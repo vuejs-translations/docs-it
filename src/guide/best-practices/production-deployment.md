@@ -50,4 +50,4 @@ app.config.errorHandler = (err, instance, info) => {
 }
 ```
 
-Tra questi assisenti di monitoraggio dell'errore abbiamo [Sentry](https://docs.sentry.io/platforms/javascript/guides/vue/) e [Bugsnag](https://docs.bugsnag.com/platforms/javascript/vue/) che a sua volta dispone di integrazione ufficiale per Vue.
+Tra questi assisenti di monitoraggio dell'errore abbiamo [Sentry](https://docs.sentry.io/platforms/javascript/guides/vue/) e [Bugsnag](https://docs.bugsnag.com/platforms/javascript/vue/) che a sua volta dispone di integrazione ufficiale per Vue..
