@@ -14,7 +14,7 @@ Puoi usare Vue per [creare Web Components nativi](/guide/extras/web-components) 
 
 ## Single-Page Application (SPA) {#single-page-application-spa}
 
-Molte delle applicazioni richiedono molta interattività, gestione della sessione, e una logica stateful complessa lato frontend. Il modo migliore per creare applicazioni è di usare un architettura dove Vue non controlla solamente l'intera pagina, ma controlla anche l'aggiornamento dei dati e navigazione senza ncessità di ricaricare la pagina. Questo tipo di applicazione è tipicamente chiamata come Single-Page Application (SPA).
+Molte delle applicazioni richiedono molta interattività, gestione della sessione, e una logica stateful complessa lato frontend. Il modo migliore per creare applicazioni è di usare un architettura dove Vue non controlla solamente l'intera pagina, ma controlla anche l'aggiornamento dei dati e navigazione senza necessità di ricaricare la pagina. Questo tipo di applicazione è tipicamente chiamata come Single-Page Application (SPA).
 
 Per rendere ancora più piacevole l'esperienza di sviluppo, Vue dispone di librerie core e [strumenti di supporto completo](/guide/scaling-up/tooling) che  includono:
 
@@ -25,7 +25,7 @@ Per rendere ancora più piacevole l'esperienza di sviluppo, Vue dispone di libre
 - Integrazioni per TypeScript
 - Utility per i test
 
-Tipicamente le SPA richiedono un backend che espone API, ma tu puoi anche abbinare a Vue soluzioni come [Inertia.js](https://inertiajs.com) per avere i vantaggi di una SPA ma mantenere il modello di sviluppo lato server. 
+Tipicamente le SPA richiedono un backend che espone API, ma soluzioni come [Inertia.js](https://inertiajs.com) possono essere abbinate a Vue per avere i vantaggi di una SPA ma mantenere il modello di sviluppo lato server. 
 
 ## Fullstack / SSR {#fullstack-ssr}
 
