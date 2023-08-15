@@ -1,31 +1,31 @@
-# Ways of Using Vue {#ways-of-using-vue}
+# Modi di utilizzare Vue {#ways-of-using-vue}
 
-We believe there is no "one size fits all" story for the web. This is why Vue is designed to be flexible and incrementally adoptable. Depending on your use case, Vue can be used in different ways to strike the optimal balance between stack complexity, developer experience and end performance.
+Noi crediamo alla storia che c'è un modo giusto in assoluto che vada per tutti nel mondo del web. Questo è il principale motivo per la quale abbiamo disegnato Vue per essere versatile e flessibile. A seconda del tuo caso d'uso, Vue può essere utilizzato in modi diversi per trovare l'equilibrio ottimale tra complessità dello stack, esperienza dello sviluppatore e performance.
 
 ## Standalone Script {#standalone-script}
 
-Vue can be used as a standalone script file - no build step required! If you have a backend framework already rendering most of the HTML, or your frontend logic isn't complex enough to justify a build step, this is the easiest way to integrate Vue into your stack. You can think of Vue as a more declarative replacement of jQuery in such cases.
+Vue può essere utilizzato con script file "standalone", ovvero senza necessità di build. Se hai un framework backend che già renderizza la maggior parte del HTML, o la tua logica di frontend non è complessa a tal punto da giustificare una build, questo è il modo più semplice per integrare Vue all'interno del vostro stack. In questi casi puoi pensare a Vue come un sostituto più dichiarativo di JQuery.
 
-Vue also provides an alternative distribution called [petite-vue](https://github.com/vuejs/petite-vue) that is specifically optimized for progressively enhancing existing HTML. It has a smaller feature set, but is extremely lightweight and uses an implementation that is more efficient in no-build-step scenarios.
+Inoltre Vue dispone di una distribuzione alternativa chiamata [petite-vue](https://github.com/vuejs/petite-vue) che è specificatamente ottimizzata per migliorare progressivamente il codice HTML esistente. Ha un set di funzionalità più limitato ma estremamente leggero ed è molto efficace soprattutto negli scenari senza step di build. 
 
 ## Embedded Web Components {#embedded-web-components}
 
-You can use Vue to [build standard Web Components](/guide/extras/web-components) that can be embedded in any HTML page, regardless of how they are rendered. This option allows you to leverage Vue in a completely consumer-agnostic fashion: the resulting web components can be embedded in legacy applications, static HTML, or even applications built with other frameworks.
+Puoi usare Vue per [creare Web Components nativi](/guide/extras/web-components) che potrai embeddare in ogni pagina HTML, indipendentemente da come quest'ultime vengano renderizzate. Questa opzione ti consente di sfruttare Vue in modo completamente indipendente da chi lo integra: i web components creati potranno essere incorporati in applicazioni legacy, HTML statico o persino applicazioni create con altri framework.
 
 ## Single-Page Application (SPA) {#single-page-application-spa}
 
-Some applications require rich interactivity, deep session depth, and non-trivial stateful logic on the frontend. The best way to build such applications is to use an architecture where Vue not only controls the entire page, but also handles data updates and navigation without having to reload the page. This type of application is typically referred to as a Single-Page Application (SPA).
+Molte delle applicazioni richiedono molta interattività, gestione della sessione, e una logica stateful complessa lato frontend. Il modo migliore per creare applicazioni è di usare un architettura dove Vue non controlla solamente l'intera pagina, ma controlla anche l'aggiornamento dei dati e navigazione senza ncessità di ricaricare la pagina. Questo tipo di applicazione è tipicamente chiamata come Single-Page Application (SPA).
 
-Vue provides core libraries and [comprehensive tooling support](/guide/scaling-up/tooling) with amazing developer experience for building modern SPAs, including:
+Per rendere ancora più piacevole l'esperienza di sviluppo, Vue dispone di librerie core e [strumenti di supporto completo](/guide/scaling-up/tooling) che  includono:
 
-- Client-side router
-- Blazing fast build tool chain
-- IDE support
+- Client-side router 
+- Blazing fast build tool chain (Strumenti di costruzione delle applicazioni incredibilmente veloce)
+- Supporto agli IDE
 - Browser devtools
-- TypeScript integrations
-- Testing utilities
+- Integrazioni per TypeScript
+- Utility per i test
 
-SPAs typically require the backend to expose API endpoints - but you can also pair Vue with solutions like [Inertia.js](https://inertiajs.com) to get the SPA benefits while retaining a server-centric development model.
+Tipicamente le SPA richiedono un backend che espone API, ma tu puoi anche abbinare a Vue soluzioni come [Inertia.js](https://inertiajs.com) per avere i vantaggi di una SPA ma mantenere il modello di sviluppo lato server. 
 
 ## Fullstack / SSR {#fullstack-ssr}
 
