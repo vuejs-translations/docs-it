@@ -57,4 +57,4 @@ Sebbene Vue sia progettato principalmente per la creazione di applicazioni web, 
 - Creare applicazioni desktop con [Electron](https://www.electronjs.org/) o [Tauri](https://tauri.studio/en/)
 - Creare applicazioni mobile con [Ionic Vue](https://ionicframework.com/docs/vue/overview)
 - Creare applicazioni desktop e mobile dallo stesso codice sorgente con [Quasar](https://quasar.dev/)
-- Utilizzare Vue come [Custom Renderer API](/api/custom-renderer) per creare targeting per renderer personalizzati [WebGL](https://troisjs.github.io/) o anche per [il terminale](https://github.com/vue-terminal/vue-termui)!
+- Utilizzare Vue come [Custom Renderer API](/api/custom-renderer) per creare targeting renderer personalizzati [WebGL](https://troisjs.github.io/) o anche per [il terminale](https://github.com/vue-terminal/vue-termui)!

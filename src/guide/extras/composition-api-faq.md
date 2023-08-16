@@ -2,64 +2,65 @@
 outline: deep
 ---
 
-# Composition API FAQ {#composition-api-faq}
+# FAQ sulla Composition API {#composition-api-faq}
 
 :::tip
-This FAQ assumes prior experience with Vue - in particular, experience with Vue 2 while primarily using Options API.
+Queste FAQ presuppongono una precedente esperienza con Vue, in particolare l'esperienza con Vue 2 utilizzando principalmente le "Options API".
 :::
 
-## What is Composition API? {#what-is-composition-api}
+## Cos'è la Composition API? {#what-is-composition-api}
 
-<VueSchoolLink href="https://vueschool.io/lessons/introduction-to-the-vue-js-3-composition-api" title="Free Composition API Lesson"/>
+<VueSchoolLink href="https://vueschool.io/lessons/introduction-to-the-vue-js-3-composition-api" title="Lezione gratuita di Composition API"/>
 
-Composition API is a set of APIs that allows us to author Vue components using imported functions instead of declaring options. It is an umbrella term that covers the following APIs:
+La Composition API è un insieme di API che ci consente di creare componenti Vue utilizzando funzioni importate invece di dichiarare opzioni. È un termine generico che include le seguenti API:
 
-- [Reactivity API](/api/reactivity-core), e.g. `ref()` and `reactive()`, that allows us to directly create reactive state, computed state, and watchers.
+- [Reactivity API](/api/reactivity-core), es. `ref()` e `reactive()`, che consentono di creare direttamente un valore reattivo, computed property, o watcher.
 
-- [Lifecycle Hooks](/api/composition-api-lifecycle), e.g. `onMounted()` and `onUnmounted()`, that allow us to programmatically hook into the component lifecycle.
+- [Lifecycle Hooks](/api/composition-api-lifecycle), es. `onMounted()` e `onUnmounted()`, che consentono di istruire comportamenti all'interno del lifecycle delle componenti applicative.
 
-- [Dependency Injection](/api/composition-api-dependency-injection), i.e. `provide()` and `inject()`, that allow us to leverage Vue's dependency injection system while using Reactivity APIs.
+- [Dependency Injection](/api/composition-api-dependency-injection), es. `provide()` e `inject()`, che consentono di sfruttare il sistema di dependency injection di Vue  durante l'utilizzo delle Reactivity API.
 
-Composition API is a built-in feature of Vue 3 and [Vue 2.7](https://blog.vuejs.org/posts/vue-2-7-naruto.html). For older Vue 2 versions, use the officially maintained [`@vue/composition-api`](https://github.com/vuejs/composition-api) plugin. In Vue 3, it is also primarily used together with the [`<script setup>`](/api/sfc-script-setup) syntax in Single-File Components. Here's a basic example of a component using Composition API:
+Composition API sono un insieme di feature incluse all'interno di Vue 3 e [Vue 2.7](https://blog.vuejs.org/posts/vue-2-7-naruto.html). Per le versioni più vecchie di Vue 2, utilizza il plugin ufficiale [`@vue/composition-api`](https://github.com/vuejs/composition-api). In Vue 3, è anche principalmente utilizzato assieme alla sintassi [`<script setup>`](/api/sfc-script-setup) nei "Single-File Components". Qui di seguito un semplice esempio di un componente che utilizza le Composition API:
 
 ```vue
 <script setup>
 import { ref, onMounted } from 'vue'
 
-// reactive state
+// Inizializza un valore reattivo
 const count = ref(0)
 
-// functions that mutate state and trigger updates
+// la funzione cambia il valore e notifica l'aggiornamento 
 function increment() {
   count.value++
 }
 
 // lifecycle hooks
 onMounted(() => {
-  console.log(`The initial count is ${count.value}.`)
+  console.log(`Il valore iniziale è ${count.value}.`)
 })
 </script>
 
 <template>
-  <button @click="increment">Count is: {{ count }}</button>
+  <button @click="increment">Il valore è: {{ count }}</button>
 </template>
 ```
 
-Despite an API style based on function composition, **Composition API is NOT functional programming**. Composition API is based on Vue's mutable, fine-grained reactivity paradigm, whereas functional programming emphasizes immutability.
+Nonostante questo stile è basato sull'utilizzo di funzioni, la **Composition API NON è functional programming**. Composition API è basata sul paradigma di reattività mutevole a granularità fine di Vue, mentre la programmazione funzionale enfatizza l'immutabilità.
 
-If you are interested in learning how to use Vue with Composition API, you can set the site-wide API preference to Composition API using the toggle at the top of the left sidebar, and then go through the guide from the beginning.
+Se sei interessato a studiare come utilizzare Vue con la Composition API, puoi impostare la preferenza a Composition API su questa documentazione nella parte superiore della barra laterale sinistra, dopodiche segui la guida dall'inizio.
 
-## Why Composition API? {#why-composition-api}
+## Perché utilizzare la Composition API? {#why-composition-api}
 
-### Better Logic Reuse {#better-logic-reuse}
+### Migliore riutilizzo della logica {#better-logic-reuse}
 
-The primary advantage of Composition API is that it enables clean, efficient logic reuse in the form of [Composable functions](/guide/reusability/composables). It solves [all the drawbacks of mixins](/guide/reusability/composables#vs-mixins), the primary logic reuse mechanism for Options API.
+Il primo vantaggio della composition API è quello di rendere la logica chiara, efficace e riutilizzabile in [funzioni componibili](/guide/reusability/composables). Questo risolve [tutti gli svantaggi dei mixin](/guide/reusability/composables#vs-mixins), il principale meccanismo per riutilizzare la logica con approccio Options API. 
 
 Composition API's logic reuse capability has given rise to impressive community projects such as [VueUse](https://vueuse.org/), an ever-growing collection of composable utilities. It also serves as a clean mechanism for easily integrating stateful third-party services or libraries into Vue's reactivity system, for example [immutable data](/guide/extras/reactivity-in-depth#immutable-data), [state machines](/guide/extras/reactivity-in-depth#state-machines), and [RxJS](/guide/extras/reactivity-in-depth#rxjs).
+La capacità di riutilizzare la logica della Composition API ha dato vita a progetti della community molto interessanti come [VueUse](https://vueuse.org/),una collezione di utility componibili in continua crescita. Serve anche come meccanismo per integrare facilmente e in modo pulito librerie o servizi di terze parti all'interno del "reactivity system" di Vue, ad esempio [dati immutabili](/guide/extras/reactivity-in-depth#immutable-data), [macchine a stati finiti](/guide/extras/reactivity-in-depth#state-machines) e [RxJS](/guide/extras/reactivity-in-depth#rxjs).
 
-### More Flexible Code Organization {#more-flexible-code-organization}
+### Ancora più flessibilità nell'organizzazione del codice{#more-flexible-code-organization}
 
-Many users love that we write organized code by default with Options API: everything has its place based on the option it falls under. However, Options API poses serious limitations when a single component's logic grows beyond a certain complexity threshold. This limitation is particularly prominent in components that need to deal with multiple **logical concerns**, which we have witnessed first hand in many production Vue 2 apps.
+Molti sviluppatori amano che di default l'organizzazione del codice sfrutti le Options API: ogni cosa ha il suo posto in base all'opzione in cui rientra. D'altra parte però, Options API pone delle serie limitazioni quando una singola componente logica cresce oltre una certa soglia di complessità. Questo limite è particolarmente preponderante in componenti che hanno necessità di trattare con molteplici **logiche delicate**, questo problema l'abbiamo visto più volte in molte applicazioni Vue 2.
 
 Take the folder explorer component from Vue CLI's GUI as an example: this component is responsible for the following logical concerns:
 
