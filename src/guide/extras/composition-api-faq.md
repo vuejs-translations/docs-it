@@ -60,28 +60,30 @@ La capacità di riutilizzare la logica della Composition API ha dato vita a prog
 
 ### Ancora più flessibilità nell'organizzazione del codice{#more-flexible-code-organization}
 
-Molti sviluppatori amano che di default l'organizzazione del codice sfrutti le Options API: ogni cosa ha il suo posto in base all'opzione in cui rientra. D'altra parte però, Options API pone delle serie limitazioni quando una singola componente logica cresce oltre una certa soglia di complessità. Questo limite è particolarmente preponderante in componenti che hanno necessità di trattare con molteplici **logiche delicate**, questo problema l'abbiamo visto più volte in molte applicazioni Vue 2.
+Molti sviluppatori amano che di default l'organizzazione del codice sfrutti le Options API: ogni cosa ha il suo posto in base all'opzione in cui rientra. D'altra parte però, Options API pone delle serie limitazioni quando una singola componente logica cresce oltre una certa soglia di complessità. Questo limite è particolarmente preponderante in componenti che utilizzano molteplici **logiche funzionali** (logic concerns), questo problema l'abbiamo visto più volte in molte applicazioni Vue 2.
 
-Take the folder explorer component from Vue CLI's GUI as an example: this component is responsible for the following logical concerns:
+Prendi come esempio il componente "folder explorer" dalla Vue CLI GUI: questo componente è responsabile per le seguenti logiche funzionali:
 
-- Tracking current folder state and displaying its content
-- Handling folder navigation (opening, closing, refreshing...)
-- Handling new folder creation
-- Toggling show favorite folders only
-- Toggling show hidden folders
-- Handling current working directory changes
+- Monitoraggio dello stato della cartella corrente e visualizzazione del suo contenuto
+- Gestione della navigazione delle cartelle (apertura, chiusura, aggiornamento...)
+- Gestione della creazione di nuove cartelle
+- Mostra e nascondi solo le cartelle preferite
+- Mostra e nascondi le cartelle nascoste
+- Gestione delle modifiche alla directory di lavoro corrente
 
-The [original version](https://github.com/vuejs/vue-cli/blob/a09407dd5b9f18ace7501ddb603b95e31d6d93c0/packages/@vue/cli-ui/src/components/folder/FolderExplorer.vue#L198-L404) of the component was written in Options API. If we give each line of code a color based on the logical concern it is dealing with, this is how it looks:
+La [versione originale](https://github.com/vuejs/vue-cli/blob/a09407dd5b9f18ace7501ddb603b95e31d6d93c0/packages/@vue/cli-ui/src/components/folder/FolderExplorer.vue#L198-L404) del componente è stata scritta con le Options API. Se dovessimo dare a ogni linea di codice un colore basato sulle logiche funzionali scritte, questo è l'aspetto che avrebbe:
 
-<img alt="folder component before" src="./images/options-api.png" width="129" height="500" style="margin: 1.2em auto">
+<img alt="versione precedente del componente" src="./images/options-api.png" width="129" height="500" style="margin: 1.2em auto">
 
-Notice how code dealing with the same logical concern is forced to be split under different options, located in different parts of the file. In a component that is several hundred lines long, understanding and navigating a single logical concern requires constantly scrolling up and down the file, making it much more difficult than it should be. In addition, if we ever intend to extract a logical concern into a reusable utility, it takes quite a bit of work to find and extract the right pieces of code from different parts of the file.
+Si noti come il codice che si occupa della stessa logica funzionale sia costretto a essere suddiviso in diverse options, localizzate in diverse parti del file. In un componente che ha centinaia di linee di codice, capire e navigare ogni singola logica funzionale richiede costantemente di scrollare su e giù, rendendolo la comprensione molto più difficoltosa di quanto dovrebbe essere. Inoltre, se vogliamo estrarre una logica funzionale esponendola come utility riutilizzabile, questo richiede un pò di lavoro per trovare ed estrarre i pezzi di codice posizionate in parti differenti del file.
 
-Here's the same component, before and after the [refactor into Composition API](https://gist.github.com/yyx990803/8854f8f6a97631576c14b63c8acd8f2e):
 
-![folder component after](./images/composition-api-after.png)
+Qui lo stesso componente, prima e dopo il [refactor tramite Composition API](https://gist.github.com/yyx990803/8854f8f6a97631576c14b63c8acd8f2e):
+
+![versione refactor del componente](./images/composition-api-after.png)
 
 Notice how the code related to the same logical concern can now be grouped together: we no longer need to jump between different options blocks while working on a specific logical concern. Moreover, we can now move a group of code into an external file with minimal effort, since we no longer need to shuffle the code around in order to extract them. This reduced friction for refactoring is key to the long-term maintainability in large codebases.
+Si noti come il codice relativo alla stessa logica funzionale può ora essere raggruppato: non abbiamo più bisogno di saltare tra blocchi di options mentre lavoriamo su una logica funzionale specifica. Infine, possiamo muovere un gruppo di codice in un file esterno con il minimo effort, poiché non abbiamo più bisogno di muoverci nel codice per estrarre la parte che ci interessa.  La riduzione degli impatti in caso di refactoring è la chiave per la manutenibilità a lungo termine in progetti molto complessi.
 
 ### Better Type Inference {#better-type-inference}
 
