@@ -82,79 +82,85 @@ Qui lo stesso componente, prima e dopo il [refactor tramite Composition API](htt
 
 ![versione refactor del componente](./images/composition-api-after.png)
 
-Notice how the code related to the same logical concern can now be grouped together: we no longer need to jump between different options blocks while working on a specific logical concern. Moreover, we can now move a group of code into an external file with minimal effort, since we no longer need to shuffle the code around in order to extract them. This reduced friction for refactoring is key to the long-term maintainability in large codebases.
 Si noti come il codice relativo alla stessa logica funzionale può ora essere raggruppato: non abbiamo più bisogno di saltare tra blocchi di options mentre lavoriamo su una logica funzionale specifica. Infine, possiamo muovere un gruppo di codice in un file esterno con il minimo effort, poiché non abbiamo più bisogno di muoverci nel codice per estrarre la parte che ci interessa.  La riduzione degli impatti in caso di refactoring è la chiave per la manutenibilità a lungo termine in progetti molto complessi.
 
-### Better Type Inference {#better-type-inference}
+### Miglioramento della tipizzazione {#better-type-inference}
 
-In recent years, more and more frontend developers are adopting [TypeScript](https://www.typescriptlang.org/) as it helps us write more robust code, make changes with more confidence, and provides a great development experience with IDE support. However, the Options API, originally conceived in 2013, was designed without type inference in mind. We had to implement some [absurdly complex type gymnastics](https://github.com/vuejs/core/blob/44b95276f5c086e1d88fa3c686a5f39eb5bb7821/packages/runtime-core/src/componentPublicInstance.ts#L132-L165) to make type inference work with the Options API. Even with all this effort, type inference for Options API can still break down for mixins and dependency injection.
+Negli ultimi anni, tanti sviluppatori frontend hanno adottato [TypeScript](https://www.typescriptlang.org/) poiché ci aiuta a scrivere codice più robusto, apportare modifiche con maggiore sicurezza e offre un'ottima esperienza di sviluppo tramite l'aiuto dell'IDE. Tuttavia, l'Options API, originariamente concepita nel 2013, è stata progettata senza tenere conto della tipizzazione. Abbiamo dovuto implementare qualche [magheggio complesso](https://github.com/vuejs/core/blob/44b95276f5c086e1d88fa3c686a5f39eb5bb7821/packages/runtime-core/src/componentPublicInstance.ts#L132-L165) per far funzionare la tipizzazione nella Options API. Anche con tutto questo sforzo, la tipizzazione nella Options API non è del tutto completa quando si usano mixin e dependency injection.
 
-This had led many developers who wanted to use Vue with TS to lean towards Class API powered by `vue-class-component`. However, a class-based API heavily relies on ES decorators, a language feature that was only a stage 2 proposal when Vue 3 was being developed in 2019. We felt it was too risky to base an official API on an unstable proposal. Since then, the decorators proposal has gone through yet another complete overhaul, and finally reached stage 3 in 2022. In addition, class-based API suffers from logic reuse and organization limitations similar to Options API.
+Ciò ha portato molti sviluppatori che volevano utilizzare Vue assieme a TypeScript a utilizzare un approccio costruito tramite Class API utilizzando la libreria `vue-class-component`. Tuttavia, un'API basata su classi fa molto affidamento sui decoratori ES (ECMAScript), una caratteristica del linguaggio che era solo una proposta di fase 2 quando Vue 3 è stato sviluppato nel 2019. Abbiamo ritenuto che fosse troppo rischioso basare un'API ufficiale su una proposta instabile. Da allora, la proposta dei decoratori ha subito un'altra revisione completa e ha finalmente raggiunto la fase 3 nel 2022. Inoltre, l'API basata sulla classe soffre nel riutilizzo della logica e ha limitazioni organizzative simili alle Options API.
 
-In comparison, Composition API utilizes mostly plain variables and functions, which are naturally type friendly. Code written in Composition API can enjoy full type inference with little need for manual type hints. Most of the time, Composition API code will look largely identical in TypeScript and plain JavaScript. This also makes it possible for plain JavaScript users to benefit from partial type inference.
+In confronto, la Composition API utilizza principalmente variabili e funzioni semplici, che sono nativamente tipizzate. Il codice scritto nella Composition API può godere della tipizzazione completa con poca necessità di dichiarazioni manuali. La maggior parte delle volte, il codice della Composition API apparirà in gran parte identico in TypeScript e in semplice JavaScript. Ciò consente anche agli utenti JavaScript di trarre vantaggio dalla tipizzazione parziale.
 
-### Smaller Production Bundle and Less Overhead {#smaller-production-bundle-and-less-overhead}
+### Pacchetto di produzione più piccolo e meno uso di risorse{#smaller-production-bundle-and-less-overhead}
 
-Code written in Composition API and `<script setup>` is also more efficient and minification-friendly than Options API equivalent. This is because the template in a `<script setup>` component is compiled as a function inlined in the same scope of the `<script setup>` code. Unlike property access from `this`, the compiled template code can directly access variables declared inside `<script setup>`, without an instance proxy in between. This also leads to better minification because all the variable names can be safely shortened.
+Il codice scritto con la Composition API e `<script setup>` è anche più efficiente e facile da minimizzare rispetto all'equivalente scritto tramite Options API. Questo perché il template in un componente `<script setup>` è compilato come una funzione incorporata nello stesso ambito del codice `<script setup>`. A differenza dell'accesso alle proprietà da `this`, il codice del template compilato può accedere direttamente alle variabili dichiarate all'interno di `<script setup>`, senza necessità di un istanza proxy. Ciò porta anche a una migliore minificazione perché tutti i nomi delle variabili possono essere abbreviati in modo sicuro.
 
-## Relationship with Options API {#relationship-with-options-api}
+## Relazioni con Options API {#relationship-with-options-api}
 
-### Trade-offs {#trade-offs}
+### Compromessi {#trade-offs}
 
-Some users moving from Options API found their Composition API code less organized, and concluded that Composition API is "worse" in terms of code organization. We recommend users with such opinions to look at that problem from a different perspective.
+Alcuni utenti che arrivano dall'utilizzo delle Options API hanno trovato il codice prodotto tramite Composition API meno organizzato e hanno concluso che la Composition API è "peggiore" in termini di organizzazione del codice. Consigliamo agli utenti con tali opinioni di esaminare il problema da una prospettiva diversa.
 
-It is true that Composition API no longer provides the "guard rails" that guide you to put your code into respective buckets. In return, you get to author component code like how you would write normal JavaScript. This means **you can and should apply any code organization best practices to your Composition API code as you would when writing normal JavaScript**. If you can write well-organized JavaScript, you should also be able to write well-organized Composition API code.
+È vero che la Composition API non fornisce più i "guard rail" che ti guidano a inserire il tuo codice in rispettivi "blocchi". Nonostante ciò, potrai creare i componenti con un codice molto simile al codice JavaScript nativo. Ciò significa che **puoi e dovresti applicare qualsiasi best practice per l'organizzazione del codice al tuo codice Composition API come faresti quando scrivi in JavaScript nativo**. Se riesci a scrivere JavaScript ben organizzato, dovresti anche essere in grado di scrivere codice ben organizzato tramite Composition API.
 
-Options API does allow you to "think less" when writing component code, which is why many users love it. However, in reducing the mental overhead, it also locks you into the prescribed code organization pattern with no escape hatch, which can make it difficult to refactor or improve code quality in larger scale projects. In this regard, Composition API provides better long term scalability.
+Le Options API ti consentono di "pensare meno" quando scrivi il codice del componente, motivo per cui molti utenti lo adorano. Tuttavia, pur riducendo il sovraccarico mentale, ti ingessa verso un modello di organizzazione del codice bloccato che non può essere cambiato, il che può rendere difficile il refactoring o migliorare la qualità del codice in grandi progetti. A questo proposito, la Composition API offre una migliore scalabilità a lungo termine.
 
-### Does Composition API cover all use cases? {#does-composition-api-cover-all-use-cases}
+### L'API Composition copre tutti i casi d'uso?{#does-composition-api-cover-all-use-cases}
 
 Yes in terms of stateful logic. When using Composition API, there are only a few options that may still be needed: `props`, `emits`, `name`, and `inheritAttrs`.
+Si, in termini di logica stateful. Quando si utilizza la Composition API, ci sono solo poche "options" che potrebbero essere ancora necessarie: `props`, `emits`, `name` e `inheritAttrs`.
 
 :::tip
 
-Since 3.3 you can directly use `defineOptions` in `<script setup>` to set the component name or `inheritAttrs` property
+Dalla 3.3 puoi usare direttamente `defineOptions` in `<script setup>` per impostare il nome del componente o la proprietà `inheritAttrs`
 
 :::
 
-If you intend to exclusively use Composition API (along with the options listed above), you can shave a few kbs off your production bundle via a [compile-time flag](https://github.com/vuejs/core/tree/main/packages/vue#bundler-build-feature-flags) that drops Options API related code from Vue. Note this also affects Vue components in your dependencies.
+Se intendi utilizzare esclusivamente la Composition API (insieme alle opzioni sopra elencate), puoi eliminare alcuni kb dal tuo pacchetto di produzione tramite un [parametro a compile-time](https://github.com/vuejs/core/tree/main/packages/vue#bundler-build-feature-flags) che elimina il codice relativo alle Options API da Vue. Nota bene che questo influirà anche sui componenti Vue importati dalle dipendenze.
 
-### Can I use both APIs in the same component? {#can-i-use-both-apis-in-the-same-component}
+### Posso utilizzare entrambe le API nello stesso componente?{#can-i-use-both-apis-in-the-same-component}
 
 Yes. You can use Composition API via the [`setup()`](/api/composition-api-setup) option in an Options API component.
 
 However, we only recommend doing so if you have an existing Options API codebase that needs to integrate with new features / external libraries written with Composition API.
 
-### Will Options API be deprecated? {#will-options-api-be-deprecated}
+Si. Puoi utilizzare la Composition API tramite la "option" [`setup()`](/api/composition-api-setup) in un componente che utilizza le Options API.
+
+Tuttavia, ti consigliamo di farlo solo se disponi di un codice già presente basato su Options API che deve integrare nuove funzionalità / librerie esterne scritte con la Composition API.
+
+### Le Options API verranno deprecate? {#will-options-api-be-deprecated}
 
 No, we do not have any plan to do so. Options API is an integral part of Vue and the reason many developers love it. We also realize that many of the benefits of Composition API only manifest in larger-scale projects, and Options API remains a solid choice for many low-to-medium-complexity scenarios.
+No, non abbiamo alcun piano a riguardo. Le Options API è parte integrante di Vue e il motivo per cui molti sviluppatori lo adorano. Ci rendiamo anche conto che molti dei vantaggi della Composition API si manifestano solo in progetti molto grandi e le Option API rimangono una scelta solida per molte applicazioni con complessità medio-bassa.
 
-## Relationship with Class API {#relationship-with-class-api}
+## Relazione con Class API {#relationship-with-class-api}
 
-We no longer recommend using Class API with Vue 3, given that Composition API provides great TypeScript integration with additional logic reuse and code organization benefits.
+Non consigliamo più di utilizzare Class API con Vue 3, dato che la Composition API offre un'ottima integrazione di TypeScript con ulteriori vantaggi per il riutilizzo della logica e l'organizzazione del codice.
 
-## Comparison with React Hooks {#comparison-with-react-hooks}
+## Comparazione con i React Hooks {#comparison-with-react-hooks}
 
-Composition API provides the same level of logic composition capabilities as React Hooks, but with some important differences.
+La Composition API fornisce lo stesso livello di funzionalità per la composizione della logica dei React Hooks, ma con alcune importanti differenze.
 
-React Hooks are invoked repeatedly every time a component updates. This creates a number of caveats that can confuse even seasoned React developers. It also leads to performance optimization issues that can severely affect development experience. Here are some examples:
+Gli hook React vengono richiamati ripetutamente ogni volta che un componente si aggiorna. Ciò crea una serie di "situazioni" che possono confondere anche gli sviluppatori React più esperti. Porta anche a problemi di ottimizzazione delle prestazioni che possono influire gravemente sull'esperienza di sviluppo. Ecco alcuni esempi:
 
-- Hooks are call-order sensitive and cannot be conditional.
+- Gli hook sono sensibili all'ordine di chiamata e non possono essere condizionali.
 
-- Variables declared in a React component can be captured by a hook closure and become "stale" if the developer fails to pass in the correct dependencies array. This leads to React developers relying on ESLint rules to ensure correct dependencies are passed. However, the rule is often not smart enough and over-compensates for correctness, which leads to unnecessary invalidation and headaches when edge cases are encountered.
+- Le variabili dichiarate in un componente React possono essere catturate da una "closure hook" e diventare "stantia" se lo sviluppatore non riesce a passare l'array delle dipendenze correttamente. Ciò porta gli sviluppatori di React a fare affidamento sulle regole ESLint per garantire che vengano passate le dipendenze corrette. Tuttavia, la regola spesso non è abbastanza da definirsi corretta, il che porta a inutili invalidazioni e mal di testa quando si incontrano casi limite.
 
-- Expensive computations require the use of `useMemo`, which again requires manually passing in the correct dependencies array.
+- I calcoli costosi richiedono l'uso di `useMemo`, esso richiede nuovamente il passaggio manuale dell'array delle dipendenze.
 
-- Event handlers passed to child components cause unnecessary child updates by default, and require explicit `useCallback` as an optimization. This is almost always needed, and again requires a correct dependencies array. Neglecting this leads to over-rendering apps by default and can cause performance issues without realizing it.
+- I "gestori di eventi" (Event handlers) passati ai componenti figlio causano aggiornamenti a quest'ultimo non necessari per impostazione predefinita e richiedono `useCallback` esplicito come ottimizzazione. Questo è quasi sempre necessario e richiede ancora una volta il passaggio delle dipendenze. Trascurare questo punto, porta l'applicazione ad eseguire il rendering eccessivo delle componenti e può causare problemi di prestazioni senza rendersene conto.
 
 - The stale closure problem, combined with Concurrent features, makes it difficult to reason about when a piece of hooks code is run, and makes working with mutable state that should persist across renders (via `useRef`) cumbersome.
+- Il problema della closure "stantia", combinato con le funzionalità Concurrent, rende difficile capire la ragione su quando un pezzo di codice viene eseguito, e rende poco pratico la gestione della mutabilità dello stato che dovrebbe persistere tra i rendering (tramite `useRef`).
 
-In comparison, Vue Composition API:
+Confronto con Vue Composition API:
 
-- Invokes `setup()` or `<script setup>` code only once. This makes the code align better with the intuitions of idiomatic JavaScript usage as there are no stale closures to worry about. Composition API calls are also not sensitive to call order and can be conditional.
+- Richiama il codice `setup()` o `<script setup>` solo una volta. Questo fa sì che il codice sia più intuitivo nell'uso idiomatico di JavaScript in quanto non ci sono "closures" obsolete di cui preoccuparsi. Anche la Composition API non è sensibile all'ordine di chiamata e possono essere condizionali.
 
-- Vue's runtime reactivity system automatically collects reactive dependencies used in computed properties and watchers, so there's no need to manually declare dependencies.
+- Il sistema di reattività di Vue a runtime raccoglie automaticamente le dipendenze reattive utilizzate nelle proprietà calcolate (computed properties) e nei watcher, quindi non è necessario dichiarare manualmente le dipendenze.
 
-- No need to manually cache callback functions to avoid unnecessary child updates. In general, Vue's fine-grained reactivity system ensures child components only update when they need to. Manual child-update optimizations are rarely a concern for Vue developers.
+- Non è necessario memorizzare manualmente nella cache le funzioni di callback per evitare aggiornamenti secondari non necessari. In generale, il sistema di reattività a grana fine di Vue garantisce che i componenti figlio si aggiornino solo quando necessario. Le ottimizzazioni manuali per gli aggiornamenti delle componenti figlio sono raramente utilizzate dagli sviluppatori Vue.
 
-We acknowledge the creativity of React Hooks, and it is a major source of inspiration for Composition API. However, the issues mentioned above do exist in its design and we noticed Vue's reactivity model happens to provide a way around them.
+Riconosciamo la creatività di React Hooks, ed è una delle principali fonti di ispirazione per la Composition API. Tuttavia, i problemi sopra menzionati esistono nel suo design e abbiamo notato che il modello di reattività di Vue fornisce un modo per aggirarli.
