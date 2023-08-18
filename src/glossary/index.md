@@ -8,7 +8,7 @@ Questo glossario ha lo scopo di fornire una guida al significato dei termini tec
 
 Un *componente asincrono* (*async component*) è un contenitore che racchiude un altro componente e che permette al componente racchiuso di essere caricato in modo "lazy" (lazy loaded, "pigro"). Questo metodo viene utilizzato tipicamente per ridurre la dimensione dei file `.js` generati, permettendo di suddividerli in frammenti più piccoli che vengono caricati solo quando necessario.
 
-Vue Router ha una funzionalità simile per il [caricamento lazy dei route components](https://router.vuejs.org/guide/advanced/lazy-loading.html), anche se questa non utilizza la funzionalità degli async components di Vue.
+Vue Router ha una funzionalità simile per il [caricamento lazy dei route components](https://router.vuejs.org/guide/advanced/lazy-loading.html), anche se questa, in effetti, non utilizza la funzionalità degli async components di Vue.
 
 Per maggiori dettagli consulta:
 - [Guida - Componenti asincroni](/guide/components/async.html)
@@ -19,7 +19,7 @@ Una *macro del compilatore* (*compiler macro*) è un codice speciale che viene e
 
 Il compilatore [SFC](#single-file-component) di Vue supporta varie macro, come `defineProps()`, `defineEmits()` e `defineExpose()`. Queste macro sono progettate con l'intenzione di sembrare delle normali funzioni JavaScript, così da poter sfruttare lo stesso parser e gli strumenti di type inference di JavaScript/TypeScript. Tuttavia, non sono delle vere funzioni che vengono eseguite nel browser. Si tratta di stringhe speciali che il compilatore rileva e sostituisce con il vero codice JavaScript che verrà effettivamente eseguito.
 
-Le macro hanno limitazioni sul loro uso che non si applicano al normale codice JavaScript. Ad esempio, potresti pensare che `const dp = defineProps` ti permetta di creare un alias per `defineProps`, ma ciò si tradurrebbe in un errore. Ci sono anche limitazioni sui valori che possono essere passati a `defineProps()`, poiché gli 'argomenti' devono essere elaborati dal compilatore e non a runtime.
+Le macro hanno delle limitazioni sul loro uso che non si applicano al normale codice JavaScript. Ad esempio, potresti pensare che `const dp = defineProps` ti permetta di creare un alias per `defineProps`, ma ciò si tradurrebbe in un errore. Ci sono delle limitazioni anche sui valori che possono essere passati a `defineProps()`, poiché gli 'argomenti' devono essere elaborati dal compilatore e non a runtime.
 
 Per maggiori dettagli consulta:
 - [`<script setup>` - `defineProps()` & `defineEmits()`](/api/sfc-script-setup.html#defineprops-defineemits)
@@ -27,9 +27,9 @@ Per maggiori dettagli consulta:
 
 ## componente {#component}
 
-Il termine *componente* (*component*) non è unico di Vue. È comune a molti framework UI. Descrive una parte della UI, come un pulsante o una casella di spunta. I componenti possono anche essere combinati per formare componenti più grandi.
+Il termine *componente* (*component*) non è esclusivo di Vue. È comune a molti framework UI. Descrive una parte della UI, come un pulsante o una casella di spunta. I componenti possono anche essere combinati per formare componenti più grandi.
 
-I componenti sono il principale meccanismo fornito da Vue per suddividere un'interfaccia utente in parti più piccole, sia per migliorare la manutenibilità che per permettere il riutilizzo del codice.
+I componenti sono il principale meccanismo fornito da Vue per suddividere un'interfaccia utente in parti più piccole, sia per migliorare la manutenibilità sia per permettere il riutilizzo del codice.
 
 Un componente Vue è un oggetto. Tutte le proprietà sono opzionali, ma è richiesto o un template o una render function (funzione di rendering) affinché il componente possa essere visualizzato. Ad esempio, l'oggetto seguente potrebbe essere un componente valido:
 
@@ -41,7 +41,7 @@ const HelloWorldComponent = {
 }
 ```
 
-In pratica, la maggior parte delle applicazioni Vue sono scritte usando [Componenti Single-File](#single-file-component) (file `.vue`). Anche se questi componenti potrebbero non sembrare oggetti a prima vista, il compilatore SFC li convertirà in un oggetto, che viene utilizzato come export predefinito per il file. Da una prospettiva esterna, un file `.vue` è solo un modulo ES che esporta un oggetto del componente.
+In pratica, la maggior parte delle applicazioni Vue sono scritte usando [Componenti Single-File](#single-file-component) (file `.vue`). Anche se questi componenti potrebbero non sembrare oggetti a prima vista, il compilatore SFC li convertirà in un oggetto, che verrà utilizzato come export predefinito per il file. Visto dall'esterno, un file `.vue` è solo un modulo ES che esporta un oggetto del componente.
 
 Le proprietà di un oggetto del componente sono solitamente chiamate *opzioni*. Da qui il nome [Options API](#options-api).
 
@@ -68,7 +68,7 @@ Il termine *composable* descrive un patter molto comune in Vue. Non è una carat
 * Ci si aspetta che la funzione venga chiamata durante l'esecuzione sincrona della funzione `setup()` di un componente (o, in modo equivalente, durante l'esecuzione di un blocco `<script setup>`). Questo collega l'invocazione del composable al contesto del componente corrente, ad es. tramite chiamate a `provide()`, `inject()` o `onMounted()`.
 * I composables di solito restituiscono un oggetto semplice, non un oggetto reattivo. Questo oggetto di solito contiene refs e funzioni ed è previsto che venga destrutturato all'interno del codice chiamante.
 
-Come per molti modelli, può esserci disaccordo su fatto che se un codice specifico sia identificato per l'etichetta. Non tutte le utility functions JavaScript sono composables. Se una funzione non utilizza la Composition API, probabilmente non è un composable. Se non ci si aspetta che venga chiamata durante l'esecuzione sincrona di `setup()`, probabilmente non è un composable. I composables sono usati specificamente per incapsulare la logica stateful (con stato), non sono solo una convenzione per etichettare le funzioni.
+Come per molti modelli, possono esserci delle divergenze sull'applicare o meno un'etichetta a un determinato codice. Non tutte le utility functions JavaScript sono composables. Se una funzione non utilizza la Composition API, probabilmente non è un composable. Se non ci si aspetta che venga chiamata durante l'esecuzione sincrona di `setup()`, probabilmente non è un composable. I composables sono usati specificamente per incapsulare la logica stateful (con stato), non sono solo una convenzione per etichettare le funzioni.
 
 Consulta [Guida - I Composables](/guide/reusability/composables.html) per ulteriori dettagli sulla scrittura di composables.
 
@@ -76,7 +76,7 @@ Consulta [Guida - I Composables](/guide/reusability/composables.html) per ulteri
 
 La *Composition API* è una raccolta di funzioni utilizzate per scrivere componenti e composables in Vue.
 
-Il termine viene anche utilizzato per descrivere uno dei due principali stili utilizzati per scrivere componenti, mentre l'altro sarebbe l'[Options API](#options-api). I componenti scritti utilizzando la Composition API usano o `<script setup>` o una funzione `setup()` esplicita.
+Il termine viene anche usato per descrivere uno dei due principali stili utilizzati per scrivere componenti, mentre l'altro sarebbe l'[Options API](#options-api). I componenti scritti utilizzando la Composition API usano o `<script setup>` o una funzione `setup()` esplicita.
 
 Consulta le [FAQ sulla Composition API](/guide/extras/composition-api-faq) per ulteriori dettagli.
 
@@ -97,7 +97,7 @@ Il termine *direttiva* (*directive*) si riferisce agli attributi del template ch
 
 Le direttive native includono `v-if`, `v-for`, `v-bind`, `v-on` e `v-slot`.
 
-Vue supporta anche la creazione di direttive personalizzate, anche se sono tipicamente utilizzate solo come "ultima via d'uscita", un modo per manipolare direttamente i nodi del DOM. In generale, le direttive personalizzate non possono essere utilizzate per ricreare la funzionalità delle direttive native.
+Vue supporta anche la creazione di direttive personalizzate, anche se sono tipicamente utilizzate solo come una "scappatoia" per manipolare direttamente i nodi del DOM. In generale, le direttive personalizzate non possono essere utilizzate per ricreare la funzionalità delle direttive native.
 
 Per maggiori dettagli consulta:
 - [Guida - La Sintassi del Template - Le Directtive](/guide/essentials/template-syntax.html#directives)
@@ -105,9 +105,9 @@ Per maggiori dettagli consulta:
 
 ## componente dinamico {#dynamic-component}
 
-Il termine *componente dinamico* (*dynamic component*) viene utilizzato per descrivere quei casi in cui la scelta di quale componente figlio renderizzare deve essere fatta dinamicamente. Tipicamente, ciò viene ottenuto utilizzando `<component :is="type">`.
+Il termine *componente dinamico* (*dynamic component*) si riferisce a quei casi in cui la scelta di quale componente figlio renderizzare deve essere fatta dinamicamente. Tipicamente, ciò si ottiene utilizzando `<component :is="type">`.
 
-Un componente dinamico non è un tipo speciale di componente. Qualsiasi componente può essere utilizzato come componente dinamico. È la scelta del componente che è dinamica, non è il componente ad esserlo.
+Un componente dinamico non è un speciale tipo di componente. Qualsiasi componente può essere utilizzato come componente dinamico. È la scelta del componente che è dinamica, non è il componente ad esserlo.
 
 Per maggiori dettagli consulta:
 - [Guida - Nozioni base sui Componenti - Componenti Dinamici](/guide/essentials/component-basics.html#dynamic-components)
@@ -130,11 +130,11 @@ Il termine *fragment* si riferisce a un tipo speciale di [VNode](#vnode) utilizz
 
 Il nome deriva dal concetto simile a quello di un [`DocumentFragment`](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) nell'API DOM nativa.
 
-I Fragment sono utilizzati per supportare componenti con nodi radice multipli. Sebbene tali componenti possano sembrare avere molteplici radici, dietro le quinte utilizzano un nodo fragment come unica radice, come genitore dei nodi 'radice'.
+I fragment sono utilizzati per supportare componenti con vari 'nodi radice' (root nodes). Sebbene tali componenti possano sembrare avere molteplici radici, dietro le quinte utilizzano un nodo fragment come unica radice, come genitore dei nodi 'radice'.
 
-I Fragment vengono anche utilizzati dal compilatore di template come un modo per racchiudere più nodi dinamici, ad es. quelli creati tramite `v-for` o `v-if`. Ciò permette di passare suggerimenti aggiuntivi all'algoritmo di patching del [VDOM](#virtual-dom). Gran parte di ciò è gestito internamente, ma un posto in cui potresti imbatterti in esso è l'uso diretto di una key su un tag `<template>` con `v-for`. In questo scenario, la `key` viene aggiunta come una [prop](#prop) al fragment VNode.
+I fragment vengono anche utilizzati dal compilatore di template come un modo per racchiudere più nodi dinamici, ad es. quelli creati tramite `v-for` o `v-if`. Ciò permette di passare suggerimenti aggiuntivi all'algoritmo di patching del [VDOM](#virtual-dom). Gran parte di ciò è gestito internamente, ma un posto in cui potresti imbatterti in esso è l'uso diretto di una key su un tag `<template>` con `v-for`. In questo scenario, la `key` viene aggiunta come una [prop](#prop) al fragment VNode.
 
-I nodi Fragment sono attualmente renderizzati nel DOM come nodi di testo vuoti, anche se questo è un dettaglio implementativo. Potresti incontrare questi nodi di testo se usi `$el` o tenti di esplorare il DOM con le API native del browser.
+I nodi fragment sono attualmente renderizzati nel DOM come nodi di testo vuoti, anche se questo è un dettaglio implementativo. Potresti incontrare questi nodi di testo se usi `$el` o tenti di esplorare il DOM con le API native del browser.
 
 ## componente funzionale {#functional-component}
 
@@ -153,7 +153,7 @@ Il termine *hoisting* è utilizzato per descrivere l'esecuzione di una sezione d
 
 JavaScript utilizza l'hoisting per alcuni costrutti, come `var`, `import` e dichiarazioni di funzione.
 
-Nel un contesto di Vue, il compiler del template applica lo *static hoisting* per migliorare le prestazioni. Quando si converte un template in una render function, i VNodes che corrispondono a contenuti statici possono essere creati una sola volta e poi riutilizzati. Questi VNodes statici vengono descritti come 'hoisted' perché sono creati al di fuori della funzione di rendering, prima che essa venga eseguita. Una forma simile di hoisting viene applicata agli oggetti o array statici generati dal compiler del template.
+Nel contesto di Vue, il compiler del template applica lo *static hoisting* per migliorare le prestazioni. Quando si converte un template in una render function, i VNodes che corrispondono a contenuti statici possono essere creati una sola volta e poi riutilizzati. Questi VNodes statici vengono descritti come 'hoisted' perché sono creati al di fuori della funzione di rendering, prima che essa venga eseguita. Una forma simile di hoisting viene applicata agli oggetti o array statici generati dal compiler del template.
 
 Per maggiori dettagli consulta:
 - [Guida - Il Meccanismo di Rendering - Static Hoisting](/guide/extras/rendering-mechanism.html#static-hoisting)
@@ -177,14 +177,14 @@ Vedi [provide / inject](#provide-inject).
 
 ## hook del ciclo di vita {#lifecycle-hooks}
 
-Un'istanza di componente Vue attraversa un ciclo di vita. Ad esempio, viene creata, montata, aggiornata e smontata.
+L'istanza di un componente Vue attraversa un ciclo di vita. Ad esempio, viene creata, montata, aggiornata e smontata.
 
 Gli *hook del ciclo di vita* (*lifecycle hooks*) sono un modo per ascoltare questi eventi del ciclo di vita.
 
 Con l'Options API, ogni hook è fornito come un'opzione separata, ad es. `mounted`. La Composition API usa invece funzioni, come `onMounted()`.
 
 Per maggiori dettagli consulta:
-- [Guida - Gli Hook del Ciclo di Vit](/guide/essentials/lifecycle.html)
+- [Guida - Gli Hook del Ciclo di Vita](/guide/essentials/lifecycle.html)
 
 ## macro {#macro}
 
@@ -205,7 +205,7 @@ I componenti possono essere scritti in due stili. Uno stile utilizza la [Composi
 
 L'Options API include opzioni come `data()`, `computed`, `methods` e `created()`.
 
-Alcune opzioni, come `props`, `emits` e `inheritAttrs`, possono essere utilizzate quando si creano componenti con entrambe le API. Poiché sono opzioni dei componenti, potrebbero essere considerate parte dell'Options API. Tuttavia, poiché queste opzioni sono anche utilizzate in combinazione con `setup()`, è generalmente più utile pensare a loro come condivise tra i due stili di componenti.
+Alcune opzioni, come `props`, `emits` e `inheritAttrs`, possono essere utilizzate quando si creano componenti con entrambe le API. Essendo delle opzioni dei componenti, potrebbero essere considerate come parte dell'Options API. Tuttavia, dato che queste opzioni sono anche utilizzate in combinazione con `setup()`, è più utile pensare a loro come condivise tra i due stili di componenti.
 
 La funzione `setup()` di per sé è un'opzione del componente, quindi potrebbe essere descritta come parte dell'Options API. Tuttavia, non è così che il termine 'Options API' viene normalmente usato. La funzione `setup()`, invece, è considerata parte della Composition API.
 
@@ -213,7 +213,7 @@ La funzione `setup()` di per sé è un'opzione del componente, quindi potrebbe e
 
 Sebbene il termine *plugin* possa essere utilizzato in una vasta gamma di contesti, Vue ha uno specifico concetto di plugin e cioè come un modo per aggiungere funzionalità a un'applicazione.
 
-I plugin vengono aggiunti a un'applicazione chiamando `app.use(plugin)`. Il plugin stesso è o una funzione o un oggetto con una funzione `install`. Tale funzione riceverà l'istanza dell'applicazione e potrà quindi fare ciò che deve fare.
+I plugin vengono aggiunti a un'applicazione chiamando `app.use(plugin)`. Il plugin stesso è o una funzione o un oggetto che espone una funzione `install`. Tale funzione riceverà l'istanza dell'applicazione e potrà quindi fare ciò che deve fare.
 
 Per maggiori dettagli consulta:
 - [Guida - I Plugin](/guide/reusability/plugins.html)
@@ -245,7 +245,7 @@ Per maggiori dettagli consulta:
 
 `provide` e `inject` sono una forma di comunicazione tra componenti.
 
-Quando un componente *fornisce* (*provides*) un valore, a quel punto tutti i discendenti di quel componente possono scegliere di 'prendere' quel valore, usando `inject`. A differenza delle prop, il componente che fornisce non sa esattamente quale componente sta ricevendo il valore.
+Quando un componente *fornisce* (*provides*) un valore, a quel punto tutti i discendenti di quel componente possono scegliere di 'prendere' quel valore, usando `inject`. A differenza delle prop, il componente che fornisce il valore non sa esattamente quale componente riceverà quel valore.
 
 `provide` e `inject`, a volte, sono utilizzati per evitare il *prop drilling*. Possono anche essere utilizzati come un modo implicito per un componente di comunicare con il contenuto del suo slot.
 
@@ -258,7 +258,7 @@ Per maggiori dettagli consulta:
 
 Un *effetto reattivo* (*reactive effect*) fa parte del sistema di reattività di Vue. Si riferisce al processo di monitoraggio delle dipendenze di una funzione e alla ri-esecuzione di quella funzione quando i valori di tali dipendenze cambiano.
 
-`watchEffect()` è il modo più diretto per creare un effetto. Diverse parti di Vue utilizzano internamente gli 'effetti'. Ad es. l'aggiornamento nel rendering dei componenti, `computed()` e `watch()`.
+`watchEffect()` è il modo più diretto per creare un 'effetto'. Diverse parti di Vue utilizzano internamente gli 'effetti'. Ad es. l'aggiornamento nel rendering dei componenti, `computed()` e `watch()`.
 
 Vue può monitorare le dipendenze reattive solo all'interno di un 'effetto reattivo'. Se il valore di una proprietà viene letto al di fuori di un effetto reattivo, essa 'perderà' la reattività, nel senso che Vue non saprà cosa fare se quella proprietà cambia successivamente.
 
@@ -269,9 +269,9 @@ Per maggiori dettagli consulta:
 
 ## reattività {#reactivity}
 
-In generale, per *reattività* (*reactivity*) si riferisce alla capacità di eseguire automaticamente azioni in risposta ai cambiamenti dei dati. Ad esempio, aggiornare il DOM o effettuare una richiesta di rete quando il valore di un dato cambia.
+In generale, per *reattività* (*reactivity*) si intende la capacità di eseguire automaticamente azioni in risposta ai cambiamenti dei dati. Ad esempio, aggiornare il DOM o effettuare una richiesta di rete quando il valore di un dato cambia.
 
-In un contesto Vue, la reattività viene utilizzata per descrivere una serie di funzionalità. Queste funzionalità si combinano per formare un *sistema di reattività*, reso disponibile tramite la [Reactivity API](#reactivity-api).
+Nel contesto di Vue, la reattività viene utilizzata per descrivere una serie di funzionalità. Queste funzionalità si combinano per formare un *sistema di reattività*, reso disponibile tramite la [Reactivity API](#reactivity-api).
 
 Ci sono vari modi in cui un sistema di reattività potrebbe essere implementato. Ad esempio, potrebbe essere realizzato attraverso un'analisi statica del codice per determinare le sue dipendenze. Tuttavia, Vue non utilizza questa forma di sistema di reattività.
 
@@ -315,9 +315,9 @@ Per maggiori dettagli consulta:
 
 ## scheduler {#scheduler}
 
-Lo *scheduler* è la parte interna di Vue che controlla il momento in cui vengono eseguiti gli [effetti reattivi](#reactive-effect).
+Lo *scheduler* (*pianificatore*) è quella parte interna di Vue che controlla il momento in cui vengono eseguiti gli [effetti reattivi](#reactive-effect).
 
-Quando lo stato reattivo cambia, Vue non innesca immediatamente gli aggiornamenti di rendering. Invece, li raggruppa insieme utilizzando una coda. Ciò garantisce che un componente venga re-renderizzato solo una volta, anche se vengono apportate più modifiche ai dati sottostanti.
+Quando lo stato reattivo cambia, Vue non innesca immediatamente gli aggiornamenti di rendering. Piuttosto, li raggruppa insieme utilizzando una coda. Ciò garantisce che un componente venga ri-renderizzato solo una volta, anche se vengono apportate più modifiche ai dati sottostanti.
 
 [I Watcher](/guide/essentials/watchers.html) vengono anch'essi raggruppati utilizzando la coda dello scheduler. I Watchers con `flush: 'pre'` (impostazione predefinita) verranno eseguiti prima del rendering del componente, mentre quelli con `flush: 'post'` verranno eseguiti dopo il rendering del componente.
 
@@ -327,11 +327,11 @@ I lavori nello scheduler vengono anche utilizzati per eseguire varie altre attiv
 
 Il termine *scoped slot* (uno slot con props) si riferisce a uno [slot](#slot) che riceve delle [props](#prop).
 
-Storicamente, Vue faceva una distinzione molto più marcata tra scoped slot e slot non-scoped. In qualche modo, potrebbero essere considerati come due caratteristiche separate, unificate dietro una sintassi comune del template.
+Storicamente, Vue faceva una distinzione molto più marcata tra scoped slot e slot non-scoped. In un certo senso, potrebbero essere considerate come due funzionalità separate, unificate da una sintassi di template comune.
 
-In Vue 3, le API degli slot sono state semplificate per far sì che tutti gli slot si comportassero come 'slot con scope' (*scoped slot*). Tuttavia, gli utilizzi per scoped slot e non-scoped spesso differiscono, quindi, il termine risulta ancora utile come modo per riferirsi a 'slot con props'.
+In Vue 3, le API degli slot sono state semplificate per far sì che tutti gli slot si comportino come *scoped slot*. Tuttavia, i modi di impiegare gli scoped slot e i non-scoped spesso differiscono, quindi, il termine risulta ancora utile come modo per riferirsi a 'slot con props'.
 
-Le props passate a uno slot possono essere utilizzate solo all'interno di una specifica area del template genitore, responsabile della definizione dei contenuti dello slot. Questa area del template si comporta come uno 'scope variabile' per le props, da cui il nome 'scoped slot'.
+Le props passate a uno slot possono essere utilizzate solo all'interno di una specifica area del template genitore, responsabile della definizione dei contenuti dello slot. Questa area del template si comporta come uno scope 'variabile' per le props, da cui il nome 'scoped slot'.
 
 Per maggiori dettagli consulta:
 - [Guida - Gli Slot - Scoped Slots](/guide/components/slots.html#scoped-slots)
@@ -344,7 +344,7 @@ Vedi [Componente Single-File](#single-file-component).
 
 Il termine *effetto collaterale* (*side effect*) non è specifico di Vue. Viene utilizzato per descrivere operazioni o funzioni che fanno qualcosa oltre il loro 'scope' locale (local scope).
 
-Ad esempio, nel contesto dell'impostazione di una proprietà come `user.name = null`, ci si aspetta che ciò modifichi il valore di `user.name`. Se, oltre a ciò, compie altre operazioni, come innescare il sistema di reattività di Vue, tale operazione verrebbe definita come un effetto collaterale 'effetto collaterale'. Ciò porta all'origine del termine [effetto reattivo](#reactive-effect) all'interno di Vue.
+Ad esempio, quando si verifica la modifica di una proprietà come `user.name = null`, ci si aspetta che ciò modifichi solo il valore di `user.name`. Se, oltre a ciò, compie altre operazioni, come innescare il sistema di reattività di Vue, tale operazione viene definita come un 'effetto collaterale'. Ciò porta all'origine del termine [effetto reattivo](#reactive-effect) all'interno di Vue.
 
 Quando si dice che una funzione ha 'effetti collaterali', significa che la funzione esegue una qualsiasi azione che è osservabile al di fuori della funzione, oltre al semplice ritorno di un valore. Ciò potrebbe voler dire che aggiorna un valore nello stato o attiva una richiesta di rete.
 
