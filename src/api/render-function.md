@@ -24,7 +24,7 @@ Crea nodi del DOM virtuale (vnodes).
   type Slots = { [name: string]: Slot }
   ```
 
-  > I tipi sono semplificati per una migliore leggibilità.
+  > I types sono semplificati per una migliore leggibilità.
 
 - **Dettagli**
 
@@ -32,7 +32,7 @@ Crea nodi del DOM virtuale (vnodes).
 
   Quando si crea un vnode di componente, i figli devono essere passati come funzioni slot. Può essere passata una singola funzione slot se il componente si aspetta solo lo slot predefinito. In caso contrario, gli slot devono essere passati come un oggetto di funzioni slot.
 
-  Per comodità, l'argomento delle props può essere omesso quando i figli non sono un oggetto di slot.
+  Per comodità, l'argomento delle props può essere omesso quando il figlio non è un oggetto di slot.
 
 - **Esempio**
 
@@ -41,7 +41,7 @@ Crea nodi del DOM virtuale (vnodes).
   ```js
   import { h } from 'vue'
 
-  // tutti gli argomenti tranne il tipo sono opzionali
+  // tutti gli argomenti tranne il type sono opzionali
   h('div')
   h('div', { id: 'foo' })
 
@@ -49,8 +49,8 @@ Crea nodi del DOM virtuale (vnodes).
   // Vue sceglie automaticamente il modo giusto per assegnarlo
   h('div', { class: 'bar', innerHTML: 'hello' })
 
-  // class e style hanno lo stesso oggetto / array
-  // supporto dei valori come nei template
+  // 'class' e 'style' supportano valori di tipo oggetto/array
+  // come nei template
   h('div', { class: [foo, { bar }], style: { color: 'red' } })
 
   // i listener degli eventi dovrebbero essere passati come onXxx
@@ -75,7 +75,7 @@ Crea nodi del DOM virtuale (vnodes).
   // passaggio di props
   h(Foo, {
     // equivalente a some-prop="ciao"
-    someProp: 'hello',
+    someProp: 'ciao',
     // equivalente a @update="() => {}"
     onUpdate: () => {}
   })
@@ -83,7 +83,7 @@ Crea nodi del DOM virtuale (vnodes).
   // passaggio di un singolo slot predefinito
   h(Foo, () => 'default slot')
 
-  // passaggio di slot nominati
+  // passaggio di slot con nome
   // notare che `null` è richiesto per evitare
   // che l'oggetto slots sia trattato come props
   h(MyComponent, null, {
@@ -111,9 +111,9 @@ Crea nodi del DOM virtuale (vnodes).
 
   - `class`
   - `style`
-  - listener degli eventi `onXxx` - i listener multipli con lo stesso nome saranno fusi in un array.
+  - listener degli eventi `onXxx` - i listener multipli con lo stesso nome saranno uniti in un array.
 
-  Se non hai bisogno del comportamento di fusione e desideri sovrascritture semplici, puoi utilizzare la sintassi nativa di spread degli oggetti.
+  Se non hai bisogno della logica dei merge e desideri delle semplici sovrascritture, puoi usare in alternativa lo spread operator (nativo degli oggetti).
 
 - **Esempio**
 
@@ -151,11 +151,11 @@ Clona un vnode.
 
 - **Dettagli**
 
-  Restituisce un vnode clonato, opzionalmente con proprietà aggiuntive da unire all'originale.
+  Restituisce un vnode clonato, con extraProps opzionali da unire all'originale.
 
   I vnode dovrebbero essere considerati immutabili una volta creati, e non dovresti modificare le proprietà di un vnode esistente. Al contrario, clonalo con proprietà diverse o aggiuntive.
 
-  I vnode hanno proprietà interne speciali, quindi clonarli non è semplice come utilizzare lo spread di oggetti. `cloneVNode()` gestisce gran parte della logica interna.
+  I vnode hanno proprietà interne speciali, quindi clonarli non è semplice come utilizzare lo spread operator. `cloneVNode()` gestisce gran parte della logica interna.
 
 - **Esempio**
 
@@ -190,7 +190,7 @@ Per risolvere manualmente un componente registrato tramite il nome.
 
   **Nota: non hai bisogno di questo se puoi importare direttamente il componente.**
 
-  `resolveComponent()` deve essere chiamato all'interno<span class="composition-api"> di `setup()` o</span> della funzione di renderizzazione per risolvere il componente dal contesto corretto.
+  `resolveComponent()` deve essere chiamato all'interno<span class="composition-api"> di `setup()` o</span> della funzione di renderizzazione per risolvere il contesto corretto del componente.
 
   Se il componente non viene trovato, verrà emesso un avviso durante l'esecuzione e verrà restituita la stringa del nome.
 
@@ -232,7 +232,7 @@ Per risolvere manualmente un componente registrato tramite il nome.
 
 ## resolveDirective() {#resolvedirective}
 
-For manually resolving a registered directive by name.
+Per risolvere manualmente una direttiva registrata per nome.
 
 - **Tipo**
 
@@ -300,7 +300,7 @@ Per aggiungere direttive personalizzate alle vnodes.
 
 ## withModifiers() {#withmodifiers}
 
-Per aggiungere i modificatori built-in [`v-on`](/guide/essentials/event-handling#event-modifiers) a una funzione gestore degli eventi.
+Per aggiungere i modificatori [`v-on`](/guide/essentials/event-handling#event-modifiers) nativi a una funzione gestore degli eventi.
 
 - **Tipo**
 
@@ -321,4 +321,4 @@ Per aggiungere i modificatori built-in [`v-on`](/guide/essentials/event-handling
   })
   ```
 
-- **Guarda anche** [Guide - Render Functions - Event Modifiers](/guide/extras/render-function#event-modifiers)
+- **Guarda anche** [Guida - Render Functions - Event Modifiers](/guide/extras/render-function#event-modifiers)

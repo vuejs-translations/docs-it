@@ -82,4 +82,4 @@ Crea un renderer personalizzato. Fornendo API specifiche della piattaforma per l
   export * from '@vue/runtime-core'
   ```
 
-  Il modulo stesso `@vue/runtime-dom` di Vue è [ implementato utilizzando la stessa API](https://github.com/vuejs/core/blob/main/packages/runtime-dom/src/index.ts). Per un'implementazione semplice, puoi dare un'occhiata a  [`@vue/runtime-test`](https://github.com/vuejs/core/blob/main/packages/runtime-test/src/index.ts) che è un pacchetto privato utilizzato internamente da Vue per gli unit test.
+  Il modulo stesso `@vue/runtime-dom` di Vue è [implementato utilizzando la stessa API](https://github.com/vuejs/core/blob/main/packages/runtime-dom/src/index.ts). Per un'implementazione semplice, puoi dare un'occhiata a  [`@vue/runtime-test`](https://github.com/vuejs/core/blob/main/packages/runtime-test/src/index.ts) che è un pacchetto privato utilizzato internamente da Vue per gli unit test.

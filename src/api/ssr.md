@@ -30,9 +30,9 @@
   })()
   ```
 
-  ### Contesto SSR {#ssr-context}
+  ### Context del SSR {#ssr-context}
 
-  Puoi passare un oggetto contesto opzionale, che può essere utilizzato per registrare dati aggiuntivi durante il rendering, ad esempio [l'accesso ai contenuti di Teleports](/guide/scaling-up/ssr#teleports):
+  Puoi passare un oggetto context opzionale, che può essere utilizzato per registrare dati aggiuntivi durante il rendering, ad esempio [l'accesso ai contenuti di Teleports](/guide/scaling-up/ssr#teleports):
 
   ```js
   const ctx = {}
@@ -47,7 +47,7 @@
 
 ## renderToNodeStream() {#rendertonodestream}
 
-Rappresenta l'input come uno [stream leggibile di Node.js](https://nodejs.org/api/stream.html#stream_class_stream_readable).
+Renderizza l'input come uno [stream leggibile di Node.js](https://nodejs.org/api/stream.html#stream_class_stream_readable).
 
 - **Esportato da `vue/server-renderer`**
 
@@ -96,7 +96,7 @@ Renderizza e indirizza in un'istanza esistente di [stream scrivibile Node.js (No
 
 ## renderToWebStream() {#rendertowebstream}
 
-Rappresenta l'input come uno [Web ReadableStream](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API).
+Renderizza l'input come uno [Web ReadableStream](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API).
 
 - **Esportato da `vue/server-renderer`**
 

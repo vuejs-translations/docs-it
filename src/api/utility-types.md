@@ -1,4 +1,4 @@
-# Tipi di Utility {#utility-types}
+# Types delle Utility.{#utility-types}
 
 :::info
 Questa pagina elenca solo alcuni tipi di utilità comunemente utilizzati che potrebbero necessitare di spiegazioni per il loro utilizzo. Per una lista completa dei tipi esportati, consulta il [codice sorgente](https://github.com/vuejs/core/blob/main/packages/runtime-core/src/index.ts#L131).
@@ -22,7 +22,7 @@ Viene utilizzato per annotare una prop con tipi più avanzati quando si utilizza
   export default {
     props: {
       book: {
-        // fornisce un tipo più specifico rispetto a `Object`
+        // fornisce un type più specifico rispetto a `Object`
         type: Object as PropType<Book>,
         required: true
       }
@@ -46,7 +46,7 @@ Alias per `T | Ref<T> | (() => T)`. Utile per annotare gli argomenti dei [Compos
 
 ## ExtractPropTypes\<T> {#extractproptypes}
 
-Estrae i tipi delle prop dal oggetto delle opzioni di props runtime. I tipi estratti sono interni - ovvero le props risolte ricevute dal componente. Ciò significa che le props booleane e le props con valori predefiniti sono sempre definite, anche se non sono richieste.
+Estrae i type delle prop dall'oggetto delle opzioni delle prop a runtime. I tipi estratti sono interni - ovvero le props risolte ricevute dal componente. Ciò significa che le props booleane e le props con valori predefiniti sono sempre definite, anche se non sono richieste.
 
 Per estrarre le props esterne, ovvero le props che il componente genitore è autorizzato a passare, utilizza [`ExtractPublicPropTypes`](#extractpublicproptypes).
 
@@ -77,7 +77,7 @@ Per estrarre le props esterne, ovvero le props che il componente genitore è aut
 
 ## ExtractPublicPropTypes\<T> {#extractpublicproptypes}
 
-Estrae i tipi delle prop dall'oggetto delle opzioni di props runtime. I tipi estratti sono rivolti all'esterno - ovvero le props che il componente genitore è autorizzato a passare.
+Estrae i type delle prop dall'oggetto delle opzioni delle prop a runtime. I tipi estratti sono rivolti all'esterno - ovvero le props che il componente genitore è autorizzato a passare.
 
 - **Esempio**
 
@@ -106,7 +106,7 @@ Estrae i tipi delle prop dall'oggetto delle opzioni di props runtime. I tipi est
 
 ## ComponentCustomProperties {#componentcustomproperties}
 
-Viene utilizzato per estendere il tipo dell'istanza del componente al fine di supportare proprietà globali personalizzate.
+Viene utilizzato per estendere il type dell'istanza del componente al fine di supportare proprietà globali personalizzate.
 
 - **Esempio**
 
@@ -122,14 +122,14 @@ Viene utilizzato per estendere il tipo dell'istanza del componente al fine di su
   ```
 
   :::tip
-  Le estensioni devono essere inserite in un file di modulo `.ts` o `.d.ts.` Per ulteriori dettagli, consulta [Posizionamento delle Estensioni di Tipo](/guide/typescript/options-api#augmenting-global-properties).
+  Le estensioni devono essere inserite in un file di modulo `.ts` o `.d.ts`. Per ulteriori dettagli, consulta [Posizionamento delle Estensioni dei Type](/guide/typescript/options-api#augmenting-global-properties).
   :::
 
 - **Guarda anche** [Guide - Augmenting Global Properties](/guide/typescript/options-api#augmenting-global-properties)
 
 ## ComponentCustomOptions {#componentcustomoptions}
 
-Viene utilizzata per estendere il tipo delle opzioni del componente al fine di supportare opzioni personalizzate.
+Viene utilizzata per estendere il type delle opzioni del componente al fine di supportare opzioni personalizzate.
 
 - **Esempio**
 
@@ -144,7 +144,7 @@ Viene utilizzata per estendere il tipo delle opzioni del componente al fine di s
   ```
 
   :::tip
-  Le estensioni devono essere inserite in un file di modulo `.ts` o `.d.ts.` Per ulteriori dettagli, consulta [Posizionamento delle Estensioni di Tipo](/guide/typescript/options-api#augmenting-global-properties).
+  Le estensioni devono essere inserite in un file di modulo `.ts` o `.d.ts`. Per ulteriori dettagli, consulta [Posizionamento delle Estensioni dei Type](/guide/typescript/options-api#augmenting-global-properties).
   :::
 
 - **Guarda anche** [Guide - Augmenting Custom Options](/guide/typescript/options-api#augmenting-custom-options)
@@ -171,7 +171,7 @@ Viene utilizzata per estendere le proprietà consentite TSX al fine di utilizzar
   ```
 
   :::tip
-  Le estensioni devono essere inserite in un file di modulo `.ts` o `.d.ts.` Per ulteriori dettagli, consulta [Posizionamento delle Estensioni di Tipo](/guide/typescript/options-api#augmenting-global-properties).
+  Le estensioni devono essere inserite in un file di modulo `.ts` o `.d.ts`. Per ulteriori dettagli, consulta [Posizionamento delle Estensioni dei Type](/guide/typescript/options-api#augmenting-global-properties).
   :::
 
 ## CSSProperties {#cssproperties}
@@ -199,11 +199,11 @@ Viene utilizzata per estendere i valori consentiti nei binding delle proprietà 
   ```
 
 :::tip
-  Le estensioni devono essere inserite in un file di modulo `.ts` o `.d.ts.` Per ulteriori dettagli, consulta [Posizionamento delle Estensioni di Tipo](/guide/typescript/options-api#augmenting-global-properties).
+  Le estensioni devono essere inserite in un file di modulo `.ts` o `.d.ts`. Per ulteriori dettagli, consulta [Posizionamento delle Estensioni dei Type](/guide/typescript/options-api#augmenting-global-properties).
   :::
 
 :::info Vedi anche
-I tag `<style>` dei SFC supportano il collegamento dei valori CSS allo stato dinamico del componente utilizzando la funzione CSS `v-bind`. Questo consente di utilizzare proprietà personalizzate senza l'augmentazione dei tipi.
+I tag `<style>` dei SFC supportano il collegamento dei valori CSS allo stato dinamico del componente utilizzando la funzione CSS `v-bind`. Questo consente di utilizzare proprietà personalizzate senza estendere i type.
 
 - [v-bind() in CSS](/api/sfc-css-features#v-bind-in-css)
   :::
