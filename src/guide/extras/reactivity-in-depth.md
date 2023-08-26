@@ -6,19 +6,19 @@ outline: deep
 import SpreadSheet from './demos/SpreadSheet.vue'
 </script>
 
-# Reactivity in Depth {#reactivity-in-depth}
+# Approfondimento sulla reattività {#reactivity-in-depth}
 
-One of Vue’s most distinctive features is the unobtrusive reactivity system. Component state consists of reactive JavaScript objects. When you modify them, the view updates. It makes state management simple and intuitive, but it’s also important to understand how it works to avoid some common gotchas. In this section, we are going to dig into some of the lower-level details of Vue’s reactivity system.
+Una delle caratteristiche più distintive di Vue è il sistema di reattività "discreto" (unobtrusive). Lo stato del componente è costituito da oggetti JavaScript reattivi. Quando li modifichi, la vista si aggiorna. Rende la gestione dello stato semplice e intuitiva, ma è anche importante capire come funziona per evitare alcuni errori comuni. In questa sezione, approfondiremo alcuni dei dettagli di basso livello del sistema di reattività di Vue.
 
-## What is Reactivity? {#what-is-reactivity}
+## Cos'è la reattività? {#what-is-reactivity}
 
-This term comes up in programming quite a bit these days, but what do people mean when they say it? Reactivity is a programming paradigm that allows us to adjust to changes in a declarative manner. The canonical example that people usually show, because it’s a great one, is an Excel spreadsheet:
+Questo termine ricorre spesso nella programmazione negli ultimi anni, ma cosa si intende esattamente? La reattività è un paradigma di programmazione che ci consente di adattare il componente ai vari cambiamenti in modo dichiarativo. L’esempio canonico che le persone di solito mostrano, perché è fantastico, è un foglio di calcolo Excel:
 
 <SpreadSheet />
 
-Here cell A2 is defined via a formula of `= A0 + A1` (you can click on A2 to view or edit the formula), so the spreadsheet gives us 3. No surprises there. But if you update A0 or A1, you'll notice that A2 automagically updates too.
+Qui la cella A2 è definita tramite la formula `= A0 + A1` (puoi fare clic su A2 per visualizzare o modificare la formula), quindi il foglio di calcolo ci darà come risultato 3. Non ci sono sorprese. Ma se aggiorni A0 o A1, noterai che anche A2 si aggiorna automaticamente.
 
-JavaScript doesn’t usually work like this. If we were to write something comparable in JavaScript:
+JavaScript nativamente non funziona in questo modo. Se dovessimo scrivere qualcosa che svolge un lavoro simile in JavaScript il risultato sarebbe:
 
 ```js
 let A0 = 1
@@ -28,12 +28,13 @@ let A2 = A0 + A1
 console.log(A2) // 3
 
 A0 = 2
-console.log(A2) // Still 3
+console.log(A2) // Comunque 3
 ```
 
-When we mutate `A0`, `A2` does not change automatically.
 
-So how would we do this in JavaScript? First, in order to re-run the code that updates `A2`, let's wrap it in a function:
+Quando mutiamo `A0`, `A2` non cambia automaticamente.
+
+Quindi come si fa a fare in JavaScript? Per prima cosa, per eseguire nuovamente il codice che aggiorna `A2`, avvolgiamolo in una funzione:
 
 ```js
 let A2
@@ -51,23 +52,31 @@ Then, we need to define a few terms:
 
 What we need is a magic function that can invoke `update()` (the **effect**) whenever `A0` or `A1` (the **dependencies**) change:
 
+Poi, dobbiamo definire alcune regole:
+
+- La funzione `update()` produce un **effetto collaterale**, poiché modifica lo stato del programma.
+
+- `A0` e `A1` sono considerate **dipendenze** dell'effetto, in quanto i loro valori sono utilizzati per eseguire l'effetto stesso. L'effetto di fatto **si mette in ascolto** al cambiamento delle sue dipendenze.
+
+Abbiamo bisogno di una funzione che possa invocare `update()` (l'**effect**) ogni volta che `A0` o `A1` (le **dipendenze**) cambiano:
+
 ```js
 whenDepsChange(update)
 ```
 
-This `whenDepsChange()` function has the following tasks:
+I compiti di questa funzione `whenDepsChange()` sono:
 
-1. Track when a variable is read. E.g. when evaluating the expression `A0 + A1`, both `A0` and `A1` are read.
+1. Tracciare quando viene letta la variabile. Ad esempio quando si computa l'espressione `A0 + A1`, vengono letti sia`A0` che `A1`.
 
-2. If a variable is read when there is a currently running effect, make that effect a subscriber to that variable. E.g. because `A0` and `A1` are read when `update()` is being executed, `update()` becomes a subscriber to both `A0` and `A1` after the first call.
+2. Se una variabile viene letta quando c'è un effetto in esecuzione, l'effetto viene sottoscritto. Ad esempio, poiché `A0` e `A1` vengono letti quando `update()` viene eseguito, `update()` sottoscrive i cambiamenti sia di `A0` che di `A1` dopo la prima esecuzione.
 
-3. Detect when a variable is mutated. E.g. when `A0` is assigned a new value, notify all its subscriber effects to re-run.
+3. Rilevare quando una variabile cambia. Ad esempio quando ad `A0` viene assegnato un nuovo valore, notifica a tutti gli effetti che la sottoscrivono di eseguire la funzione nuovamente.
 
-## How Reactivity Works in Vue {#how-reactivity-works-in-vue}
+## Come funziona la reattività in Vue {#how-reactivity-works-in-vue}
 
-We can't really track the reading and writing of local variables like in the example. There's just no mechanism for doing that in vanilla JavaScript. What we **can** do though, is intercept the reading and writing of **object properties**.
+Nell'esempio che abbiamo appena il modo con cui leggiamo e scriviamo le variabili non è ottimale. Non c'è nessun meccanismo per farlo in JavaScript vanilla. Quello che possiamo fare, però, è intercettare la lettura e la scrittura delle **proprietà del oggetto**.
 
-There are two ways of intercepting property access in JavaScript: [getter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get) / [setters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set) and [Proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy). Vue 2 used getter / setters exclusively due to browser support limitations. In Vue 3, Proxies are used for reactive objects and getter / setters are used for refs. Here's some pseudo-code that illustrates how they work:
+Ci sono due modi per intercettare l'accesso alle proprietà in JavaScript: [getter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get) / [setters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set) e [Proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy). Vue 2 usava i getter e i setter esclusivamente a causa di limitazioni date dal supporto dei browser. In Vue 3, i Proxy sono usati per gli oggetti reattivi e i getter / setter sono usati per i refs. Ecco alcuni esempi pseudo-codice che illustrano come funzionano:
 
 ```js{4,9,17,22}
 function reactive(obj) {
@@ -99,20 +108,21 @@ function ref(value) {
 ```
 
 :::tip
-Code snippets here and below are meant to explain the core concepts in the simplest form possible, so many details are omitted, and edge cases ignored.
+I frammenti di codice qui e sotto hanno lo scopo di spiegare i concetti fondamentali nel modo più semplice possibile, quindi molti dettagli vengono omessi e i casi limite ignorati.
 :::
 
-This explains a few [limitations of reactive objects](/guide/essentials/reactivity-fundamentals#limitations-of-reactive) that we have discussed in the fundamentals section:
+Questo spiega alcune [limitazioni degli oggetti reattivi](/guide/essentials/reactivity-fundamentals#limitations-of-reactive) che abbiamo discusso nella sezione "fondamenti delle reattività":
 
-- When you assign or destructure a reactive object's property to a local variable, accessing or assigning to that variable is non-reactive because it no longer triggers the get / set proxy traps on the source object. Note this "disconnect" only affects the variable binding - if the variable points to a non-primitive value such as an object, mutating the object would still be reactive.
 
-- The returned proxy from `reactive()`, although behaving just like the original, has a different identity if we compare it to the original using the `===` operator.
+- Quando si assegna o si distrugge una proprietà di un oggetto reattivo a una variabile locale, l'accesso o l'assegnazione a quella variabile non è più attiva perché non attiva più i trigger get / set proxy sull'oggetto. Nota che questa "disconnessione" ha effetto solo sulle variabili bindate - se la variabile punta ad un valore non primitivo, come un oggetto, la mutazione dell'oggetto sarebbe comunque reattiva.
 
-Inside `track()`, we check whether there is a currently running effect. If there is one, we lookup the subscriber effects (stored in a Set) for the property being tracked, and add the effect to the Set:
+- Il valore proxy restituito dalla funzione `reactive()`, pur comportandosi esattamente come il valore originale, ha un'identità diversa se lo confrontiamo con l'operatore `==` al valore originale.
+
+All'interno del metodo `track()`, viene controllato se c'è un effetto in esecuzione. Se ce n'è uno, cerchiamo effetti sottoscritti (memorizzati in un Set) per la proprietà che si sta tracciando e la aggiungiamo al Set:
 
 ```js
-// This will be set right before an effect is about
-// to be run. We'll deal with this later.
+// Questo sarà impostato appena prima che un effetto
+// stia per essere eseguito. Ne parleremo più avanti.
 let activeEffect
 
 function track(target, key) {
