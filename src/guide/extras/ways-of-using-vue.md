@@ -51,7 +51,6 @@ Il team di Vue mantiene anche uno static-site generator chiamato [VitePress](htt
 
 ## Oltre al web {#beyond-the-web}
 
-Although Vue is primarily designed for building web applications, it is by no means limited to just the browser. You can:
 Sebbene Vue sia progettato principalmente per la creazione di applicazioni web, non è limitato ad esso. Puoi:
 
 - Creare applicazioni desktop con [Electron](https://www.electronjs.org/) o [Tauri](https://tauri.studio/en/)

@@ -152,7 +152,6 @@ Gli hook React vengono richiamati ripetutamente ogni volta che un componente si 
 
 - I "gestori di eventi" (Event handlers) passati ai componenti figlio causano aggiornamenti a quest'ultimo non necessari per impostazione predefinita e richiedono `useCallback` esplicito come ottimizzazione. Questo è quasi sempre necessario e richiede ancora una volta il passaggio delle dipendenze. Trascurare questo punto, porta l'applicazione ad eseguire il rendering eccessivo delle componenti e può causare problemi di prestazioni senza rendersene conto.
 
-- The stale closure problem, combined with Concurrent features, makes it difficult to reason about when a piece of hooks code is run, and makes working with mutable state that should persist across renders (via `useRef`) cumbersome.
 - Il problema della closure "stantia", combinato con le funzionalità Concurrent, rende difficile capire la ragione su quando un pezzo di codice viene eseguito, e rende poco pratico la gestione della mutabilità dello stato che dovrebbe persistere tra i rendering (tramite `useRef`).
 
 Confronto con Vue Composition API:
