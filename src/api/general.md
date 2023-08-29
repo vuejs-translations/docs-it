@@ -26,7 +26,7 @@ Una utility per attendere il successivo aggiornamento del DOM.
 
 - **Dettagli**
 
-  Quando modifichi uno stato reattivo in Vue, gli aggiornamenti del DOM che ne risultano non vengono applicati istantaneamente. Vue, invece, li mette in buffer fino al "next tick" per garantire che ogni componente venga aggiornato solo una volta, indipendentemente da quante modifiche allo stato hai effettuato.
+  Quando modifichi uno stato reattivo in Vue, gli aggiornamenti del DOM che ne risultano non vengono applicati istantaneamente. Vue, invece, li mette in un buffer fino al "next tick" per garantire che ogni componente venga aggiornato solo una volta, indipendentemente da quante modifiche allo stato hai effettuato.
 
   `nextTick()` può essere utilizzato immediatamente dopo una modifica dello stato per attendere che gli aggiornamenti del DOM siano completati. Puoi sia passare una callback come argomento, sia utilizzare await sulla Promise restituita.
 
@@ -113,11 +113,11 @@ Un helper per definire un componente Vue con inferenza del Type.
   ): () => any
   ```
 
-  > Il Type è semplificato per la leggibilità.
+  > Il Type è semplificato per migliorarne la leggibilità.
 
 - **Dettagli**
 
-  Il primo argomento si aspetta un oggetto delle opzioni del componente. Il valore di ritorno sarà lo stesso oggetto delle opzioni, poiché la funzione è essenzialmente una no-op a runtime solo per scopi di inferenza del Type.
+  Il primo argomento si aspetta un oggetto delle options del componente. Il valore di ritorno sarà lo stesso oggetto delle opzioni, poiché la funzione è essenzialmente una no-op a runtime solo per scopi di inferenza del Type.
 
   Nota che il type restituito è un po' speciale: sarà un type di costruttore il cui type di istanza è il type dell'istanza del componente ricavato dalle options. Il type restituito viene poi utilizzato per l'inferenza del type quando è usato come un tag in TSX.
 
@@ -131,24 +131,24 @@ Un helper per definire un componente Vue con inferenza del Type.
 
   ### Function Signature <sup class="vt-badge" data-text="3.3+" /> {#function-signature}
 
-  `defineComponent()` also has an alternative signature that is meant to be used with Composition API and [render functions or JSX](/guide/extras/render-function.html).
+  `defineComponent()` ha anche una firma (signature) alternativa che è pensata per essere utilizzata con la Composition API e le [render functions o JSX](/guide/extras/render-function.html).
 
-  Instead of passing in an options object, a function is expected instead. This function works the same as the Composition API [`setup()`](/api/composition-api-setup.html#composition-api-setup) function: it receives the props and the setup context. The return value should be a render function - both `h()` and JSX are supported:
+  Invece di accettare un oggetto di options, si aspetta una funzione. Questa funzione lavora nello stesso modo della funzione [`setup()`](/api/composition-api-setup.html#composition-api-setup) della Composition API: riceve le props e il context di setup. Il valore di ritorno dovrebbe essere una render function - sono supportati sia `h()` sia JSX:
 
   ```js
   import { ref, h } from 'vue'
 
   const Comp = defineComponent(
     (props) => {
-      // use Composition API here like in <script setup>
+      // qui usa la Composition API come in <script setup>
       const count = ref(0)
 
       return () => {
-        // render function or JSX
+        // render function o JSX
         return h('div', count.value)
       }
     },
-    // extra options, e.g. declare props and emits
+    // option aggiuntive, ad es. dichiara props ed emits
     {
       props: {
         /* ... */
@@ -157,45 +157,45 @@ Un helper per definire un componente Vue con inferenza del Type.
   )
   ```
 
-  The main use case for this signature is with TypeScript (and in particular with TSX), as it supports generics:
+  L'uso principale per questa firma è con TypeScript (e in particolare con TSX), poiché supporta i generics:
 
   ```tsx
   const Comp = defineComponent(
     <T extends string | number>(props: { msg: T; list: T[] }) => {
-      // use Composition API here like in <script setup>
+      // qui usa la Composition API come in <script setup>
       const count = ref(0)
 
       return () => {
-        // render function or JSX
+        // render function o JSX
         return <div>{count.value}</div>
       }
     },
-    // manual runtime props declaration is currently still needed.
+    // la dichiarazione manuale delle props a runtime allo stato attuale è ancora necessaria.
     {
       props: ['msg', 'list']
     }
   )
   ```
 
-  In the future, we plan to provide a Babel plugin that automatically infers and injects the runtime props (like for `defineProps` in SFCs) so that the runtime props declaration can be omitted.
+  In futuro, pianifichiamo di fornire un plugin Babel che inferisca e inietti automaticamente le props a runtime (come per `defineProps` in SFC) in modo che la dichiarazione manuale delle props a runtime possa essere omessa.
 
-  ### Note on webpack Treeshaking {#note-on-webpack-treeshaking}
+  ### Nota sul Treeshaking di webpack {#note-on-webpack-treeshaking}
 
-  Because `defineComponent()` is a function call, it could look like that it would produce side-effects to some build tools, e.g. webpack. This will prevent the component from being tree-shaken even when the component is never used.
+  Poiché `defineComponent()` è una chiamata di funzione, sembra che possa causare effetti collaterali ad alcuni strumenti di build, ad es. webpack. Ciò potrebbe impedire al componente di essere eliminato (tree-shaked) anche quando non è mai utilizzato.
 
-  To tell webpack that this function call is safe to be tree-shaken, you can add a `/*#__PURE__*/` comment notation before the function call:
+  Per indicare a webpack che questa chiamata di funzione è sicura per il tree-shaking, puoi aggiungere una nota di commento `/*#__PURE__*/` prima della chiamata della funzione:
 
   ```js
   export default /*#__PURE__*/ defineComponent(/* ... */)
   ```
 
-  Note this is not necessary if you are using Vite, because Rollup (the underlying production bundler used by Vite) is smart enough to determine that `defineComponent()` is in fact side-effect-free without the need for manual annotations.
+  Nota che ciò non è necessario se stai utilizzando Vite, perché Rollup (il bundler di produzione usato da Vite) riconosce che `defineComponent()` è effettivamente privo di effetti collaterali senza la necessità di annotazioni manuali.
 
-- **Guarda anche** [Guida - Using Vue with TypeScript](/guide/typescript/overview#general-usage-notes)
+- **Guarda anche** [Guida - Utilizzo di Vue con TypeScript](/guide/typescript/overview#general-usage-notes)
 
 ## defineAsyncComponent() {#defineasynccomponent}
 
-Define an async component which is lazy loaded only when it is rendered. The argument can either be a loader function, or an options object for more advanced control of the loading behavior.
+Definisce un componente asincrono che viene caricato in modo lazy solo quando viene renderizzato. L'argomento può essere una funzione di loader o un oggetto di options per un maggiore controllo del comportamento di caricamento.
 
 - **Tipo**
 
@@ -222,11 +222,11 @@ Define an async component which is lazy loaded only when it is rendered. The arg
   }
   ```
 
-- **Guarda anche** [Guida - Async Components](/guide/components/async)
+- **Guarda anche** [Guida - I Componenti asincroni](/guide/components/async)
 
 ## defineCustomElement() {#definecustomelement}
 
-This method accepts the same argument as [`defineComponent`](#definecomponent), but instead returns a native [Custom Element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) class constructor.
+Questo metodo accetta lo stesso argomento di [`defineComponent`](#definecomponent), ma restituisce un costruttore di classe nativo per [Custom Element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements).
 
 - **Tipo**
 
@@ -240,13 +240,13 @@ This method accepts the same argument as [`defineComponent`](#definecomponent), 
   }
   ```
 
-  > Type is simplified for readability.
+  > Il Type è semplificato per migliorarne la leggibilità.
 
 - **Dettagli**
 
-  In addition to normal component options, `defineCustomElement()` also supports a special option `styles`, which should be an array of inlined CSS strings, for providing CSS that should be injected into the element's shadow root.
+  Oltre alle normali options del componente, `defineCustomElement()` supporta anche un'opzione speciale `styles`, che dovrebbe essere un array di stringhe CSS inline, per fornire CSS che da iniettare nella shadow root dell'elemento.
 
-  The return value is a custom element constructor that can be registered using [`customElements.define()`](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/define).
+  Il valore restituito è un costruttore di elementi personalizzato che può essere registrato utilizzando [`customElements.define()`](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/define).
 
 - **Esempio**
 
@@ -254,15 +254,15 @@ This method accepts the same argument as [`defineComponent`](#definecomponent), 
   import { defineCustomElement } from 'vue'
 
   const MyVueElement = defineCustomElement({
-    /* component options */
+    /* options del componente */
   })
 
-  // Register the custom element.
+  // Registra l'elemento personalizzato.
   customElements.define('my-vue-element', MyVueElement)
   ```
 
 - **Guarda anche**
 
-  - [Guida - Building Custom Elements with Vue](/guide/extras/web-components#building-custom-elements-with-vue)
+  - [Guida - Creazione di Custom Elements con Vue](/guide/extras/web-components#building-custom-elements-with-vue)
 
-  - Also note that `defineCustomElement()` requires [special config](/guide/extras/web-components#sfc-as-custom-element) when used with Single-File Components.
+  - Da notare anche che `defineCustomElement()` richiede una [configurazione speciale](/guide/extras/web-components#sfc-as-custom-element) quando utilizzato con Componenti Single-File (SFC).
