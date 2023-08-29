@@ -1,23 +1,23 @@
-# Reactivity Transform {#reactivity-transform}
+# Trasformazione della reattività (Reactivity Transform) {#reactivity-transform}
 
-:::danger Deprecated Experimental Feature
-Reactivity Transform was an experimental feature, and has been deprecated. Please read about [the reasoning here](https://github.com/vuejs/rfcs/discussions/369#discussioncomment-5059028).
+:::danger Funzionalità sperimentale deprecata
+La trasformazione della reattività (Reactivity Transform) era una funzionalità sperimentale ed è stata deprecata. Si prega di leggere [il ragionamento qui](https://github.com/vuejs/rfcs/discussions/369#discussioncomment-5059028).
 
-It will eventually be removed from Vue core in a future minor release.
+Essa verrà rimossa dal core Vue in una versione futura tramite minor release.
 
-- To migrate away from it, check out this [command line tool](https://github.com/edison1105/drop-reactivity-transform) that can automate the process.
-- If you still intend to use it, it is now available via the [Vue Macros](https://vue-macros.sxzz.moe/features/reactivity-transform.html) plugin.
+- Per rimuoverne l'utilizzo, controlla questo [strumento da riga di comando](https://github.com/edison1105/drop-reactivity-transform) che può automatizzare il processo.
+- Se intendi ancora utilizzarlo, ora è disponibile tramite il plugin [Vue Macros](https://vue-macros.sxzz.moe/features/reactivity-transform.html).
 :::
 
-:::tip Composition-API-specific
-Reactivity Transform is a Composition-API-specific feature and requires a build step.
+:::tip Specifico per la Composition API
+La trasformazione della reattività è una funzionalità specifica della Composition API e richiede lo step di compilazione.
 :::
 
-## Refs vs. Reactive Variables {#refs-vs-reactive-variables}
+## Riferimenti (Refs) contro le variabili reattive {#refs-vs-reactive-variables}
 
-Ever since the introduction of the Composition API, one of the primary unresolved questions is the use of refs vs. reactive objects. It's easy to lose reactivity when destructuring reactive objects, while it can be cumbersome to use `.value` everywhere when using refs. Also, `.value` is easy to miss if not using a type system.
+Sin dall'introduzione della Composition API, una delle principali domande irrisolte è l'uso dei riferimenti rispetto agli oggetti reattivi. È facile perdere reattività quando si destrutturano oggetti reattivi, mentre può essere complicato utilizzare `.value` ovunque quando si utilizzano refs. Inoltre, `.value` è facile da dimenticare se non si utilizza la tipizzazione.
 
-[Vue Reactivity Transform](https://github.com/vuejs/core/tree/main/packages/reactivity-transform) is a compile-time transform that allows us to write code like this:
+[trasformazione della reattività con Vue](https://github.com/vuejs/core/tree/main/packages/reactivity-transform) è una trasformazione in fase di compilazione che ci consente di scrivere codice come questo:
 
 ```vue
 <script setup>
@@ -36,8 +36,10 @@ function increment() {
 ```
 
 The `$ref()` method here is a **compile-time macro**: it is not an actual method that will be called at runtime. Instead, the Vue compiler uses it as a hint to treat the resulting `count` variable as a **reactive variable.**
+Il metodo `$ref()` è una **macro computata in fase di compilazione**: non è un metodo vero e proprio che verrà chiamato in fase di runtime. Invece, il compilatore Vue lo utilizza come suggerimento per trattare la variabile "count" risultante come una **variabile reattiva.**
 
 Reactive variables can be accessed and re-assigned just like normal variables, but these operations are compiled into refs with `.value`. For example, the `<script>` part of the above component is compiled into:
+Le variabili reattive possono essere accedute e riassegnate solamente come le variabili normali, ma queste operazioni vengono compilate in riferimenti (refs) con `.value`. Ad esempio, lo `<script>` del componente che abbiamo visto precedentemente è compilata in:
 
 ```js{5,8}
 import { ref } from 'vue'
