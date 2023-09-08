@@ -14,7 +14,7 @@ A causa del suo frequente utilizzo, `v-on` ha anche una sintassi abbreviata:
 
 <div class="options-api">
 
-Qui, `increment` fa riferimento a una funzione dichiarata utilizzando l'opzione 'methods':
+Qui, `increment` fa riferimento a una funzione dichiarata utilizzando l'opzione `methods`:
 
 <div class="sfc">
 
@@ -55,7 +55,7 @@ createApp({
 
 </div>
 
-All'interno di un metodo, possiamo accedere all'istanza del componente utilizzando `this`, il quale espone le proprietà dichiarate in `data` e possiamo aggiornare lo stato del componente modificando queste proprietà.
+All'interno di un metodo, possiamo accedere all'istanza del componente utilizzando `this`. L'istanza, poi espone le proprietà dichiarate in `data`. In questo modo possiamo aggiornare lo stato del componente modificando queste proprietà.
 
 </div>
 
@@ -108,4 +108,4 @@ All'interno della funzione, possiamo aggiornare lo stato del componente mediante
 
 Gli eventi possono anche utilizzare espressioni inline e semplificare compiti comuni mediante l'uso dei modificatori. Questi dettagli sono trattati nella <a target="_blank" href="/guide/essentials/event-handling.html">Guida - La Gestione degli eventi</a>. 
 
-Ora, si provi a implementare <span class="options-api">il metodo</span><span class="composition-api">la funzione</span> `increment` e lo si leghi al pulsante usando `v-on`.
+Ora, prova tu a implementare <span class="options-api">il metodo</span><span class="composition-api">la funzione</span> `increment` legandolo al pulsante usando `v-on`.
