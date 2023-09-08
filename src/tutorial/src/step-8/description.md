@@ -101,4 +101,4 @@ createApp({
 
 Una computed property tiene traccia degli altri stati reattivi utilizzati nel suo calcolo come dipendenze. Mette in cache il risultato e lo aggiorna automaticamente quando le sue dipendenze cambiano.
 
-Ora, si provi ad aggiungere la computed property `filteredTodos` e a implementare la sua logica di calcolo! Se implementata correttamente, la spunta di un todo quando stiamo nascondendo quelli completati dovrebbe nascondere istantaneamente anche questo.
+Ora, prova ad aggiungere la computed property `filteredTodos` e a implementare la sua logica di calcolo! Se implementata correttamente, la spunta di un todo quando stiamo nascondendo quelli completati dovrebbe nasconderlo istantaneamente.
