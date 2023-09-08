@@ -34,7 +34,7 @@ function onInput(e) {
 
 Prova a digitare nell'input box - dovresti vedere il testo nel tag `<p>` aggiornarsi mentre digiti.
 
-Per semplificare il binding bidirezionale, Vue fornisce una direttiva chiamata `v-model`, che essenzialmente è uno zucchero sintattico per quanto sopra:
+Per semplificare il binding bidirezionale, Vue fornisce una direttiva chiamata `v-model`, che essenzialmente è una sintassi semplificata per quanto sopra:
 
 ```vue-html
 <input v-model="text">
@@ -44,4 +44,4 @@ Per semplificare il binding bidirezionale, Vue fornisce una direttiva chiamata `
 
 `v-model` funziona non solo su input di tipo testuali, ma anche su altri tipi di input come checkboxes, pulsanti radio (radio buttons) e menu a discesa (select dropdowns). Per ulteriori dettagli, consulta la <a target="_blank" href="/guide/essentials/forms.html">Guida - Binding di Form</a>.
 
-Ora, si provi a fare il refactor del codice utilizzando `v-model`.
+Ora, prova a fare il refactor del codice utilizzando `v-model`.
