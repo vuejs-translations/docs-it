@@ -16,7 +16,7 @@ Da notare come stiamo assegnando a ogni oggetto todo un `id` univoco, e facendo 
 
 Ci sono due modi per aggiornare la lista:
 
-1. Chiamare dei [metodi mutanti](https://stackoverflow.com/questions/9009879/which-javascript-array-functions-are-mutating) sull'array di origine:
+1. Chiamare dei [mutating methods](https://stackoverflow.com/questions/9009879/which-javascript-array-functions-are-mutating) sull'array di origine:
 
    <div class="composition-api">
 
