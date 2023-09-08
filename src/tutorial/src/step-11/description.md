@@ -56,7 +56,7 @@ createApp({
 
 Abbiamo anche bisogno di registrare il componente usando l'opzione `components`. Qui stiamo usando la notazione degli oggetti per registrare il componente `ChildComp` con la chiave `ChildComp`.
 
-Stiamo scrivendo il template all'interno DOM, il quale è soggetto alle regole di parsing del browser, che è case-insensitive. Di conseguenza, è necessario usare il kebab-case per fare riferimento al componente figlio:
+Dato che stiamo scrivendo il template all'interno del DOM, esso sarà soggetto alle regole di parsing del browser, che è case-insensitive per i nomi dei tag. Di conseguenza, è necessario usare il kebab-case per fare riferimento al componente figlio:
 
 ```vue-html
 <child-comp></child-comp>
@@ -65,4 +65,4 @@ Stiamo scrivendo il template all'interno DOM, il quale è soggetto alle regole d
 </div>
 
 
-Si provi adesso a importare il componente figlio e a renderizzarlo nel template.
+Prova adesso a importare il componente figlio e a renderizzarlo nel template.
