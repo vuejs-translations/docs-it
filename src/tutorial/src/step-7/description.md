@@ -16,7 +16,7 @@ Da notare come stiamo assegnando a ogni oggetto todo un `id` univoco, e facendo 
 
 Ci sono due modi per aggiornare la lista:
 
-1. Chiamare [metodi mutanti](https://stackoverflow.com/questions/9009879/which-javascript-array-functions-are-mutating) sull'array di origine:
+1. Chiamare dei [metodi mutanti](https://stackoverflow.com/questions/9009879/which-javascript-array-functions-are-mutating) sull'array di origine:
 
    <div class="composition-api">
 
@@ -50,6 +50,6 @@ Ci sono due modi per aggiornare la lista:
 
    </div>
 
-Qui abbiamo un semplice elenco di cose da fare (todo list): si provi a implementare la logica dei metodi `addTodo()` e `removeTodo()` per farlo funzionare!
+Qui abbiamo un semplice elenco di cose da fare (todo list): prova a implementare la logica dei metodi `addTodo()` e `removeTodo()` per farlo funzionare!
 
 Maggiori dettagli su `v-for`: <a target="_blank" href="/guide/essentials/list.html">Guida - Il Rendering delle Liste</a>
