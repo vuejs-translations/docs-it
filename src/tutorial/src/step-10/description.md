@@ -1,6 +1,6 @@
 # Watchers {#watchers}
 
-A volte abbiamo bisogno di eseguire dei "side effects" in modo reattivo. Per esempio, fare il log di un numero nella console quando esso cambia valore. Possiamo fare questo attraverso i watchers:
+A volte abbiamo bisogno di eseguire dei "side effects" in modo reattivo. Per esempio, fare il log di un numero nella console quando esso cambia valore. Possiamo farlo attraverso i watchers:
 
 <div class="composition-api">
 
@@ -40,4 +40,4 @@ In questo caso, si utilizza l'opzione `watch` per osservare le modifiche alla pr
 
 </div>
 
-Un esempio più pratico rispetto a fare il logging all'interno della console potrebbe essere quello di recuperare nuovi dati quando un ID cambia. Il codice che abbiamo effettua il fetch di alcuni todos da una mock API sul mount del componente. C'è un bottone che incrementa l'ID del todo che deve essere recuperato. Si provi a implementare un watcher che recuperi un nuovo todo quando il bottone viene cliccato.
+Un esempio più pratico rispetto a fare il logging all'interno della console potrebbe essere quello di recuperare nuovi dati quando un ID cambia. Il codice che abbiamo effettua il fetch di alcuni todos da una mock API al mount del componente. C'è un bottone che incrementa l'ID del todo che deve essere recuperato. Prova a implementare un watcher che recupera un nuovo todo quando il bottone viene cliccato.
