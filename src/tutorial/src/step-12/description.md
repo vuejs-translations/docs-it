@@ -32,7 +32,7 @@ export default {
 }
 ```
 
-Una volta dichiarato, la prop `msg` è esposta in `this` e può essere usata nel template del componete figlio. Le props ricevute vengono passate a `setup()` come primo argomento.
+Una volta dichiarata, la prop `msg` è esposta in `this` e può essere usata nel template del componete figlio. Le props ricevute vengono passate a `setup()` come primo argomento.
 
 </div>
 
@@ -49,7 +49,7 @@ export default {
 }
 ```
 
-Una volta dichiarato, la prop `msg` è esposta in `this` e può essere usata nel template del componente figlio.
+Una volta dichiarata, la prop `msg` è esposta in `this` e può essere usata nel template del componente figlio.
 
 </div>
 
