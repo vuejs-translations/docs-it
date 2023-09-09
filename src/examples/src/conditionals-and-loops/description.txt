@@ -1,1 +1,1 @@
-We can render content conditionally or in a loop with the v-if and v-for directives.
+Le direttive v-if e v-for possono essere utilizzate per eseguire il rendering in modo condizionato in un ciclo.
