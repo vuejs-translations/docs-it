@@ -2,7 +2,7 @@
 
 Fino a questo momento, Vue ha gestito autonomamente tutti gli aggiornamenti del DOM per noi, sfruttando la reattività e il rendering dichiarativo. Tuttavia, è inevitabile che si verifichino situazioni in cui sarà necessario intervenire manualmente sul DOM.
 
-È possibile ottenere un riferimento a un elemento nel template utilizzando <a target="_blank" href="/api/built-in-special-attributes.html#ref">l'attributo speciale `ref`</a>:
+Possiamo richiedere un **template ref**, cioè un riferimento a un elemento nel template utilizzando l'<a target="_blank" href="/api/built-in-special-attributes.html#ref">attributo speciale `ref`</a>:
 
 ```vue-html
 <p ref="pElementRef">hello</p>
@@ -67,9 +67,9 @@ createApp({
 
 <div class="options-api">
 
-L'elemento verrà esposto su `this.$refs` come `this.$refs.pElementRef`. Tuttavia, sarà possibile accedervi soltanto dopo che il componente è stato **montato**.
+L'elemento verrà esposto su `this.$refs` come `this.$refs.pElementRef`. Tuttavia, sarà possibile accedervi soltanto dopo che il componente sarà stato **montato**.
 
-Per seguire del codice dopo il mount, è possibile utilizzare l'opzione `mounted`:
+Per eseguire del codice dopo il mount, è possibile utilizzare l'opzione `mounted`:
 
 <div class="sfc">
 
@@ -97,4 +97,4 @@ createApp({
 
 Questo è chiamato **hook del ciclo di vita**, che ci permetti di registrare una callback da eseguire in determinati momenti del ciclo di vita del componente. Ci sono altri hook come <span class="options-api">`created` e `updated`</span><span class="composition-api">`onUpdated` e `onUnmount`</span>. Per ulteriori dettagli, si può fare riferimento al <a target="_blank" href="/guide/essentials/lifecycle.html#lifecycle-diagram">diagramma del ciclo di vita</a>.
 
-Ora, si provi ad aggiungere <span class="options-api">un hook `mounted`</span><span class="composition-api">un hook `onMounted`</span>, ad accedere all'elemento `<p>` tramite <span class="options-api">`this.$refs.pElementRef`</span><span class="composition-api">`pElementRef.value`</span> e a eseguire un'operazione diretta su di esso, come ad esempio la modifica del suo `textContent`.
+Ora, prova ad aggiungere <span class="options-api">un hook `mounted`</span><span class="composition-api">un hook `onMounted`</span>, ad accedere all'elemento `<p>` tramite <span class="options-api">`this.$refs.pElementRef`</span><span class="composition-api">`pElementRef.value`</span> e a eseguire un'operazione diretta su di esso, come ad esempio la modifica del suo `textContent`.
