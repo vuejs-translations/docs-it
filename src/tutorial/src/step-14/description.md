@@ -6,7 +6,7 @@ Oltre a passare i dati tramite props, il componente padre può anche passare dei
 
 ```vue-html
 <ChildComp>
-  Questo è il contenuto di una slot!
+  Questo è il contenuto di uno slot!
 </ChildComp>
 ```
 
@@ -15,13 +15,13 @@ Oltre a passare i dati tramite props, il componente padre può anche passare dei
 
 ```vue-html
 <child-comp>
-  Questo è il contenuto di una slot!
+  Questo è il contenuto di uno slot!
 </child-comp>
 ```
 
 </div>
 
-Il componente figlio, può renderizzare il contenuto della slot passata dal genitore usando l'elemento `<slot>` come outlet:
+Il componente figlio, può renderizzare il contenuto dello slot passato dal genitore usando l'elemento `<slot>` per renderizzarlo:
 
 <div class="sfc">
 
@@ -40,7 +40,7 @@ Il componente figlio, può renderizzare il contenuto della slot passata dal geni
 
 </div>
 
-Il contenuto all'interno di `<slot>` sarà trattato come contenuto di "fallback", cioè sarà visualizzato se il padre non ha passato alcuno contenuto di slot:
+Il contenuto all'interno di uno `<slot>` sarà trattato come contenuto di "fallback", cioè sarà visualizzato se il padre non ha passato alcuno contenuto:
 
 ```vue-html
 <slot>Contenuto di fallback</slot>
