@@ -1,6 +1,6 @@
 # Emits {#emits}
 
-Oltre a poter ricevere props, un componente può anche emettere eventi al padre:
+Oltre a poter ricevere props, un componente può anche emettere eventi verso padre:
 
 <div class="composition-api">
 <div class="sfc">
@@ -10,8 +10,8 @@ Oltre a poter ricevere props, un componente può anche emettere eventi al padre:
 // dichiara gli eventi che si emettono
 const emit = defineEmits(['response'])
 
-// emissione evento con argomento
-emit('response', 'hello from child')
+// emit dell'evento con argomento
+emit('response', 'ciao dal figlio')
 </script>
 ```
 
@@ -24,8 +24,8 @@ export default {
   // dichiara gli eventi che si emettono
   emits: ['response'],
   setup(props, { emit }) {
-    // emissione evento con argomento
-    emit('response', 'hello from child')
+    // emit dell'evento con argomento
+    emit('response', 'ciao dal figlio')
   }
 }
 ```
@@ -41,8 +41,8 @@ export default {
   // dichiara gli eventi che si emettono
   emits: ['response'],
   created() {
-    // emissione evento con argomento
-    this.$emit('response', 'hello from child')
+    // emit dell'evento con argomento
+    this.$emit('response', 'ciao dal figlio')
   }
 }
 ```
@@ -51,7 +51,7 @@ export default {
 
 Il primo parametro di <span class="options-api">`this.$emit()`</span><span class="composition-api">`emit()`</span> è il nome dell'evento. Eventuali argomenti aggiuntivi vengono passati al listener dell'evento.
 
-Il padre può ascoltare gli eventi emessi dal figlio utilizzando `v-on`, in questo caso il handler riceve l'argomento extra della chiamata emit del figlio e lo assegna allo stato locale:
+Il padre può ascoltare gli eventi emessi dal figlio utilizzando `v-on`, in questo caso l'handler riceve l'argomento extra della chiamata emit del figlio e lo assegna allo stato locale:
 
 <div class="sfc">
 
