@@ -24,7 +24,7 @@ export default {
     }
 
     function addChild() {
-      props.model.children.push({ name: 'new stuff' })
+      props.model.children.push({ name: 'nuovo elemento' })
     }
 
     return {
