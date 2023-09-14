@@ -1,6 +1,6 @@
 # Emits {#emits}
 
-Oltre a poter ricevere props, un componente può anche emettere eventi verso padre:
+Oltre a poter ricevere props, un componente può anche emettere eventi verso il padre:
 
 <div class="composition-api">
 <div class="sfc">
