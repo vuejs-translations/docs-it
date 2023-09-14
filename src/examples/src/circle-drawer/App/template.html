@@ -1,8 +1,8 @@
 <svg @click="onClick">
   <foreignObject x="0" y="40%" width="100%" height="200">
     <p class="tip">
-      Fai click sull'area di disegno per disegnare un cerchio. Fai click su un cerchio per selezionarlo.
-      Fai click destro sull'area di disegno per regolare il raggio del cerchio selezionato.
+      Fai click sul canvas per disegnare un cerchio. Fai click su un cerchio per selezionarlo.
+      Fai click con tasto destro per regolare il raggio del cerchio selezionato.
     </p>
   </foreignObject>
   <circle
@@ -18,7 +18,7 @@
 
 <div class="controls">
   <button @click="undo" :disabled="index <= 0">Annulla</button>
-  <button @click="redo" :disabled="index >= history.length - 1">Avanti</button>
+  <button @click="redo" :disabled="index >= history.length - 1">Ripristina</button>
 </div>
 
 <div class="dialog" v-if="adjusting" @click.stop>
