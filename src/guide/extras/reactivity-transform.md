@@ -110,7 +110,7 @@ let count = $(myCreateRef())
 
 ## Destrutturare proprietà reattive {#reactive-props-destructure}
 
-Ci sono due punti critici nell'attuale utilizzo di `defineProps()` dentro a "<script setup>":
+Ci sono due punti critici nell'attuale utilizzo di `defineProps()` dentro a `<script setup>`:
 
 1. Come con `.value`, per mantenere la reattività devi sempre accedere alle proprietà (props) come `props.x`. Ciò significa che non puoi destrutturare `defineProps` poiché le variabili destrutturate risultanti non saranno reattive e non si aggiorneranno.
 
