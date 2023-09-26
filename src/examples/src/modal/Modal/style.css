@@ -35,10 +35,10 @@
 
 /*
  * I seguenti stili vengono applicati automaticamente agli elementi con
- * transition="modal" quando la loro visibilità viene modificata
+ * transition="modal" quando la loro visibility viene modificata
  * da Vue.js.
  *
- * Puoi facilmente giocare con la transizione modale modificando
+ * Puoi facilmente giocare con la transizione della modale modificando
  * questi stili.
  */
 

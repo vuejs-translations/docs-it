@@ -1,7 +1,7 @@
 <button id="show-modal" @click="showModal = true">Mostra Modale</button>
 
 <Teleport to="body">
-  <!-- utilizza il componente modale, passando la proprietà -->
+  <!-- utilizza il componente modale, passando la prop -->
   <modal :show="showModal" @close="showModal = false">
     <template #header>
       <h3>header personalizzato</h3>
