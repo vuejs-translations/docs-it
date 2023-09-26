@@ -29,7 +29,7 @@ export default {
       if (this.stats.length > 3) {
         this.stats.splice(this.stats.indexOf(stat), 1)
       } else {
-        alert("Non puoi più cancellare!")
+        alert("Non puoi cancellare oltre!")
       }
     }
   }

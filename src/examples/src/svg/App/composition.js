@@ -30,7 +30,7 @@ export default {
       if (stats.length > 3) {
         stats.splice(stats.indexOf(stat), 1)
       } else {
-        alert("Non puoi più cancellare!")
+        alert("Non puoi cancellare oltre!")
       }
     }
 
