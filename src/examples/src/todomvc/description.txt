@@ -1,3 +1,2 @@
 Una implementazione di TodoMVC pienamente conforme alle specifiche
 https://todomvc.com/
-w
