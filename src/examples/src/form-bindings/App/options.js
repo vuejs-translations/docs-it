@@ -1,7 +1,7 @@
 export default {
   data() {
     return {
-      text: 'Modifica me',
+      text: 'Modificami',
       checked: true,
       checkedNames: ['Jack'],
       picked: 'One',
