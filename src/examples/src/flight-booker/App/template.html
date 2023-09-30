@@ -6,6 +6,6 @@
 <input type="date" v-model="departureDate">
 <input type="date" v-model="returnDate" :disabled="!isReturn">
 
-<button :disabled="!canBook" @click="book">Book</button>
+<button :disabled="!canBook" @click="book">Prenota</button>
 
 <p>{{ canBook ? '' : 'La data di ritorno deve essere successiva alla data di partenza.' }}</p>
