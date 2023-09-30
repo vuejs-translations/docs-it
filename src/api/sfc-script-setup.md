@@ -4,12 +4,12 @@
 
 - Codice più succinto con meno boilerplate
 - Possibilità di dichiarare props ed eventi emessi usando TypeScript puro
-- Migliore performance a runtime (il template viene compilato in una funzione di rendering nello stesso ambito, senza un proxy intermedio)
+- Migliore performance a runtime (il template viene compilato in una funzione di rendering nello stesso scope, senza un proxy intermedio)
 - Migliore performance di inferenza del tipo nell'IDE (meno lavoro per il language server per estrarre i tipi dal codice)
 
 ## Sintassi base {#basic-syntax}
 
-Per aderire a questa sintassi, aggiungi l'attributo `setup` al blocco `<script>`:
+Per utilizzare a questa sintassi, aggiungi l'attributo `setup` al blocco `<script>`:
 
 ```vue
 <script setup>
@@ -53,7 +53,7 @@ import { capitalize } from './helpers'
 
 ## Reattività {#reactivity}
 
-Lo stato reattivo deve essere creato esplicitamente utilizzando le [API di reattività](./reactivity-core). Similmente ai valori restituiti da una funzione `setup()`, i `ref` vengono automaticamente "srotolati" quando vengono referenziati nei template:
+Lo stato reattivo deve essere creato esplicitamente utilizzando le [API di reattività](./reactivity-core). Similmente ai valori restituiti da una funzione `setup()`, i `ref` vengono automaticamente estratti quando vengono usati nei template:
 
 ```vue
 <script setup>
@@ -67,7 +67,7 @@ const count = ref(0)
 </template>
 ```
 
-## Usando i componenti {#using-components}
+## Uso di componenti {#using-components}
 
 I valori nello scope di `<script setup>` possono essere utilizzati direttamente come nomi di tag per i componenti personalizzati:
 
@@ -81,11 +81,11 @@ import MyComponent from './MyComponent.vue'
 </template>
 ```
 
-Pensa a `MyComponent` come se fosse referenziato come una variabile. Se hai utilizzato JSX, il modello mentale è simile qui. L'equivalente in kebab-case `<my-component>` funziona anche nel template, ma è fortemente consigliato utilizzare PascalCase per la coerenza. Ciò aiuta anche a differenziare dagli elementi personalizzati nativi.
+Pensa a `MyComponent` come se fosse referenziato come una variabile. Se hai utilizzato JSX, il modello mentale è simile qui. L'equivalente in kebab-case `<my-component>` funziona anche nel template, ma è fortemente consigliato utilizzare PascalCase per la coerenza. Ciò aiuta anche a distinguerlo dagli elementi personalizzati nativi.
 
 ### Componenti dinamici {#dynamic-components}
 
-Poiché i componenti sono referenziati come variabili invece che registrati con chiavi di stringa, dovremmo utilizzare il binding dinamico `:is` quando si utilizzano componenti dinamici all'interno di `<script setup>`:
+Poiché i componenti sono utilizzati come variabili invece che registrati con chiavi di stringa, dovremmo utilizzare il binding dinamico `:is` quando si utilizzano componenti dinamici all'interno di `<script setup>`:
 
 ```vue
 <script setup>
@@ -127,9 +127,9 @@ import * as Form from './form-components'
 </template>
 ```
 
-## Usando direttive personalizzate {#using-custom-directives}
+## Uso di direttive personalizzate {#using-custom-directives}
 
-L'uso di direttive personalizzate globalmente registrate funziona normalmente. Le direttive personalizzate locali non devono essere registrate esplicitamente con `<script setup>`, ma devono seguire lo schema di denominazione `vNameOfDirective`:
+L'uso di direttive personalizzate registrate globalmente funziona normalmente. Le direttive personalizzate locali non devono essere registrate esplicitamente con `<script setup>`, ma devono seguire lo schema di denominazione `vNameOfDirective`:
 
 ```vue
 <script setup>
@@ -173,7 +173,7 @@ const emit = defineEmits(['change', 'delete'])
 
 - `defineProps` e `defineEmits` forniscono un'adeguata inferenza dei tipi in base alle opzioni passate.
 
-- Le opzioni passate a `defineProps` e `defineEmits` saranno rimosse dal setup nello scope del modulo. Pertanto, le opzioni non possono fare riferimento a variabili locali dichiarate nello scope del setup. Farlo causerà un errore di compilazione. Tuttavia, possono fare riferimento a binding importati poiché anch'essi si trovano nello scope del modulo.
+- Le opzioni passate a `defineProps` e `defineEmits` saranno rimosse dal setup nello scope del modulo. Quindi, le opzioni non possono fare riferimento a variabili locali dichiarate nello scope del setup. Farlo causerà un errore di compilazione. Tuttavia, _possono_ fare riferimento a binding importati poiché anch'essi si trovano nello scope del modulo.
 
 ### Dichiarazioni di props/emit (solo) per il type<sup class="vt-badge ts" /> {#type-only-props-emit-declarations}
 
@@ -203,7 +203,7 @@ const emit = defineEmits<{
 
   - In modalità di sviluppo, il compilatore cercherà di dedurre la corrispondente validazione a runtime dai tipi. Ad esempio, qui `foo: String` è inferito dal tipo `foo: string`. Se il tipo è un riferimento a un tipo importato, il risultato dedotto sarà `foo: null` (quivalente al tipo `any`) poiché il compilatore non ha informazioni sui file esterni.
 
-  - In produzione, il compilatore genererà la dichiarazione in formato array per ridurre le dimensioni del bundle (qui le props saranno compilati in  `['foo', 'bar']`)
+  - In produzione, il compilatore genererà la dichiarazione in formato array per ridurre le dimensioni del bundle (qui le props saranno compilate in  `['foo', 'bar']`)
 
 - Nella versione 3.2 e precedenti, il parametro del tipo generico per `defineProps()` era limitato a un tipo letterale o a un riferimento a un'interfaccia locale.
 
@@ -225,11 +225,11 @@ const props = withDefaults(defineProps<Props>(), {
 })
 ```
 
-Questo verrà compilato in opzioni `default` delle props equivalenti a runtime. Inoltre, l'aiutante `withDefaults` fornisce controlli di tipo per i valori predefiniti e garantisce che il tipo delle `props` restituito non abbia i flag opzionali per le proprietà che hanno valori predefiniti dichiarati.
+Questo verrà compilato a runtime nelle equivalenti opzioni `default` per le props. Inoltre, l'helper `withDefaults` fornisce controlli di tipo per i valori predefiniti e garantisce che il tipo delle `props` restituito non abbia i flag opzionali per le proprietà che hanno valori predefiniti dichiarati.
 
 ## defineExpose() {#defineexpose}
 
-I componenti che utilizzano `<script setup>` sono **chiusi per impostazione predefinita** - ovvero l'istanza pubblica del componente, ottenuta tramite riferimenti nel template o "catene" `$parent`, **non** espone alcune delle bindings dichiarate all'interno di `<script setup>`.
+I componenti che utilizzano `<script setup>` sono **chiusi per impostazione predefinita** - ovvero l'istanza pubblica del componente, ottenuta tramite riferimenti nel template o "catene" `$parent`, **non** espone alcun binding dichiarato all'interno di `<script setup>`.
 
 Per esporre esplicitamente proprietà in un componente `<script setup>`, usa la macro del compilatore `defineExpose`:
 
@@ -247,7 +247,7 @@ defineExpose({
 </script>
 ```
 
-Quando un componente genitore ottiene un'istanza di questo componente tramite riferimenti nel template, l'istanza ottenuta avrà la forma `{ a: number, b: number }` (i riferimenti vengono automaticamente tirati fuori come nelle istanze normali).
+Quando un componente genitore ottiene un'istanza di questo componente tramite riferimenti nel template, l'istanza ottenuta avrà la forma `{ a: number, b: number }` (i riferimenti vengono automaticamente estratti come nelle istanze normali).
 
 ## defineOptions() {#defineoptions}
 
@@ -287,7 +287,7 @@ const slots = defineSlots<{
 
 ## `useSlots()` & `useAttrs()` {#useslots-useattrs}
 
-L'utilizzo di `slots` e `attrs` all'interno di `<script setup>` dovrebbe essere relativamente raro, poiché è possibile accedervi direttamente come `$slots` e `$attrs` nel template. Nel raro caso in cui ne abbiate bisogno, utilizzate gli aiutanti `useSlots` e `useAttrs` rispettivamente:
+L'utilizzo di `slots` e `attrs` all'interno di `<script setup>` dovrebbe essere relativamente raro, poiché è possibile accedervi direttamente come `$slots` e `$attrs` nel template. Nel raro caso in cui ne abbiate bisogno, utilizzate gli helper `useSlots` e `useAttrs` rispettivamente:
 
 ```vue
 <script setup>
@@ -298,19 +298,19 @@ const attrs = useAttrs()
 </script>
 ```
 
-`useSlots` e `useAttrs` sono effettive funzioni runtime che restituiscono l'equivalente di `setupContext.slots` e `setupContext.attrs`. Possono essere utilizzate anche in funzioni del normale composition API.
+`useSlots` e `useAttrs` sono effettive funzioni runtime che restituiscono l'equivalente di `setupContext.slots` e `setupContext.attrs`. Possono essere utilizzate anche nelle normali funzioni della composition API.
 
-## Utilizzo insieme allo `<script>`normale {#usage-alongside-normal-script}
+## Utilizzo insieme al classico `<script>` {#usage-alongside-normal-script}
 
-`<script setup>` può essere utilizzato insieme a `<script>` normale. Potrebbe essere necessario uno `<script>` normale nei casi:
+`<script setup>` può essere utilizzato insieme a `<script>` classico. Potrebbe essere necessario uno `<script>` classico nei casi:
 
 - Dichiarare opzioni che non possono essere espresse in `<script setup>`, ad esempio `inheritAttrs` o opzioni personalizzate abilitate tramite plugin (possono essere sostituite da [`defineOptions`](/api/sfc-script-setup#defineoptions) in 3.3+).
-- Dichiarare esportazioni con nome.
+- Dichiarare export con nome.
 - Eseguire effetti collaterali o creare oggetti che devono essere eseguiti solo una volta.
 
 ```vue
 <script>
-// <script> normale, eseguito nello scope del modulo (solo una volta)
+// <script> classico, eseguito nello scope del modulo (solo una volta)
 runSideEffectOnce()
 
 // dichiarare opzioni aggiuntive
@@ -325,10 +325,10 @@ export default {
 </script>
 ```
 
-Il supporto per la combinazione di `<script setup>` e `<script>` nello stesso componente è limitato agli scenari descritti sopra. Nello specifico:
+Il supporto per combinare di `<script setup>` e `<script>` nello stesso componente è limitato agli scenari descritti sopra. Nello specifico:
 
 - **NON** utilizzare una sezione `<script>` separata per le opzioni che possono già essere definite usando `<script setup>`, come `props` e `emits`.
-- Le variabili create all'interno di `<script setup>` non vengono aggiunte come proprietà all'istanza del componente, rendendole non accessibili dall'API delle opzioni. Si sconsiglia vivamente di mixare le API in questo modo.
+- Le variabili create all'interno di `<script setup>` non vengono aggiunte come proprietà all'istanza del componente, rendendole non accessibili dalla Options API. Si sconsiglia vivamente di mixare le API in questo modo.
 
 Se vi trovate in uno degli scenari non supportati, dovreste considerare di passare a una funzione [`setup()`](/api/composition-api-setup)  esplicita, invece di utilizzare `<script setup>`.
 
@@ -342,7 +342,7 @@ const post = await fetch(`/api/post/1`).then((r) => r.json())
 </script>
 ```
 
-Inoltre, l'espressione in attesa verrà compilata automaticamente in un formato che conserva il contesto dell'istanza del componente corrente dopo l'`await`.
+Inoltre, l'espressione attesa verrà compilata automaticamente in un formato che conserva il contesto dell'istanza del componente corrente dopo l'`await`.
 
 :::warning Note
 `async setup()` deve essere utilizzato in combinazione con `Suspense`, che è attualmente ancora una funzionalità sperimentale. Prevediamo di finalizzarla e documentarla in una futura versione, ma se siete curiosi ora, potete fare riferimento ai suoi [tests](https://github.com/vuejs/core/blob/main/packages/runtime-core/__tests__/components/Suspense.spec.ts) per vedere come funziona.

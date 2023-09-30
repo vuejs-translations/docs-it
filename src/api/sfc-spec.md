@@ -2,7 +2,7 @@
 
 ## Panoramica {#overview}
 
-I Single-File Component (SFC) di Vue, solitamente con l'estensione di file `*.vue` file extension, è un formato di file personalizzato che utilizza una sintassi simile a HTML per descrivere un componente Vue. Un SFC di Vue è sintatticamente compatibile con HTML.
+I Single-File Component (SFC) di Vue, solitamente con l'estensione di file `*.vue`, è un formato di file personalizzato che utilizza una sintassi simile a HTML per descrivere un componente Vue. Un SFC di Vue è sintatticamente compatibile con HTML.
 
 Ogni file `*.vue` è composto da tre tipi di blocchi di linguaggio di primo livello: `<template>`, `<script>`, e `<style>`, e facoltativamente da blocchi personalizzati aggiuntivi:
 
@@ -32,13 +32,13 @@ export default {
 </custom1>
 ```
 
-## Linguaggi dei blocchi personalizzati {#language-blocks}
+## Linguaggio dei blocchi {#language-blocks}
 
 ### `<template>` {#template}
 
 - Ogni file `*.vue` può contenere massimo un blocco `<template>`.
 
-- I suoi contenuti verranno estratti e passati al `@vue/compiler-dom`, pre-compilati in render function di JavaScript, e collegato al componente esportato come sua opzione`render`.
+- I suoi contenuti verranno estratti e passati al `@vue/compiler-dom`, pre-compilati in render function di JavaScript, e collegati al componente esportato come sua opzione`render`.
 
 ### `<script>` {#script}
 
@@ -46,11 +46,11 @@ export default {
 
 - Lo script viene eseguito come un ES Module.
 
-- Il **default export** dovrebbe essere un oggetto di opzioni del componente Vue, sia come oggetto semplice che come valore di ritorno di [defineComponent](/api/general#definecomponent).
+- Il **default export** dovrebbe essere un oggetto di opzioni del componente Vue, sia come oggetto semplice che come valore restituito da [defineComponent](/api/general#definecomponent).
 
 ### `<script setup>` {#script-setup}
 
-- Ogni file `*.vue` può contenere al massimo un blocco `<script setup>` (escludendo lo `<script>` normale).
+- Ogni file `*.vue` può contenere al massimo un blocco `<script setup>` (escludendo lo `<script>` classico).
 
 - Lo script viene pre-processato e utilizzato come la funzione `setup()` del componente, il che significa che verrà eseguito **per ogni istanza del componente**. Le associazioni al livello superiore in `<script setup>` vengono automaticamente esposte al template. Per ulteriori dettagli, consulta la [documentazione dedicata a `<script setup>`](/api/sfc-script-setup).
 
@@ -58,7 +58,7 @@ export default {
 
 - Un singolo file `*.vue` può contenere più tag `<style>`.
 
-- Un tag `<style>` può avere gli attributi `scoped` o `module` (guarda [SFC Style Features](/api/sfc-css-features) per più dettagli) per aiutare ad incapsulare gli stili all'interno del componente corrente. È possibile mescolare più tag `<style>` con diverse modalità di incapsulamento nello stesso componente.
+- Un tag `<style>` può avere gli attributi `scoped` o `module` (guarda [Funzionalità CSS dei SFC](/api/sfc-css-features) per maggiori dettagli) per aiutare ad incapsulare gli stili all'interno del componente corrente. È possibile mescolare più tag `<style>` con diverse modalità di incapsulamento nello stesso componente.
 
 ### Blocchi custom {#custom-blocks}
 
@@ -68,17 +68,17 @@ Blocchi personalizzati aggiuntivi possono essere inclusi in un file `*.vue` per 
 - [vite-plugin-vue-gql: `<gql>`](https://github.com/wheatjs/vite-plugin-vue-gql)
 - [vue-i18n: `<i18n>`](https://github.com/intlify/bundle-tools/tree/main/packages/vite-plugin-vue-i18n#i18n-custom-block)
 
-La gestione dei blocchi personalizzati dipenderà dagli strumenti utilizzati. Se desideri creare le tue integrazioni personalizzate per i blocchi, consulta la sezione sugli strumenti di integrazione dei blocchi personalizzati nelle componenti a file singolo (SFC) nella [documentazione sulla scalabilità e gli strumenti](/guide/scaling-up/tooling#sfc-custom-block-integrations) per ulteriori dettagli.
+La gestione dei blocchi personalizzati dipenderà dagli strumenti utilizzati. Se desideri creare le tue integrazioni personalizzate per i blocchi, consulta la [sezione degli strumenti per integrazioni di blocchi personalizzati negli SFC](/guide/scaling-up/tooling#sfc-custom-block-integrations) per ulteriori dettagli.
 
-## Automatic Name Inference {#automatic-name-inference}
+## Inferenza automatica del nome {#automatic-name-inference}
 
-An SFC automatically infers the component's name from its **filename** in the following cases:
+Un SFC ricava automaticamente il nome del componente dal suo **nome del file** nei seguenti casi:
 
-- Dev warning formatting
-- DevTools inspection
-- Recursive self-reference, e.g. a file named `FooBar.vue` can refer to itself as `<FooBar/>` in its template. This has lower priority than explicitly registered/imported components.
+- Formattazione degli avvisi durante lo sviluppo
+- Ispezioni tramite DevTools
+- Riferimento ricorsivo a sé stesso, ad es. un file chiamato `FooBar.vue` può fare riferimento a se stesso come `<FooBar/>` nel proprio template. Ciò ha una priorità inferiore rispetto ai componenti registrati/importati esplicitamente.
 
-## Pre-Processore {#pre-processors}
+## Pre-Processori {#pre-processors}
 
 I blocchi possono dichiarare linguaggi di pre-processore utilizzando l'attributo `lang`. Il caso più comune è l'utilizzo di TypeScript per il blocco `<script>`:
 
