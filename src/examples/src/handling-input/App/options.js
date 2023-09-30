@@ -9,7 +9,7 @@ export default {
       this.message = this.message.split('').reverse().join('')
     },
     notify() {
-      alert('la navigazione è stata impedita.')
+      alert('la navigazione è stata bloccata.')
     }
   }
 }
