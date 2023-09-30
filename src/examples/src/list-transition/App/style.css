@@ -25,7 +25,7 @@
   transform: scaleY(0.01) translate(30px, 0);
 }
 
-/* 3. si assicura che gli elementi in uscita vengano tolti dal flusso di layout,
+/* 3. assicurati che gli elementi in uscita vengano tolti dal flusso di layout,
       in modo che le animazioni in movimento possano essere calcolate correttamente.*/
 .fade-leave-active {
   position: absolute;
