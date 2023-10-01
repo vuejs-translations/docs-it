@@ -55,7 +55,7 @@ Il codice sopra verrà compilato in:
 ```
 
 :::tip
-Il contenuto DOM creato con `v-html` non è influenzato dagli stili scoped, ma puoi comunque stilizzarlo utilizzando selettori profondi.
+Il contenuto DOM creato con `v-html` non è influenzato dagli stili scoped, ma puoi comunque stilizzarlo utilizzando i selettori deep.
 :::
 
 ### Selettori degli slot {#slotted-selectors}
