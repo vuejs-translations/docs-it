@@ -201,7 +201,7 @@ const emit = defineEmits<{
 
 - Quando si utilizza la dichiarazione di tipo, la dichiarazione a runtime equivalente viene generata automaticamente dall'analisi statica per eliminare la necessità di una doppia dichiarazione e garantire comunque un corretto comportamento a runtime.
 
-  - In modalità di sviluppo, il compilatore cercherà di dedurre la corrispondente validazione a runtime dai tipi. Ad esempio, qui `foo: String` è inferito dal tipo `foo: string`. Se il tipo è un riferimento a un tipo importato, il risultato dedotto sarà `foo: null` (quivalente al tipo `any`) poiché il compilatore non ha informazioni sui file esterni.
+  - In modalità di sviluppo, il compilatore cercherà di dedurre la corrispondente validazione a runtime dai tipi. Ad esempio, qui `foo: String` è inferito dal tipo `foo: string`. Se il tipo è un riferimento a un tipo importato, il risultato dedotto sarà `foo: null` (equivalente al tipo `any`) poiché il compilatore non ha informazioni sui file esterni.
 
   - In produzione, il compilatore genererà la dichiarazione in formato array per ridurre le dimensioni del bundle (qui le props saranno compilate in  `['foo', 'bar']`)
 
