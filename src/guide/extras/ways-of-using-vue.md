@@ -1,59 +1,59 @@
 # Modi di utilizzare Vue {#ways-of-using-vue}
 
-Noi crediamo alla storia che c'è un modo giusto in assoluto che vada per tutti nel mondo del web. Questo è il principale motivo per la quale abbiamo disegnato Vue per essere versatile e flessibile. A seconda del tuo caso d'uso, Vue può essere utilizzato in modi diversi per trovare l'equilibrio ottimale tra complessità dello stack, esperienza dello sviluppatore e performance.
+Crediamo che non esista una soluzione "unica per tutti" per il web. Ecco perché Vue è progettato per essere flessibile e adottabile in maniera incrementale. A seconda del tuo caso d'uso, Vue può essere utilizzato in modi diversi per trovare l'equilibrio ottimale tra complessità dello stack, esperienza dello sviluppatore e performance finale.
 
 ## Standalone Script {#standalone-script}
 
-Vue può essere utilizzato con script file "standalone", ovvero senza necessità di build. Se hai un framework backend che già renderizza la maggior parte del HTML, o la tua logica di frontend non è complessa a tal punto da giustificare una build, questo è il modo più semplice per integrare Vue all'interno del vostro stack. In questi casi puoi pensare a Vue come un sostituto più dichiarativo di JQuery.
+Vue può essere utilizzato come un file di script incorporato (standalone) - non è richiesta alcuna build! Se hai un framework backend che genera già la maggior parte dell'HTML, o la tua logica frontend non è abbastanza complessa da giustificare una build, questo è il modo più semplice per integrare Vue nel tuo stack. In questi casi puoi pensare a Vue come un sostituto più dichiarativo di jQuery.
 
-Inoltre Vue dispone di una distribuzione alternativa chiamata [petite-vue](https://github.com/vuejs/petite-vue) che è specificatamente ottimizzata per migliorare progressivamente il codice HTML esistente. Ha un set di funzionalità più limitato ma estremamente leggero ed è molto efficace soprattutto negli scenari senza step di build. 
+Inoltre Vue dispone di una distribuzione alternativa chiamata [petite-vue](https://github.com/vuejs/petite-vue) che è specificamente ottimizzata per migliorare progressivamente l'HTML esistente. Ha un set di funzionalità più piccolo, ma è estremamente leggero e utilizza un'implementazione che è più efficiente in scenari senza step di build.
 
-## Utilizzare Web Components {#embedded-web-components}
+## Web Components Incorporati {#embedded-web-components}
 
-Puoi usare Vue per [creare Web Components nativi](/guide/extras/web-components) che potrai embeddare in ogni pagina HTML, indipendentemente da come quest'ultime vengano renderizzate. Questa opzione ti consente di sfruttare Vue in modo completamente indipendente da chi lo integra: i web components creati potranno essere incorporati in applicazioni legacy, HTML statico o persino applicazioni create con altri framework.
+Puoi usare Vue per [creare Web Components standard](/guide/extras/web-components) che possono essere incorporati in qualsiasi pagina HTML, indipendentemente da come vengono renderizzati. Questa opzione ti consente di sfruttare Vue in un modo completamente indipendente da ciò che lo integra: i web components risultanti possono essere incorporati in applicazioni legacy, HTML statico, o anche applicazioni costruite con altri framework.
 
-## Single-Page Application (SPA) {#single-page-application-spa}
+## Applicazione Single-Page (SPA) {#single-page-application-spa}
 
-Molte delle applicazioni richiedono molta interattività, gestione della sessione, e una logica stateful complessa lato frontend. Il modo migliore per creare applicazioni è di usare un architettura dove Vue non controlla solamente l'intera pagina, ma controlla anche l'aggiornamento dei dati e navigazione senza necessità di ricaricare la pagina. Questo tipo di applicazione è tipicamente chiamata come Single-Page Application (SPA).
+Alcune applicazioni richiedono una grande interattività, una profonda gestione della sessione e una logica stateful non banale sul frontend. Il modo migliore per costruire tali applicazioni è utilizzare un'architettura dove Vue non solo controlla l'intera pagina, ma gestisce anche gli aggiornamenti dei dati e la navigazione senza dover ricaricare la pagina. Questo tipo di applicazione è tipicamente definita come Applicazione a Pagina Singola (SPA, Single-Page Application).
 
-Per rendere ancora più piacevole l'esperienza di sviluppo, Vue dispone di librerie core e [strumenti di supporto completo](/guide/scaling-up/tooling) che  includono:
+Per rendere ancora più piacevole l'esperienza di sviluppo, Vue dispone di librerie core e [strumenti di supporto completo](/guide/scaling-up/tooling) che includono:
 
-- Client-side router 
-- Blazing fast build tool chain (Strumenti di costruzione delle applicazioni incredibilmente veloce)
+- Router lato client
+- Strumenti di build rapidissimi / estremamente veloci
 - Supporto agli IDE
 - Browser devtools
 - Integrazioni per TypeScript
 - Utility per i test
 
-Tipicamente le SPA richiedono un backend che espone API, ma soluzioni come [Inertia.js](https://inertiajs.com) possono essere abbinate a Vue per avere i vantaggi di una SPA ma mantenere il modello di sviluppo lato server. 
+Tipicamente le SPA richiedono che il backend esponga endpoint API, ma soluzioni come [Inertia.js](https://inertiajs.com) possono essere abbinate a Vue per avere i vantaggi di una SPA e mantenere il modello di sviluppo lato server. 
 
 ## Fullstack / SSR {#fullstack-ssr}
 
-Le SPA "pure" sono limitate quando le applicazioni devono essere soggette a pratiche SEO e time-to-content. Questo perché il browser riceverà una pagina HTML gran parte vuota, e deve aspettare fino a che il Javascript verrà caricato prima di renderizzare qualsiasi cosa.
+Le SPA lato client "pure" presentano problemi quando l'app è soggetta alla SEO e al time-to-content. Questo perché il browser riceverà una pagina HTML sostanzialmente vuota e dovrà attendere che il JavaScript venga caricato prima di visualizzare qualsiasi cosa.
 
-Vue dispone di API di prima categoria per "renderizzare" lato Sever una Vue app in stringhe HTML. Questo fa si che il server risponda con il codice HTML già renderizzato, così che l'utente finale veda il contenuto immediatamente anche se il Javascript è ancora in caricamento. Quando il caricamento di quest'ultimo sarà finito, Vue "sostituirà" l'applicazione visualizzata server side con una client side per renderla interattiva. Questa modalità è chiamata [Server-Side Rendering (SSR)](/guide/scaling-up/ssr) e migliora notevolmente le "Core Web Vital metrics" come [Largest Contentful Paint (LCP)](https://web.dev/lcp/).
+Vue fornisce API di prima classe per il "rendering" di un'app Vue in stringhe HTML sul server. Ciò consente al server di inviare HTML già renderizzato, permettendo agli utenti finali di vedere immediatamente il contenuto mentre il JavaScript è ancora in fase di download. Vue poi "idraterà" l'applicazione sul client per renderla interattiva. Questo è chiamato [Server-Side Rendering (SSR)](/guide/scaling-up/ssr) e migliora notevolmente le "Core Web Vital metrics" come [Largest Contentful Paint (LCP)](https://web.dev/lcp/).
 
-Esistono Framework che si basano su Vue costruiti su questo paradigma, come [Nuxt](https://nuxt.com/), che fa si che tu possa sviluppare una fullstack application utilizzando Vue e Javascript.
+Esistono Framework che si basano su Vue costruiti su questo paradigma, come [Nuxt](https://nuxt.com/), che ti permettono di sviluppare un'applicazione fullstack utilizzando Vue e JavaScript.
 
 ## JAMStack / SSG {#jamstack-ssg}
 
-Il rendering lato server può essere eseguito in anticipo se i dati sono statici. Questo significa che noi possiamo pre-renderizzare un intera applicazione in HTML e distribuirla come file statici. Questo migliora le performance dei siti e semplifica visto che non sempre abbiamo bisogno di renderizzare la pagina dinamicamente. Vue può sempre rendere interattive applicazioni mediante il processo di "hydration". Questa tecnica è comunemente chiamata Static-Site Generation (SSG), anche conosciuta come [JAMStack](https://jamstack.org/what-is-jamstack/).
+Il rendering lato server può essere eseguito in anticipo se i dati richiesti sono statici. Ciò significa che possiamo pre-renderizzare un'intera applicazione in HTML e distribuirla come file statici. Questo migliora le prestazioni del sito e semplifica molto il deployment, poiché non c'è più bisogno di fare il rendering dinamico delle pagine ad ogni richiesta. Vue può ancora idratare (hydrate) queste applicazioni per fornire una maggiore interattività sul client. Questa tecnica è comunemente chiamata Generazione di Siti Statici (SSG, Static-Site Generation), conosciuta anche come [JAMStack](https://jamstack.org/what-is-jamstack/).
 
-Ci sono due tipi di SSG: single-page e multi-page.Tutte e due le tipologie pre-renderizzano il sito in HTML statico, la differenza è la seguente:
+Ci sono due tipi di SSG: single-page e multi-page. Entrambe le tipologie pre-renderizzano il sito in HTML statico, la differenza è che:
 
-- Dopo che la pagina iniziale è caricata , una single-page SSG verrà sostituita con una SPA. Questo richiede un costo in termini di tempo di caricamento e di "hydration", ma dopo di questo le navigazioni successive saranno molto veloci,poiché l'applicazione avrà solo bisogno di aggiornare parzialmente il contenuto della pagina invece di ricaricarla interamente.
+- Dopo il caricamento iniziale della pagina, un SSG (ServerSideGenerated) single-page "idrata" la pagina trasformandola in una SPA. Ciò richiede un peso maggiore del JS iniziale e un costo di idratazione (hydration), ma le navigazioni successive saranno più rapide, poiché c'è bisogno di aggiornare parzialmente solo il contenuto della pagina invece di ricaricare l'intera pagina.
 
-- Una multi-page SSG caricherà una nuova pagina ogni navigazione. Il lato positivo è che verrà caricato il solo JS necessario - o potrebbe non caricare JS se tutte le pagine caricate non hanno interazioni! Multi framework per la creazione di multi-page SSG come [Astro](https://astro.build/) possiedono il supporto per un "partial hydration" (sostituzione parziale) - questo permette di creare con le componenti Vue delle "zone" interattive all'interno del HTML statico.
+- Una SSG (ServerSideGenerated) multi-pagina carica una nuova pagina ad ogni navigazione. Il vantaggio è che può fornire un JS minimo - o nessun JS se la pagina non richiede interazione! Alcuni framework SSG multi-pagina come [Astro](https://astro.build/) supportano anche l'"hydration parziale" - che ti permette di usare componenti Vue per creare "zone" interattive all'interno di HTML statico.
 
-Le applicazioni Single-page SSG è la migliore soluzione se ti aspetti un interazione significativa, gestione della sessione o elementi persistenti / stato applicativo cross navigazione. Altrimenti, le applicazioni multi-page SSG saranno la scelta migliore.
+Le SSG single-page sono più adatte se ci si aspetta un'interattività non banale, sessioni lunghe, o elementi/stati persistenti durante la navigazione. Altrimenti, l'SSG multi-pagina sarebbe la scelta migliore.
 
-Il team di Vue mantiene anche uno static-site generator chiamato [VitePress](https://vitepress.dev/), su cui è costruito questo sito Web che stai leggendo in questo momento! VitePress supporto tutte e due le tipologie. Anche [Nuxt](https://nuxt.com/) le supporta entrambe. Ogni applicazione Nuxt consente per ogni rotta configurata di decidere quale delle due tipologie utilizzare, SSR e SSG.
+Il team di Vue mantiene anche un generatore di siti statici chiamato [VitePress](https://vitepress.dev/), su cui si basa questo sito web che stai leggendo proprio ora! VitePress supporta entrambe le varianti di SSG. Anche [Nuxt](https://nuxt.com/)  supporta le SSG. Puoi persino mixare SSR e SSG per percorsi diversi nella stessa app Nuxt.
 
-## Oltre al web {#beyond-the-web}
+## Oltre il web {#beyond-the-web}
 
-Sebbene Vue sia progettato principalmente per la creazione di applicazioni web, non è limitato ad esso. Puoi:
+Anche se Vue è progettato principalmente per la creazione di applicazioni web, non è in alcun modo limitato solo ai browser. Puoi:
 
 - Creare applicazioni desktop con [Electron](https://www.electronjs.org/) o [Tauri](https://tauri.studio/en/)
 - Creare applicazioni mobile con [Ionic Vue](https://ionicframework.com/docs/vue/overview)
 - Creare applicazioni desktop e mobile dallo stesso codice sorgente con [Quasar](https://quasar.dev/)
-- Utilizzare Vue come [Custom Renderer API](/api/custom-renderer) per creare targeting renderer personalizzati [WebGL](https://troisjs.github.io/) o anche per [il terminale](https://github.com/vue-terminal/vue-termui)!
+- Utilizzare la [Custom Renderer API](/api/custom-renderer) di Vue per creare renderer personalizzati per [WebGL](https://troisjs.github) o persino per [il terminale](https://github.com/vue-terminal/vue-termui)!
