@@ -650,6 +650,11 @@ export default defineConfigWithTheme<ThemeConfig>({
 
     localeLinks: [
       {
+        link: 'https://vuejs.org',
+        text: 'English',
+        repo: 'https://github.com/vuejs/docs'
+      },
+      {
         link: 'https://cn.vuejs.org',
         text: '简体中文',
         repo: 'https://github.com/vuejs-translations/docs-zh-cn'
@@ -680,8 +685,18 @@ export default defineConfigWithTheme<ThemeConfig>({
         repo: 'https://github.com/vuejs-translations/docs-pt'
       },
       {
+        link: 'https://bn.vuejs.org',
+        text: 'বাংলা',
+        repo: 'https://github.com/vuejs-translations/docs-bn'
+      },
+      {
+        link: 'https://it.vuejs.org',
+        text: 'Italiano',
+        repo: 'https://github.com/vuejs-translations/docs-it'
+      },
+      {
         link: '/translations/',
-        text: 'Help Us Translate!',
+        text: 'Aiutaci a tradurre!',
         isTranslationsDesc: true
       }
     ],
@@ -707,7 +722,7 @@ export default defineConfigWithTheme<ThemeConfig>({
     ],
 
     editLink: {
-      repo: 'phox081/docs-it',
+      repo: 'vuejs-translations/docs-it',
       text: 'Modifica questa pagina su GitHub'
     },
 
