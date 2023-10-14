@@ -90,7 +90,6 @@ export default {
 
 ## Animazioni guidate dallo stato {#state-driven-animations}
 
-
 Alcuni effetti di transizione possono essere applicati tramite una computazione di valori, ad esempio legando uno stile a un elemento mentre avviene un'interazione. Di seguito un esempio:
 
 <div class="composition-api">
@@ -142,11 +141,11 @@ export default {
 
 <Colors />
 
-Oltre al colore, puoi anche utilizzare le associazioni di stile per animare la trasformazione, la larghezza o l'altezza di un elemento. Puoi anche animare percorsi SVG utilizzando la conformazione vettoriale (spring physics): dopo tutto, sono tutte associazioni di dati di attributi:
+Oltre al colore, puoi anche utilizzare le associazioni di stile (binding) per animare la trasformazione, la larghezza o l'altezza di un elemento. Puoi anche animare percorsi SVG utilizzando la conformazione vettoriale (spring physics): dopo tutto, sono tutte associazioni di dati di attributi:
 
 <ElasticHeader />
 
-## Animazione con gli osservatori {#animating-with-watchers}
+## Animazione con i Watchers {#animating-with-watchers}
 
 Con un po' di creatività, possiamo usare gli osservatori (watchers) per animare qualsiasi cosa in base ad uno stato numerico. Ad esempio, possiamo animare il numero stesso come nell'esempio seguente:
 
