@@ -24,7 +24,7 @@ function genMailLink(email: string) {
   <div class="partner-page">
     <div class="back">
       <a href="/partners/all.html"
-        ><VTIconChevronLeft class="icon" />Back to all partners</a
+        ><VTIconChevronLeft class="icon" />Torna all'elenco dei partners</a
       >
     </div>
 
@@ -37,19 +37,19 @@ function genMailLink(email: string) {
 
     <div class="actions">
       <a :href="website.url" target="_blank" @click="track"
-        >Visit Website</a
+        >Visita il sito web</a
       >
       <a
         class="contact"
         :href="genMailLink(contact)"
         target="_blank"
         @click="track"
-        >Contact</a
+        >Contatta</a
       >
     </div>
 
     <div class="hiring" v-if="hiring">
-      <a :href="hiring" @click="track">{{ name }} is hiring!</a>
+      <a :href="hiring" @click="track">{{ name }} sta assumendo!</a>
     </div>
   </div>
 </template>
