@@ -516,9 +516,7 @@ export function signal(initialValue) {
 
 [Prova nel Playground](https://play.vuejs.org/#eNp9UslOwzAQ/ZVRLiRQEsqxpBUIvoADp0goTd3U4DiWl4AU5d8ZL3E3iZtn5r1Z3vOYvAiRD4Ykq6RUjaRCgyLaiE3FaSd6qWEERVteswU0fSeMJjuYYC/7Dm7youatYbW895D8S91UvOJNz5VGuOEa1oGePmRzYdebLSNYmRumaQbrjSfg8xYeEVsWfh/cBANNOsFqTTACKA/LzavrTtUKxjEyp6kssDZj3vygAPJjL1Bbo3XP4blhtPleV4nrlBuxw1npYLca4A6WWZU4PADljSQd4drRC8//rxfKaW+f+ZJg4oJbFvG8ZJFcaYreHL041Iz1P+9kvwAtadsS6d7Rm1rB55VRaLAzhvy6NnvDG01x1WAN5VTTmn3UzJAMRrudd0pa++LEc9wRpRDlHZT5YGu2pOzhWHAJWxvnakxOHufFxqx/4MxzcEinIYP+eV5ntOe5Rx94IYjopxOZUhnIEr+4xPMrjuG1LPFftkTj5DNJGhwYBZ4BJz3DV56FmJLpD1DrKXU=)
 
-Compared to Vue refs, Solid and Angular's getter-based API style provide some interesting trade-offs when used in Vue components:
-
-Rispetto ai refs di Vue, lo stile dell'API basato su getter di Solid e Angular fornisce alcuni compromessi interessanti se utilizzato nei componenti Vue:
+Rispetto ai refs di Vue, lo stile dell'API basato sui getter di Solid e Angular offre alcuni compromessi interessanti quando utilizzato nei componenti Vue:
 
 - `()` è leggermente meno verboso di `.value`, ma l'aggiornamento del valore è più verboso.
 - Non è previsto il ref-unwrapping: l'accesso ai valori richiede sempre `()`. Ciò rende l’accesso ad un valore consistente ovunque. Ciò significa anche che puoi trasmettere signals nativi come proprietà delle componenti.
