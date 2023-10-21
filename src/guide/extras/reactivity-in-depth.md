@@ -6,19 +6,19 @@ outline: deep
 import SpreadSheet from './demos/SpreadSheet.vue'
 </script>
 
-# Approfondimento sulla reattività {#reactivity-in-depth}
+# Reattività nel dettaglio {#reactivity-in-depth}
 
-Una delle caratteristiche più distintive di Vue è il sistema di reattività "discreto" (unobtrusive). Lo stato del componente è costituito da oggetti JavaScript reattivi. Quando li modifichi, la vista si aggiorna. Rende la gestione dello stato semplice e intuitiva, ma è anche importante capire come funziona per evitare alcuni errori comuni. In questa sezione, approfondiremo alcuni dei dettagli di basso livello del sistema di reattività di Vue.
+Una delle caratteristiche più distintive di Vue è il sistema di reattività "discreto" (unobtrusive). Lo stato del componente è costituito da oggetti JavaScript reattivi. Quando li modifichi, la vista si aggiorna. Rende la gestione dello stato semplice e intuitiva, ma è anche importante capire come funziona per evitare alcuni errori comuni. In questa sezione, approfondiremo alcuni dei dettagli al livello più profondo del sistema di reattività di Vue.
 
 ## Cos'è la reattività? {#what-is-reactivity}
 
-Questo termine ricorre spesso nella programmazione negli ultimi anni, ma cosa si intende esattamente? La reattività è un paradigma di programmazione che ci consente di adattare il componente ai vari cambiamenti in modo dichiarativo. L’esempio canonico che le persone di solito mostrano, perché è fantastico, è un foglio di calcolo Excel:
+Questo termine ricorre spesso nella programmazione in questi anni, ma cosa si intende esattamente? La reattività è un paradigma di programmazione che permette al componente di rispondere ai vari cambiamenti in modo dichiarativo. L’esempio canonico che le persone di solito mostrano, perché è fantastico, è un foglio di calcolo Excel:
 
 <SpreadSheet />
 
 Qui la cella A2 è definita tramite la formula `= A0 + A1` (puoi fare clic su A2 per visualizzare o modificare la formula), quindi il foglio di calcolo ci darà come risultato 3. Non ci sono sorprese. Ma se aggiorni A0 o A1, noterai che anche A2 si aggiorna automaticamente.
 
-JavaScript nativamente non funziona in questo modo. Se dovessimo scrivere qualcosa che svolge un lavoro simile in JavaScript il risultato sarebbe:
+JavaScript di solito non funziona in questo modo. Dovendo scrivere qualcosa di simile in Javascript:
 
 ```js
 let A0 = 1
@@ -28,13 +28,12 @@ let A2 = A0 + A1
 console.log(A2) // 3
 
 A0 = 2
-console.log(A2) // Comunque 3
+console.log(A2) // Resta 3
 ```
-
 
 Quando mutiamo `A0`, `A2` non cambia automaticamente.
 
-Quindi come si fa a fare in JavaScript? Per prima cosa, per eseguire nuovamente il codice che aggiorna `A2`, avvolgiamolo in una funzione:
+Quindi come si fa a fare in JavaScript? Per prima cosa, per eseguire nuovamente il codice che aggiorna `A2`, racchiudiamolo in una funzione:
 
 ```js
 let A2
@@ -43,14 +42,6 @@ function update() {
   A2 = A0 + A1
 }
 ```
-
-Then, we need to define a few terms:
-
-- The `update()` function produces a **side effect**, or **effect** for short, because it modifies the state of the program.
-
-- `A0` and `A1` are considered **dependencies** of the effect, as their values are used to perform the effect. The effect is said to be a **subscriber** to its dependencies.
-
-What we need is a magic function that can invoke `update()` (the **effect**) whenever `A0` or `A1` (the **dependencies**) change:
 
 Poi, dobbiamo definire alcune regole:
 
@@ -74,7 +65,7 @@ I compiti di questa funzione `whenDepsChange()` sono:
 
 ## Come funziona la reattività in Vue {#how-reactivity-works-in-vue}
 
-Nell'esempio che abbiamo appena il modo con cui leggiamo e scriviamo le variabili non è ottimale. Non c'è nessun meccanismo per farlo in JavaScript vanilla. Quello che possiamo fare, però, è intercettare la lettura e la scrittura delle **proprietà del oggetto**.
+Non possiamo davvero tracciare la lettura e la scrittura di variabili locali come nell'esempio. Non c'è proprio nessun meccanismo per farlo in vanilla JavaScript. Quello che *possiamo* fare, però, è intercettare la lettura e la scrittura delle **proprietà dell'oggetto**.
 
 Ci sono due modi per intercettare l'accesso alle proprietà in JavaScript: [getter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get) / [setters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set) e [Proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy). Vue 2 usava i getter e i setter esclusivamente a causa di limitazioni date dal supporto dei browser. In Vue 3, i Proxy sono usati per gli oggetti reattivi e i getter / setter sono usati per i refs. Ecco alcuni esempi pseudo-codice che illustrano come funzionano:
 
@@ -112,7 +103,6 @@ I frammenti di codice qui e sotto hanno lo scopo di spiegare i concetti fondamen
 :::
 
 Questo spiega alcune [limitazioni degli oggetti reattivi](/guide/essentials/reactivity-fundamentals#limitations-of-reactive) che abbiamo discusso nella sezione "fondamenti delle reattività":
-
 
 - Quando si assegna o si distrugge una proprietà di un oggetto reattivo a una variabile locale, l'accesso o l'assegnazione a quella variabile non è più attiva perché non attiva più i trigger get / set proxy sull'oggetto. Nota che questa "disconnessione" ha effetto solo sulle variabili bindate - se la variabile punta ad un valore non primitivo, come un oggetto, la mutazione dell'oggetto sarebbe comunque reattiva.
 
@@ -218,13 +208,9 @@ Le API `ref()`, `computed()` e `watchEffect()` fanno tutte parte della Compositi
 
 ## Reattività a runtime contro reattività in fase di compilazione {#runtime-vs-compile-time-reactivity}
 
-Vue's reactivity system is primarily runtime-based: the tracking and triggering are all performed while the code is running directly in the browser. The pros of runtime reactivity are that it can work without a build step, and there are fewer edge cases. On the other hand, this makes it constrained by the syntax limitations of JavaScript, leading to the need of value containers like Vue refs.
-
 Il sistema di reattività di Vue è principalmente basato sul runtime: il tracking e il triggering vengono tutti eseguiti mentre il codice viene eseguito direttamente nel browser. I vantaggi della reattività a runtime sono che può funzionare senza una fase di build e ci sono meno casi limite. D'altra parte, ciò rende il tutto vincolato dalle limitazioni della sintassi JavaScript, portando alla necessità di avere dei contenitori dei valori come Vue refs.
 
 Alcuni framework, come [Svelte](https://svelte.dev/), scelgono di superare tali limitazioni implementando la reattività durante la compilazione. Analizza e trasforma il codice per simulare la reattività. La fase di compilazione consente al framework di alterare la semantica di JavaScript stesso, ad esempio inserendo implicitamente codice che esegue l'analisi delle dipendenze e attiva l'effetto sull'accesso a variabili definite localmente. Lo svantaggio è che tali trasformazioni richiedono una fase di build e alterare la semantica di JavaScript significa essenzialmente creare un linguaggio che assomigli a JavaScript ma che diventata qualcos'altro.
-
-The Vue team did explore this direction via an experimental feature called [Reactivity Transform](/guide/extras/reactivity-transform), but in the end we have decided that it would not be a good fit for the project due to [the reasoning here](https://github.com/vuejs/rfcs/discussions/369#discussioncomment-5059028).
 
 Il team di Vue ha esplorato questa direzione tramite una funzionalità sperimentale chiamata [Reactivity Transform](/guide/extras/reactivity-transform), ma alla fine abbiamo deciso che non sarebbe stata adatta al progetto a causa [di ragionamenti espressi qui](https://github.com/vuejs/rfcs/discussions/369#discussioncomment-5059028).
 
@@ -296,11 +282,7 @@ type DebuggerEvent = {
 
 <!-- TODO options API equivalent -->
 
-
 Possiamo eseguire il debug delle proprietà calcolate passando a `computed()` un oggetto con i callback `onTrack` e `onTrigger` come secondo argomento:
-
-- `onTrack` will be called when a reactive property or ref is tracked as a dependency.
-- `onTrigger` will be called when the watcher callback is triggered by the mutation of a dependency.
 
 - `onTrack` verrà chiamato quando una proprietà reattiva o un riferimento viene tracciato come dipendenza.
 - `onTrigger` verrà chiamato quando la callback viene richiamata dal mutare di una dipendenza.
@@ -362,7 +344,6 @@ Le opzioni `onTrack` e `onTrigger` per gli osservatori funzionano solo in modali
 
 ## Integrazioni con gli External State Systems {#integration-with-external-state-systems}
 
-
 Il sistema di reattività di Vue funziona convertendo profondamente semplici oggetti JavaScript in proxy reattivi. Questa conversione può non essere necessaria o talvolta indesiderata durante l'integrazione con sistemi di gestione dello stato esterni (ad esempio se una soluzione esterna utilizza anch'essa Proxies).
 
 L'idea generale di integrare il sistema di reattività di Vue in combinazione con una soluzione di gestione dello stato esterna è di mantenere in quest'ultimo in un [`shallowRef`](/api/reactivity-advanced#shallowref). Un riferimento superficiale è reattivo solo quando si accede alla sua proprietà `.value`: il valore interno viene lasciato intatto. Quando lo stato esterno cambia, sostituisci il valore ref per attivare gli aggiornamenti.
@@ -395,8 +376,6 @@ export function useImmer(baseState) {
 
 Una [macchina a stati](https://en.wikipedia.org/wiki/Finite-state_machine) è un modello per descrivere tutti i possibili stati in cui può trovarsi un'applicazione e tutti i possibili modi in cui può passare da uno stato a un altro. Sebbene possa essere eccessivo per componenti semplici, può aiutare a rendere i flussi di stati complessi più robusti e gestibili.
 
-One of the most popular state machine implementations in JavaScript is [XState](https://xstate.js.org/). Here's a composable that integrates with it:
-
 Una delle più popolari implementazioni per creare una macchina a stati in JavaScript è [XState](https://xstate.js.org/). Ecco una composizione che si integra con esso:
 
 ```js
@@ -423,8 +402,6 @@ export function useMachine(options) {
 
 ## Connessione ai signals {#connection-to-signals}
 
-Quite a few other frameworks have introduced reactivity primitives similar to refs from Vue's Composition API, under the term "signals":
-
 Molti altri framework hanno introdotto moduli reattivi simili ai refs della Composition API di Vue, con il termine "signals":
 
 - [Solid Signals](https://www.solidjs.com/docs/latest/api#createsignal)
@@ -434,16 +411,14 @@ Molti altri framework hanno introdotto moduli reattivi simili ai refs della Comp
 
 Fondamentalmente, i signals hanno lo stesso modello di reattività  dei refs di Vue. È un contenitore di valori che fornisce il monitoraggio delle dipendenze sull'accesso e l'attivazione degli effetti collaterali di una mutazione. Questo paradigma basato sulla reattività di valori primitivi non è un concetto particolarmente nuovo nel mondo frontend: ci sono state implementazioni più di dieci anni fa come [Knockout observables](https://knockoutjs.com/documentation/observables.html) e [Meteor Tracker]( https://docs.meteor.com/api/tracker.html). Anche l'Options API di Vue e la libreria di gestione dello stato React [MobX](https://mobx.js.org/) si basano sugli stessi principi, ma nascondono i modelli primitivi dietro le proprietà degli oggetti.
 
-Although not a necessary trait for something to qualify as signals, today the concept is often discussed alongside the rendering model where updates are performed through fine-grained subscriptions. Due to the use of Virtual DOM, Vue currently [relies on compilers to achieve similar optimizations](/guide/extras/rendering-mechanism#compiler-informed-virtual-dom). However, we are also exploring a new Solid-inspired compilation strategy (Vapor Mode) that does not rely on Virtual DOM and takes more advantage of Vue's built-in reactivity system.
-
-Sebbene non sia una caratteristica necessaria affinché qualcosa possa essere riconosciuto come signals, oggi il concetto viene spesso discusso insieme al modello di rendering in cui gli aggiornamenti vengono eseguiti tramite piccole sottoscrizioni. Utilizzando il DOM virtuale (Virtual DOM), Vue attualmente [si affida ai compilatori per ottenere ottimizzazioni simili](/guide/extras/rendering-mechanism#compiler-informed-virtual-dom). Tuttavia, stiamo anche esplorando una nuova strategia di compilazione ispirandoci al framework Solid (Vapor Mode) che non baserebbe più sul DOM virtuale e sfrutterebbe maggiormente il sistema di reattività integrato di Vue.
+Sebbene non sia una caratteristica necessaria per definire qualcosa come signals, oggi questo concetto viene spesso discusso insieme al modello di rendering in cui gli aggiornamenti vengono eseguiti tramite piccole sottoscrizioni. Utilizzando il DOM virtuale (Virtual DOM), Vue attualmente [si affida ai compilatori per ottenere ottimizzazioni simili](/guide/extras/rendering-mechanism#compiler-informed-virtual-dom). Tuttavia, stiamo anche esplorando una nuova strategia di compilazione ispirata al framework Solid (Vapor Mode) che non si affida al DOM virtuale e sfrutta di più il sistema di reattività integrato di Vue.
 
 ### Compromessi nella progettazione API {#api-design-trade-offs}
 
 Il design dei signals di Preact e Qwik è molto simile a quello di [shallowRef](/api/reactivity-advanced#shallowref) di Vue: tutti e tre forniscono un'interfaccia modificabile tramite la proprietà `.value`. Quindi concentreremo la discussione sui signals di Solid e Angolar.
 
 
-#### Signals di Solid {#solid-signals}
+#### I Signals di Solid {#solid-signals}
 
 Il design dell'API `createSignal()` di Solid enfatizza la separazione di lettura e scrittura. I signals sono esposti come getter di sola lettura e di un setter separato:
 
@@ -472,10 +447,9 @@ export function createSignal(value, options) {
 
 [Prova nel Playground](https://play.vuejs.org/#eNpdUk1TgzAQ/Ss7uQAjgr12oNXxH+ix9IAYaDQkMV/qMPx3N6G0Uy9Msu/tvn2PTORJqcI7SrakMp1myoKh1qldI9iopLYwQadpa+krG0TLYYZeyxGSojSSs/d7E8vFh0ka0YhOCmPh0EknbB4mPYfTEeqbIelD1oiqXPRQCS+WjoojAW8A1Wmzm1A39KYZzHNVYiUib85aKeCx46z7rBuySqQe6h14uINN1pDIBWACVUcqbGwtl17EqvIiR3LyzwcmcXFuTi3n8vuF9jlYzYaBajxfMsDcomv6E/m9E51luN2NV99yR3OQKkAmgykss+SkMZerxMLEZFZ4oBYJGAA600VEryAaD6CPaJwJKwnr9ldR2WMedV1Dsi6WwB58emZlsAV/zqmH9LzfvqBfruUmNvZ4QN7VearjenP4aHwmWsABt4x/+tiImcx/z27Jqw==)
 
-#### Signals di Angular {#angular-signals}
+#### I Signals di Angular {#angular-signals}
 
-Angular is undergoing some fundamental changes by foregoing dirty-checking and introducing its own implementation of a reactivity primitive. The Angular Signal API looks like this:
-Angular sta subendo alcuni cambiamenti fondamentali rinunciando al controllo e creando una propria implementazione di un modello reattivo. La Signal API di Angular si presenta così:
+Angular sta subendo alcuni cambiamenti fondamentali abbandonando il dirty-checking e creando una propria implementazione di un modello reattivo. La Signal API di Angular si presenta così:
 
 ```js
 const count = signal(0)
@@ -491,7 +465,6 @@ state.mutate((o) => {
 })
 ```
 
-Again, we can easily replicate the API in Vue:
 Ancora una volta, possiamo facilmente replicare l'API in Vue:
 
 ```js
