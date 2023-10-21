@@ -66,7 +66,7 @@ Ciò ci consentirà di seguire più facilmente le parti di testo che in futuro s
 : Comunica, qui o in altro modo, che intendi tradurre una pagina. Modifica il primo post e cambia lo stato nell'elenco se hai i permessi.
 
 2. **Fare un fork** (se non sei un contributor)
-: Fai un fork del repository `https://github.com/phox081/docs-it` (questo repository) verso `{your-username}/docs-it` (il tuo).
+: Fai un fork del repository `https://github.com/vuejs-translations/docs-it` (questo repository) verso `{your-username}/docs-it` (il tuo).
 
 3. **Creare un branch**
 : Crea un nuovo ramo (branch) dedicato specificamente alla modifica del tuo file (cf. [Condivisione del lavoro di traduzione](#condivisione-del-lavoro-di-traduzione)).
