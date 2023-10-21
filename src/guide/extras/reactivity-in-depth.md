@@ -216,8 +216,6 @@ Il team di Vue ha esplorato questa direzione tramite una funzionalità speriment
 
 ## Debug della reattività {#reactivity-debugging}
 
-It's great that Vue's reactivity system automatically tracks dependencies, but in some cases we may want to figure out exactly what is being tracked, or what is causing a component to re-render.
-
 È fantastico che il sistema di reattività di Vue tenga traccia automaticamente delle dipendenze, ma in alcuni casi potremmo voler capire esattamente cosa viene tracciato o cosa sta causando la re-renderizzazione di un componente.
 
 ### Hook per il debug dei componenti {#component-debugging-hooks}
@@ -416,7 +414,6 @@ Sebbene non sia una caratteristica necessaria per definire qualcosa come signals
 ### Compromessi nella progettazione API {#api-design-trade-offs}
 
 Il design dei signals di Preact e Qwik è molto simile a quello di [shallowRef](/api/reactivity-advanced#shallowref) di Vue: tutti e tre forniscono un'interfaccia modificabile tramite la proprietà `.value`. Quindi concentreremo la discussione sui signals di Solid e Angolar.
-
 
 #### I Signals di Solid {#solid-signals}
 
