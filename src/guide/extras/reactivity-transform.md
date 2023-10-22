@@ -13,11 +13,11 @@ Essa verrà rimossa dal core Vue in una versione futura tramite minor release.
 La trasformazione della reattività è una funzionalità specifica della Composition API e richiede lo step di compilazione.
 :::
 
-## Riferimenti (Refs) contro le variabili reattive {#refs-vs-reactive-variables}
+## Refs vs Variabili Reattive {#refs-vs-reactive-variables}
 
-Sin dall'introduzione della Composition API, una delle principali domande irrisolte è l'uso dei riferimenti rispetto agli oggetti reattivi. È facile perdere reattività quando si destrutturano oggetti reattivi, mentre può essere complicato utilizzare `.value` ovunque quando si utilizzano refs. Inoltre, `.value` è facile da dimenticare se non si utilizza la tipizzazione.
+Sin dall'introduzione della Composition API, una delle principali domande irrisolte è l'uso dei riferimenti (Refs) rispetto agli oggetti reattivi. È facile perdere reattività quando si destrutturano oggetti reattivi, mentre può essere complicato utilizzare `.value` ovunque quando si utilizzano refs. Inoltre, `.value` è facile da dimenticare se non si utilizza la tipizzazione.
 
-[trasformazione della reattività con Vue](https://github.com/vuejs/core/tree/main/packages/reactivity-transform) è una trasformazione in fase di compilazione che ci consente di scrivere codice come questo:
+[La trasformazione della reattività con Vue](https://github.com/vuejs/core/tree/main/packages/reactivity-transform) è una trasformazione in fase di compilazione che ci consente di scrivere codice come questo:
 
 ```vue
 <script setup>
@@ -37,7 +37,7 @@ function increment() {
 
 Il metodo `$ref()` è una **macro computata in fase di compilazione**: non è un metodo vero e proprio che verrà chiamato in fase di runtime. Invece, il compilatore Vue lo utilizza come suggerimento per trattare la variabile "count" risultante come una **variabile reattiva.**
 
-Le variabili reattive possono essere accedute e riassegnate solamente come le variabili normali, ma queste operazioni vengono compilate in riferimenti (refs) con `.value`. Ad esempio, lo `<script>` del componente che abbiamo visto precedentemente è compilata in:
+Le variabili reattive possono essere accedute e riassegnate solamente come le variabili normali, ma queste operazioni vengono compilate in riferimenti (refs) con `.value`. Ad esempio, lo `<script>` del componente che abbiamo visto precedentemente è compilato in:
 
 ```js{5,8}
 import { ref } from 'vue'
@@ -253,7 +253,7 @@ function useMouse() {
 
 ### Usare `$$()` per destrutturare le proprietà {#using-on-destructured-props}
 
-`$$()` funziona su oggetti di scena destrutturati poiché anch'essi sono variabili reattive. Il compilatore lo convertirà con `toRef` per un discorso di ottimizzazione:
+`$$()` funziona su su props destrutturate poiché anch'esse sono variabili reattive. Il compilatore le convertirà con `toRef` per un discorso di ottimizzazione:
 
 ```ts
 const { count } = defineProps<{ count: number }>()
@@ -284,19 +284,13 @@ Poiché le macro sono disponibili a livello globale, è necessario fare riferime
 
 Quando si importano esplicitamente le macro da "vue/macros", il tipo funzionerà senza dichiararlo globalmente.
 
-## Partecipazione esplicita {#explicit-opt-in}
+## Uso esplicito {#explicit-opt-in}
 
 :::warning
 Quanto segue si applica solo fino alla versione Vue 3.3 e precedenti. Il supporto principale verrà rimosso nella versione 3.4 e successive. Se intendi continuare a utilizzare la trasformazione, esegui invece la migrazione a [Vue Macros](https://vue-macros.sxzz.moe/features/reactivity-transform.html).
 :::
 
-
-
 ### Vite {#vite}
-
-- Requires `@vitejs/plugin-vue@>=2.0.0`
-- Applies to SFCs and js(x)/ts(x) files. A fast usage check is performed on files before applying the transform so there should be no performance cost for files not using the macros.
-- Note `reactivityTransform` is now a plugin root-level option instead of nested as `script.refSugar`, since it affects not just SFCs.
 
 - Richiede `@vitejs/plugin-vue@>=2.0.0`
 - Si applica ai file SFC e js(x)/ts(x). Viene eseguito un rapido controllo dell'utilizzo dei file prima di applicare la trasformazione, pertanto non dovrebbero esserci costi in termini di prestazioni per i file che non utilizzano le macro.
@@ -335,7 +329,7 @@ module.exports = {
 }
 ```
 
-### `webpack` + `vue-loader` "fatti a mano" {#plain-webpack-vue-loader}
+### Uso di `webpack` + `vue-loader` {#plain-webpack-vue-loader}
 
 - Attualmente funzionante solo in file SFC
 - Richiede `vue-loader@>=17.0.0`
