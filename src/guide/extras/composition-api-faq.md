@@ -55,7 +55,6 @@ Se sei interessato a studiare come utilizzare Vue con la Composition API, puoi i
 
 Il primo vantaggio della composition API è quello di rendere la logica chiara, efficace e riutilizzabile in [funzioni componibili](/guide/reusability/composables). Questo risolve [tutti gli svantaggi dei mixin](/guide/reusability/composables#vs-mixins), il principale meccanismo per riutilizzare la logica con approccio Options API. 
 
-Composition API's logic reuse capability has given rise to impressive community projects such as [VueUse](https://vueuse.org/), an ever-growing collection of composable utilities. It also serves as a clean mechanism for easily integrating stateful third-party services or libraries into Vue's reactivity system, for example [immutable data](/guide/extras/reactivity-in-depth#immutable-data), [state machines](/guide/extras/reactivity-in-depth#state-machines), and [RxJS](/guide/extras/reactivity-in-depth#rxjs).
 La capacità di riutilizzare la logica della Composition API ha dato vita a progetti della community molto interessanti come [VueUse](https://vueuse.org/),una collezione di utility componibili in continua crescita. Serve anche come meccanismo per integrare facilmente e in modo pulito librerie o servizi di terze parti all'interno del "reactivity system" di Vue, ad esempio [dati immutabili](/guide/extras/reactivity-in-depth#immutable-data), [macchine a stati finiti](/guide/extras/reactivity-in-depth#state-machines) e [RxJS](/guide/extras/reactivity-in-depth#rxjs).
 
 ### Ancora più flessibilità nell'organizzazione del codice{#more-flexible-code-organization}
@@ -76,7 +75,6 @@ La [versione originale](https://github.com/vuejs/vue-cli/blob/a09407dd5b9f18ace7
 <img alt="versione precedente del componente" src="./images/options-api.png" width="129" height="500" style="margin: 1.2em auto">
 
 Si noti come il codice che si occupa della stessa logica funzionale sia costretto a essere suddiviso in diverse options, localizzate in diverse parti del file. In un componente che ha centinaia di linee di codice, capire e navigare ogni singola logica funzionale richiede costantemente di scrollare su e giù, rendendolo la comprensione molto più difficoltosa di quanto dovrebbe essere. Inoltre, se vogliamo estrarre una logica funzionale esponendola come utility riutilizzabile, questo richiede un pò di lavoro per trovare ed estrarre i pezzi di codice posizionate in parti differenti del file.
-
 
 Qui lo stesso componente, prima e dopo il [refactor tramite Composition API](https://gist.github.com/yyx990803/8854f8f6a97631576c14b63c8acd8f2e):
 
@@ -108,7 +106,6 @@ Le Options API ti consentono di "pensare meno" quando scrivi il codice del compo
 
 ### L'API Composition copre tutti i casi d'uso?{#does-composition-api-cover-all-use-cases}
 
-Yes in terms of stateful logic. When using Composition API, there are only a few options that may still be needed: `props`, `emits`, `name`, and `inheritAttrs`.
 Si, in termini di logica stateful. Quando si utilizza la Composition API, ci sono solo poche "options" che potrebbero essere ancora necessarie: `props`, `emits`, `name` e `inheritAttrs`.
 
 :::tip
@@ -121,17 +118,12 @@ Se intendi utilizzare esclusivamente la Composition API (insieme alle opzioni so
 
 ### Posso utilizzare entrambe le API nello stesso componente?{#can-i-use-both-apis-in-the-same-component}
 
-Yes. You can use Composition API via the [`setup()`](/api/composition-api-setup) option in an Options API component.
-
-However, we only recommend doing so if you have an existing Options API codebase that needs to integrate with new features / external libraries written with Composition API.
-
 Si. Puoi utilizzare la Composition API tramite la "option" [`setup()`](/api/composition-api-setup) in un componente che utilizza le Options API.
 
 Tuttavia, ti consigliamo di farlo solo se disponi di un codice già presente basato su Options API che deve integrare nuove funzionalità / librerie esterne scritte con la Composition API.
 
 ### Le Options API verranno deprecate? {#will-options-api-be-deprecated}
 
-No, we do not have any plan to do so. Options API is an integral part of Vue and the reason many developers love it. We also realize that many of the benefits of Composition API only manifest in larger-scale projects, and Options API remains a solid choice for many low-to-medium-complexity scenarios.
 No, non abbiamo alcun piano a riguardo. Le Options API è parte integrante di Vue e il motivo per cui molti sviluppatori lo adorano. Ci rendiamo anche conto che molti dei vantaggi della Composition API si manifestano solo in progetti molto grandi e le Option API rimangono una scelta solida per molte applicazioni con complessità medio-bassa.
 
 ## Relazione con Class API {#relationship-with-class-api}
