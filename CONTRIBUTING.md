@@ -26,7 +26,7 @@ Grazie per prendere visione di questa `Guida alla scrittura`. Lo scopo della gui
 - Tutti i nomi di variabili, codici e testi tra parentesi graffe devono rimanere inalterati (preserva l'integrità del codice originale).
 - Non tradurre termini specifici di VueJS: Lasciare inalterati i termini tecnici specifici di VueJS, aggiungendo al massimo degli articoli se necessario (mantiene l'autenticità e l'integrità dei termini tecnici legati a VueJS).
 
-In caso di dubbi, consulta il [Glossario condiviso](https://github.com/phox081/docs-it/discussions/79) `in fase di aggiornamento`.
+In caso di dubbi, consulta il [Glossario condiviso](https://github.com/vuejs-translations/docs-it/discussions/79) `in fase di aggiornamento`.
 
 Se un termine ti crea problemi (perché è troppo ambiguo), apri una `discussione` sul Termine/Frase per prendere una decisione di comune accordo.
 
@@ -36,7 +36,7 @@ Se un termine ti crea problemi (perché è troppo ambiguo), apri una `discussion
 
 ## Condivisione del lavoro di traduzione
 
-Tutto il lavoro di traduzione è guidato dall'issue [#1 Avanzamento della traduzione - struttura file totale](https://github.com/phox081/docs-it/issues/1), che elenca tutte le pagine da tradurre con il loro stato (con un `issue` collegato e il suo stato).
+Tutto il lavoro di traduzione è guidato dall'issue [#1 Avanzamento della traduzione - struttura file totale](https://github.com/vuejs-translations/docs-it/issues/1), che elenca tutte le pagine da tradurre con il loro stato (con un `issue` collegato e il suo stato).
 
 **Un issue collegato 'aperto' e 'non assegnato'** può essere considerato aperto per contributi e può essere preso in carico da chiunque: **puoi assegnartelo** o lasciare un commento per la presa in carico***.
 
@@ -66,7 +66,7 @@ Ciò ci consentirà di seguire più facilmente le parti di testo che in futuro s
 : Comunica, qui o in altro modo, che intendi tradurre una pagina. Modifica il primo post e cambia lo stato nell'elenco se hai i permessi.
 
 2. **Fare un fork** (se non sei un contributor)
-: Fai un fork del repository `https://github.com/phox081/docs-it` (questo repository) verso `{your-username}/docs-it` (il tuo).
+: Fai un fork del repository `https://github.com/vuejs-translations/docs-it` (questo repository) verso `{your-username}/docs-it` (il tuo).
 
 3. **Creare un branch**
 : Crea un nuovo ramo (branch) dedicato specificamente alla modifica del tuo file (cf. [Condivisione del lavoro di traduzione](#condivisione-del-lavoro-di-traduzione)).
@@ -107,7 +107,7 @@ Per i contributor il canale Discord: [vue-doc-it-translation](https://discord.co
 
 ### Creare un issue dalla lista di controllo
 
-Partendo dall'issue [#1 Avanzamento della traduzione - struttura file totale](https://github.com/phox081/docs-it/issues/1):
+Partendo dall'issue [#1 Avanzamento della traduzione - struttura file totale](https://github.com/vuejs-translations/docs-it/issues/1):
 
 segui la sezione di interesse, se esiste un issue per quella sezione verifica che non sia già in lavorazione.
 
