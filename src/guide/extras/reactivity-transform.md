@@ -6,7 +6,7 @@ La trasformazione della reattività (Reactivity Transform) era una funzionalità
 Essa verrà rimossa dal core Vue in una versione futura tramite minor release.
 
 - Per rimuoverne l'utilizzo, controlla questo [strumento da riga di comando](https://github.com/edison1105/drop-reactivity-transform) che può automatizzare il processo.
-- Se intendi ancora utilizzarlo, ora è disponibile tramite il plugin [Vue Macros](https://vue-macros.sxzz.moe/features/reactivity-transform.html).
+- Se intendi comunque utilizzarla, ora è disponibile tramite il plugin [Vue Macros](https://vue-macros.sxzz.moe/features/reactivity-transform.html).
 :::
 
 :::tip Specifico per la Composition API
@@ -161,9 +161,9 @@ export default {
 
 ## Limiti di funzionamento per mantenere la reattività {#retaining-reactivity-across-function-boundaries}
 
-Mentre le variabili reattive da una parte ci sollevano dal compito di dover utilizzare `.value` ovunque, dall'altra creano un problema di "perdita di reattività" quando passiamo variabili reattive oltre i limiti della funzione. Ciò può avvenire in due casi:
+Mentre le variabili reattive da una parte ci sollevano dal compito di dover utilizzare `.value` ovunque, dall'altra creano un problema di "perdita di reattività" quando passiamo variabili reattive oltre i limiti di una funzione. Ciò può avvenire in due casi:
 
-### Passaggio in funzione come argomento {#passing-into-function-as-argument}
+### Passaggio in una funzione come argomento {#passing-into-function-as-argument}
 
 Data una funzione che prevede un ref come argomento, ad esempio:
 
@@ -206,7 +206,7 @@ Come possiamo vedere, `$$()` è una macro che serve come **via di uscita**: alle
 
 ### Ritorno all'interno dell'ambito della funzione {#returning-inside-function-scope}
 
-La reattività può anche andare persa se le variabili reattive vengono utilizzate direttamente in un'espressione nel ritorno della funzione:
+La reattività può andare persa anche se le variabili reattive vengono utilizzate direttamente in un'espressione nel ritorno della funzione:
 
 ```ts
 function useMouse() {
@@ -253,7 +253,7 @@ function useMouse() {
 
 ### Usare `$$()` per destrutturare le proprietà {#using-on-destructured-props}
 
-`$$()` funziona su su props destrutturate poiché anch'esse sono variabili reattive. Il compilatore le convertirà con `toRef` per un discorso di ottimizzazione:
+`$$()` funziona su props destrutturate poiché anch'esse sono variabili reattive. Il compilatore le convertirà con `toRef` per un discorso di ottimizzazione:
 
 ```ts
 const { count } = defineProps<{ count: number }>()
@@ -287,7 +287,7 @@ Quando si importano esplicitamente le macro da "vue/macros", il tipo funzionerà
 ## Uso esplicito {#explicit-opt-in}
 
 :::warning
-Quanto segue si applica solo fino alla versione Vue 3.3 e precedenti. Il supporto principale verrà rimosso nella versione 3.4 e successive. Se intendi continuare a utilizzare la trasformazione, esegui invece la migrazione a [Vue Macros](https://vue-macros.sxzz.moe/features/reactivity-transform.html).
+Quanto segue si applica solo fino alla versione Vue 3.3 e precedenti. Il supporto principale verrà rimosso nella versione 3.4 e successive. Se intendi continuare a utilizzare la trasformazione, effettula la migrazione a [Vue Macros](https://vue-macros.sxzz.moe/features/reactivity-transform.html).
 :::
 
 ### Vite {#vite}
