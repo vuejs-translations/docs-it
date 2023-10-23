@@ -16,11 +16,11 @@ La Composition API è un insieme di API che ci consente di creare componenti Vue
 
 - [Reactivity API](/api/reactivity-core), es. `ref()` e `reactive()`, che consentono di creare direttamente un valore reattivo, computed property, o watcher.
 
-- [Lifecycle Hooks](/api/composition-api-lifecycle), es. `onMounted()` e `onUnmounted()`, che consentono di istruire comportamenti all'interno del lifecycle delle componenti applicative.
+- [Lifecycle Hooks](/api/composition-api-lifecycle), es. `onMounted()` e `onUnmounted()`, che ci consentono di agganciarci programmaticamente al ciclo di vita dei componenti.
 
 - [Dependency Injection](/api/composition-api-dependency-injection), es. `provide()` e `inject()`, che consentono di sfruttare il sistema di dependency injection di Vue  durante l'utilizzo delle Reactivity API.
 
-Composition API sono un insieme di feature incluse all'interno di Vue 3 e [Vue 2.7](https://blog.vuejs.org/posts/vue-2-7-naruto.html). Per le versioni più vecchie di Vue 2, utilizza il plugin ufficiale [`@vue/composition-api`](https://github.com/vuejs/composition-api). In Vue 3, è anche principalmente utilizzato assieme alla sintassi [`<script setup>`](/api/sfc-script-setup) nei "Single-File Components". Qui di seguito un semplice esempio di un componente che utilizza le Composition API:
+La Composition API è un insieme di feature incluse all'interno di Vue 3 e [Vue 2.7](https://blog.vuejs.org/posts/vue-2-7-naruto.html). Per le versioni più vecchie di Vue 2, utilizza il plugin ufficiale [`@vue/composition-api`](https://github.com/vuejs/composition-api). In Vue 3, è anche principalmente utilizzato assieme alla sintassi [`<script setup>`](/api/sfc-script-setup) nei "Single-File Components". Qui di seguito un semplice esempio di un componente che utilizza le Composition API:
 
 ```vue
 <script setup>
@@ -34,7 +34,7 @@ function increment() {
   count.value++
 }
 
-// lifecycle hooks
+// hook del ciclo di vita
 onMounted(() => {
   console.log(`Il valore iniziale è ${count.value}.`)
 })
@@ -45,7 +45,7 @@ onMounted(() => {
 </template>
 ```
 
-Nonostante questo stile è basato sull'utilizzo di funzioni, la **Composition API NON è functional programming**. Composition API è basata sul paradigma di reattività mutevole a granularità fine di Vue, mentre la programmazione funzionale enfatizza l'immutabilità.
+Nonostante questo stile sia basato sull'utilizzo di funzioni, la **Composition API NON è programmazione funzionale** (functional programming). La Composition API è basata sul paradigma di reattività mutevole a granularità fine di Vue, mentre la programmazione funzionale enfatizza l'immutabilità.
 
 Se sei interessato a studiare come utilizzare Vue con la Composition API, puoi impostare la preferenza a Composition API su questa documentazione nella parte superiore della barra laterale sinistra, dopodiche segui la guida dall'inizio.
 
@@ -53,15 +53,15 @@ Se sei interessato a studiare come utilizzare Vue con la Composition API, puoi i
 
 ### Migliore riutilizzo della logica {#better-logic-reuse}
 
-Il primo vantaggio della composition API è quello di rendere la logica chiara, efficace e riutilizzabile in [funzioni componibili](/guide/reusability/composables). Questo risolve [tutti gli svantaggi dei mixin](/guide/reusability/composables#vs-mixins), il principale meccanismo per riutilizzare la logica con approccio Options API. 
+Il primo vantaggio della composition API è quello di rendere la logica chiara, efficace e riutilizzabile tramitem le [funzioni Composables](/guide/reusability/composables) (funzioni componibili). Questo risolve [tutti gli svantaggi dei mixin](/guide/reusability/composables#vs-mixins), il principale meccanismo per riutilizzare la logica con approccio Options API. 
 
-La capacità di riutilizzare la logica della Composition API ha dato vita a progetti della community molto interessanti come [VueUse](https://vueuse.org/),una collezione di utility componibili in continua crescita. Serve anche come meccanismo per integrare facilmente e in modo pulito librerie o servizi di terze parti all'interno del "reactivity system" di Vue, ad esempio [dati immutabili](/guide/extras/reactivity-in-depth#immutable-data), [macchine a stati finiti](/guide/extras/reactivity-in-depth#state-machines) e [RxJS](/guide/extras/reactivity-in-depth#rxjs).
+La capacità di riutilizzare la logica della Composition API ha dato vita a progetti della community molto interessanti come [VueUse](https://vueuse.org/), una collezione di utility componibili in continua crescita. Serve anche come meccanismo per integrare facilmente e in modo pulito librerie o servizi di terze parti all'interno del "reactivity system" di Vue, ad esempio [dati immutabili](/guide/extras/reactivity-in-depth#immutable-data), [macchine a stati finiti](/guide/extras/reactivity-in-depth#state-machines) e [RxJS](/guide/extras/reactivity-in-depth#rxjs).
 
-### Ancora più flessibilità nell'organizzazione del codice{#more-flexible-code-organization}
+### MAggiore flessibilità nell'organizzazione del codice{#more-flexible-code-organization}
 
-Molti sviluppatori amano che di default l'organizzazione del codice sfrutti le Options API: ogni cosa ha il suo posto in base all'opzione in cui rientra. D'altra parte però, Options API pone delle serie limitazioni quando una singola componente logica cresce oltre una certa soglia di complessità. Questo limite è particolarmente preponderante in componenti che utilizzano molteplici **logiche funzionali** (logic concerns), questo problema l'abbiamo visto più volte in molte applicazioni Vue 2.
+Molti utenti amano il fatto che di default scriviamo codice organizzato tramite la Options API: ogni cosa ha il suo posto in base all'opzione in cui rientra. D'altra parte però, la Options API pone delle serie limitazioni quando la logica di un singolo componente cresce oltre una certa soglia di complessità. Questo limite è particolarmente evidente in componenti che utilizzano molteplici **logiche funzionali** (logic concerns), questo problema l'abbiamo visto più volte in molte applicazioni Vue 2.
 
-Prendi come esempio il componente "folder explorer" dalla Vue CLI GUI: questo componente è responsabile per le seguenti logiche funzionali:
+Prendi come esempio il componente "folder explorer" dalla GUI della Vue CLI: questo componente è responsabile per le seguenti logiche funzionali:
 
 - Monitoraggio dello stato della cartella corrente e visualizzazione del suo contenuto
 - Gestione della navigazione delle cartelle (apertura, chiusura, aggiornamento...)
@@ -74,13 +74,13 @@ La [versione originale](https://github.com/vuejs/vue-cli/blob/a09407dd5b9f18ace7
 
 <img alt="versione precedente del componente" src="./images/options-api.png" width="129" height="500" style="margin: 1.2em auto">
 
-Si noti come il codice che si occupa della stessa logica funzionale sia costretto a essere suddiviso in diverse options, localizzate in diverse parti del file. In un componente che ha centinaia di linee di codice, capire e navigare ogni singola logica funzionale richiede costantemente di scrollare su e giù, rendendolo la comprensione molto più difficoltosa di quanto dovrebbe essere. Inoltre, se vogliamo estrarre una logica funzionale esponendola come utility riutilizzabile, questo richiede un pò di lavoro per trovare ed estrarre i pezzi di codice posizionate in parti differenti del file.
+Si noti come il codice che si occupa della stessa logica funzionale sia costretto a essere suddiviso in diverse options, localizzate in diverse parti del file. In un componente che ha centinaia di linee di codice, capire e navigare ogni singola logica funzionale richiede costantemente di scrollare su e giù, rendendo la comprensione molto più difficoltosa di quanto dovrebbe essere. Inoltre, se vogliamo estrarre una logica funzionale esponendola come utility riutilizzabile, questo richiede un pò di lavoro per trovare ed estrarre i pezzi di codice posizionate in parti differenti del file.
 
 Qui lo stesso componente, prima e dopo il [refactor tramite Composition API](https://gist.github.com/yyx990803/8854f8f6a97631576c14b63c8acd8f2e):
 
 ![versione refactor del componente](./images/composition-api-after.png)
 
-Si noti come il codice relativo alla stessa logica funzionale può ora essere raggruppato: non abbiamo più bisogno di saltare tra blocchi di options mentre lavoriamo su una logica funzionale specifica. Infine, possiamo muovere un gruppo di codice in un file esterno con il minimo effort, poiché non abbiamo più bisogno di muoverci nel codice per estrarre la parte che ci interessa.  La riduzione degli impatti in caso di refactoring è la chiave per la manutenibilità a lungo termine in progetti molto complessi.
+Si noti come il codice relativo alla stessa logica funzionale può ora essere raggruppato: non abbiamo più bisogno di saltare tra blocchi di options mentre lavoriamo su una logica funzionale specifica. Infine, possiamo spostare un gruppo di codice in un file esterno con il minimo effort, poiché non abbiamo più bisogno di muoverci nel codice per estrarre la parte che ci interessa.  Favorire refactoring è la chiave per la manutenibilità a lungo termine in progetti molto complessi.
 
 ### Miglioramento della tipizzazione {#better-type-inference}
 
