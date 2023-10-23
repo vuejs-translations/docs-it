@@ -4,7 +4,7 @@
     <h2>Fai crescere il tuo business con Vue</h2>
     <p>
       Genera contatti per i tuoi nuovi progetti, aumenta la tua credibilità
-      con i clienti e supporta a lungo termine lo sviluppo di Vue.js e del
+      con i clienti e supporta a  lo sviluppo a lungo termine di Vue.js e del
       suo ecosistema.
     </p>
     <a

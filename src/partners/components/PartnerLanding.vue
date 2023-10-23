@@ -28,9 +28,9 @@ onMounted(() => {
     </div>
 
     <div class="featured">
-      <h2>Partners in primo piano</h2>
+      <h2>I partner in evidenza</h2>
       <PartnerList :filter="(p) => p.platinum" showLinkToAll />
-      <a class="browse-all" href="./all.html">Sfoglia tutti i partners</a>
+      <a class="browse-all" href="./all.html">Visualizza tutti i partner</a>
     </div>
 
     <PartnerJoin />
