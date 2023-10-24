@@ -8,9 +8,9 @@ defineProps<{ title?: string }>()
     <p class="lead">
       I partner di Vue sono aziende approvate dal team Vue che forniscono
       servizi di prima classe, consulenza e sviluppo Vue. Se la tua azienda
-      è interessata a diventare un partner ed essere all'elenco per favore
+      è interessata a diventare un partner ed essere aggiunta all'elenco per favore
       <a href="https://airtable.com/shrCQhat57SApJI2l" target="_blank"
-        >Segnala il tuo interesse qui</a
+        >segnala il tuo interesse qui</a
       >.
     </p>
   </div>
