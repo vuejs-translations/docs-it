@@ -2,9 +2,9 @@
 
 ## data {#data}
 
-A function that returns the initial reactive state for the component instance.
+Una funzione che restituisce lo stato reattivo iniziale per l'istanza del componente.
 
-- **Type**
+- **Tipo**
 
   ```ts
   interface ComponentOptions {
@@ -15,17 +15,17 @@ A function that returns the initial reactive state for the component instance.
   }
   ```
 
-- **Details**
+- **Dettagli**
 
-  The function is expected to return a plain JavaScript object, which will be made reactive by Vue. After the instance is created, the reactive data object can be accessed as `this.$data`. The component instance also proxies all the properties found on the data object, so `this.a` will be equivalent to `this.$data.a`.
+  La funzione si aspetta il ritorno di un semplice oggetto JavaScript, che sarà reso reattivo da Vue. Dopo la creazione dell'istanza, è possibile accedere all'oggetto reattivo data con `this.$data`. L'istanza del componente inoltre funziona come proxy per tutte le proprietà dell'oggetto data, quindi `this.a` sarà uguale a `this.$data.a`.
 
-  All top-level data properties must be included in the returned data object. Adding new properties to `this.$data` is possible, but it is **not** recommended. If the desired value of a property is not yet available then an empty value such as `undefined` or `null` should be included as a placeholder to ensure that Vue knows that the property exists.
+  Tutte le proprietà dei dati di livello superiore devono essere incluse nell'oggetto data restituito. Aggiungere nuove proprietà a `this.$data` è possibile, ma **non** è raccomandato. Se il valore desiderato di una proprietà non è ancora disponibile è necessario includere un valore vuoto come `undefined` o `null` come segnaposto per garantire che Vue sappia che la proprietà esiste.
 
-  Properties that start with `_` or `$` will **not** be proxied on the component instance because they may conflict with Vue's internal properties and API methods. You will have to access them as `this.$data._property`.
+  Proprietà che iniziano con `_` o `$` **non** saranno proxy sull'istanza del componente potrebbero entrare in conflitto con le proprietà interne di Vue e i metodi API. Dovrai accedervi come `this.$data._property`.
 
-  It is **not** recommended to return objects with their own stateful behavior like browser API objects and prototype properties. The returned object should ideally be a plain object that only represents the state of the component.
+  **Non** raccomandato ritornare oggetti con il proprio comportamento con stato come oggetti API del browser e proprietà del prototipo. L'oggetto restituito dovrebbe idealmente essere un oggetto semplice che rappresenta solo lo stato del componente.
 
-- **Example**
+- **Esempio**
 
   ```js
   export default {
@@ -39,13 +39,13 @@ A function that returns the initial reactive state for the component instance.
   }
   ```
 
-  Note that if you use an arrow function with the `data` property, `this` won't be the component's instance, but you can still access the instance as the function's first argument:
+  Tieni presente che se utilizzi una funzione freccia con la proprietà `data`, `this` non sarà l'istanza del componente, ma potrai comunque accedere all'istanza come primo argomento della funzione:
 
   ```js
   data: (vm) => ({ a: vm.myProp })
   ```
 
-- **See also** [Reactivity in Depth](/guide/extras/reactivity-in-depth)
+- **Guarda anche** [Reattività nel dettaglio](/guide/extras/reactivity-in-depth)
 
 ## props {#props}
 
