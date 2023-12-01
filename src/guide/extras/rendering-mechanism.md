@@ -2,9 +2,9 @@
 outline: deep
 ---
 
-# Rendering Mechanism {#rendering-mechanism}
+# Meccanismo di rendering {#rendering-mechanism}
 
-How does Vue take a template and turn it into actual DOM nodes? How does Vue update those DOM nodes efficiently? We will attempt to shed some light on these questions here by diving into Vue's internal rendering mechanism.
+Come fa Vue a trasformare un template in un nodo del DOM? Come aggiorna questi nodi in modo efficiente? Cercheremo di fare luce su queste domande approfondendo il meccanismo di rendering interno di Vue.
 
 ## Virtual DOM {#virtual-dom}
 
