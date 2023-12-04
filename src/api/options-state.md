@@ -2,9 +2,9 @@
 
 ## data {#data}
 
-A function that returns the initial reactive state for the component instance.
+Una funzione che restituisce lo stato reattivo iniziale per l'istanza del componente.
 
-- **Type**
+- **Tipo**
 
   ```ts
   interface ComponentOptions {
@@ -15,17 +15,17 @@ A function that returns the initial reactive state for the component instance.
   }
   ```
 
-- **Details**
+- **Dettagli**
 
-  The function is expected to return a plain JavaScript object, which will be made reactive by Vue. After the instance is created, the reactive data object can be accessed as `this.$data`. The component instance also proxies all the properties found on the data object, so `this.a` will be equivalent to `this.$data.a`.
+  La funzione si aspetta il ritorno di un semplice oggetto JavaScript, che sarà reso reattivo da Vue. Dopo la creazione dell'istanza, è possibile accedere all'oggetto reattivo data con `this.$data`. L'istanza del componente inoltre funziona come proxy per tutte le proprietà dell'oggetto data, quindi `this.a` sarà uguale a `this.$data.a`.
 
-  All top-level data properties must be included in the returned data object. Adding new properties to `this.$data` is possible, but it is **not** recommended. If the desired value of a property is not yet available then an empty value such as `undefined` or `null` should be included as a placeholder to ensure that Vue knows that the property exists.
+  Tutte le proprietà dei dati di livello superiore devono essere incluse nell'oggetto data restituito. Aggiungere nuove proprietà a `this.$data` è possibile, ma **non** è raccomandato. Se il valore desiderato di una proprietà non è ancora disponibile è necessario includere un valore vuoto come `undefined` o `null` come segnaposto per garantire che Vue sappia che la proprietà esiste.
 
-  Properties that start with `_` or `$` will **not** be proxied on the component instance because they may conflict with Vue's internal properties and API methods. You will have to access them as `this.$data._property`.
+  Proprietà che iniziano con `_` o `$` **non** saranno proxy sull'istanza del componente potrebbero entrare in conflitto con le proprietà interne di Vue e i metodi API. Dovrai accedervi come `this.$data._property`.
 
-  It is **not** recommended to return objects with their own stateful behavior like browser API objects and prototype properties. The returned object should ideally be a plain object that only represents the state of the component.
+  **Non** raccomandato ritornare oggetti con il proprio comportamento con stato come oggetti API del browser e proprietà del prototipo. L'oggetto restituito dovrebbe idealmente essere un oggetto semplice che rappresenta solo lo stato del componente.
 
-- **Example**
+- **Esempio**
 
   ```js
   export default {
@@ -39,17 +39,17 @@ A function that returns the initial reactive state for the component instance.
   }
   ```
 
-  Note that if you use an arrow function with the `data` property, `this` won't be the component's instance, but you can still access the instance as the function's first argument:
+  Tieni presente che se utilizzi una funzione freccia con la proprietà `data`, `this` non sarà l'istanza del componente, ma potrai comunque accedere all'istanza come primo argomento della funzione:
 
   ```js
   data: (vm) => ({ a: vm.myProp })
   ```
 
-- **See also** [Reactivity in Depth](/guide/extras/reactivity-in-depth)
+- **Guarda anche** [Reattività nel dettaglio](/guide/extras/reactivity-in-depth)
 
 ## props {#props}
 
-Declare the props of a component.
+Dichiarare le props di un componente
 
 - **Type**
 
@@ -74,30 +74,30 @@ Declare the props of a component.
   type PropType<T> = { new (): T } | { new (): T }[]
   ```
 
-  > Types are simplified for readability.
+  > I tipi sono semplificati per la leggibilità.
 
-- **Details**
+- **Dettagli**
 
-  In Vue, all component props need to be explicitly declared. Component props can be declared in two forms:
+  In Vue, tutte le props dei componenti devono essere dichiarate esplicitamente. Le props dei componenti possono essere dichiarate in due forme:
 
-  - Simple form using an array of strings
-  - Full form using an object where each property key is the name of the prop, and the value is the prop's type (a constructor function) or advanced options.
+  - Forma semplice che utilizza un array di stringhe
+  - Forma completa utilizzando un oggetto in cui ciascuna chiave è il nome di una prop, e il valore è il suo tipo (una funzione di costruzione) o le opzioni avanzate.
 
-  With object-based syntax, each prop can further define the following options:
+  Con la sintassi basata sugli oggetti, ciascuna prop può definire ulteriormente le seguenti opzioni:
 
-  - **`type`**: Can be one of the following native constructors: `String`, `Number`, `Boolean`, `Array`, `Object`, `Date`, `Function`, `Symbol`, any custom constructor function or an array of those. In development mode, Vue will check if a prop's value matches the declared type, and will throw a warning if it doesn't. See [Prop Validation](/guide/components/props#prop-validation) for more details.
+  - **`type`**: Può essere uno dei seguenti costruttori nativi: `String`, `Number`, `Boolean`, `Array`, `Object`, `Date`, `Function`, `Symbol`, qualsiasi funzione di costruzione personalizzata o un array di queste. In modalità sviluppo, Vue controllerà se il valore di un oggetto corrisponde al tipo dichiarato, e darà errore in caso contrario. Guarda [Validazione delle props](/guide/components/props#prop-validation) per maggiori dettagli.
 
-    Also note that a prop with `Boolean` type affects its value casting behavior in both development and production. See [Boolean Casting](/guide/components/props#boolean-casting) for more details.
+    Tieni inoltre presente che un oggetto di tipo `Boolean` influisce sul suo comportamento di conversione del valore sia nello sviluppo che nella produzione. Guarda [Conversione in Booleano](/guide/components/props#boolean-casting) per maggiori dettagli.
 
-  - **`default`**: Specifies a default value for the prop when it is not passed by the parent or has `undefined` value. Object or array defaults must be returned using a factory function. The factory function also receives the raw props object as the argument.
+  - **`default`**: Specifica un valore predefinito per la prop quando non viene passata dal genitore o ha un valore `undefined`. I valori predefiniti dell'oggetto o dell'array devono essere restituiti utilizzando una funzione di fabbrica. La funzione di fabbrica riceve anche l'oggetto raw props come argomento.
 
-  - **`required`**: Defines if the prop is required. In a non-production environment, a console warning will be thrown if this value is truthy and the prop is not passed.
+  - **`required`**: Definisce se la prop è richiesta. In un ambiente non di produzione, verrà lanciato un avviso sulla console se questo valore è vero e la prop non viene passata.
 
-  - **`validator`**: Custom validator function that takes the prop value as the sole argument. In development mode, a console warning will be thrown if this function returns a falsy value (i.e. the validation fails).
+  - **`validator`**: Funzione di convalida personalizzata che accetta il valore prop come unico argomento. In modalità sviluppo, verrà lanciato un avviso sulla console se questa funzione restituisce un valore falso (ovvero la convalida fallisce).
 
-- **Example**
+- **Esempio**
 
-  Simple declaration:
+  Semplice dichiarazione:
 
   ```js
   export default {
@@ -105,14 +105,14 @@ Declare the props of a component.
   }
   ```
 
-  Object declaration with validations:
+  Dichiarazione dell'oggetto con validazione:
 
   ```js
   export default {
     props: {
-      // type check
+      // controllo del tipo
       height: Number,
-      // type check plus other validations
+      // controllo del tipo più altre validazioni
       age: {
         type: Number,
         default: 0,
@@ -125,9 +125,9 @@ Declare the props of a component.
   }
   ```
 
-- **See also**
-  - [Guide - Props](/guide/components/props)
-  - [Guide - Typing Component Props](/guide/typescript/options-api#typing-component-props) <sup class="vt-badge ts" />
+- **Guarda anche**
+  - [Guida - Props](/guide/components/props)
+  - [Guida - Tipizzare le props dei componenti](/guide/typescript/options-api#typing-component-props) <sup class="vt-badge ts" />
 
 ## computed {#computed}
 
