@@ -131,9 +131,9 @@ Dichiarare le props di un componente
 
 ## computed {#computed}
 
-Declare computed properties to be exposed on the component instance.
+Dichiarare le proprietà calcolate da esporre nell'istanza del componente.
 
-- **Type**
+- **Tipo**
 
   ```ts
   interface ComponentOptions {
@@ -158,13 +158,13 @@ Declare computed properties to be exposed on the component instance.
   }
   ```
 
-- **Details**
+- **Dettagli**
 
-  The option accepts an object where the key is the name of the computed property, and the value is either a computed getter, or an object with `get` and `set` methods (for writable computed properties).
+  L'opzione accetta un oggetto in cui la chiave è il nome della proprietà calcolata e il valore è un getter calcolato o un oggetto con metodi `get` e `set` (per proprietà calcolate scrivibili).
 
-  All getters and setters have their `this` context automatically bound to the component instance.
+  Tutti i getter e i setter hanno il loro contesto `this` automaticamente associato all'istanza del componente.
 
-  Note that if you use an arrow function with a computed property, `this` won't point to the component's instance, but you can still access the instance as the function's first argument:
+  Tieni presente che se utilizzi una funzione freccia con una proprietà calcolata, `this` non punterà all'istanza del componente, ma puoi comunque accedere all'istanza come primo argomento della funzione:
 
   ```js
   export default {
@@ -174,7 +174,7 @@ Declare computed properties to be exposed on the component instance.
   }
   ```
 
-- **Example**
+- **Esempio**
 
   ```js
   export default {
@@ -207,15 +207,15 @@ Declare computed properties to be exposed on the component instance.
   }
   ```
 
-- **See also**
-  - [Guide - Computed Properties](/guide/essentials/computed)
-  - [Guide - Typing Computed Properties](/guide/typescript/options-api#typing-computed-properties) <sup class="vt-badge ts" />
+- **Guarda anche**
+  - [Guida - Computed Properties](/guide/essentials/computed)
+  - [Guida - Tipizzare le Computed Properties](/guide/typescript/options-api#typing-computed-properties) <sup class="vt-badge ts" />
 
-## methods {#methods}
+## metodi {#methods}
 
-Declare methods to be mixed into the component instance.
+Dichiarare i metodi da combinare nell'istanza del componente.
 
-- **Type**
+- **Tipo**
 
   ```ts
   interface ComponentOptions {
@@ -225,13 +225,13 @@ Declare methods to be mixed into the component instance.
   }
   ```
 
-- **Details**
+- **Dettagli**
 
-  Declared methods can be directly accessed on the component instance, or used in template expressions. All methods have their `this` context automatically bound to the component instance, even when passed around.
+  È possibile accedere direttamente ai metodi dichiarati nell'istanza del componente o utilizzarli nelle espressioni del modello. Tutti i metodi hanno il loro contesto `this` automaticamente associato all'istanza del componente, anche quando viene passato.
 
-  Avoid using arrow functions when declaring methods, as they will not have access to the component instance via `this`.
+  Evita di utilizzare le funzioni freccia quando dichiari i metodi, poiché non avranno accesso all'istanza del componente tramite `this`.
 
-- **Example**
+- **Esempio**
 
   ```js
   export default {
@@ -250,7 +250,7 @@ Declare methods to be mixed into the component instance.
   }
   ```
 
-- **See also** [Event Handling](/guide/essentials/event-handling)
+- **Guarda anche** [Gestione degli Eventi](/guide/essentials/event-handling)
 
 ## watch {#watch}
 
