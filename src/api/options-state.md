@@ -254,9 +254,9 @@ Dichiarare i metodi da combinare nell'istanza del componente.
 
 ## watch {#watch}
 
-Declare watch callbacks to be invoked on data change.
+Dichiara le callback di controllo da richiamare alla modifica dei dati.
 
-- **Type**
+- **Tipo**
 
   ```ts
   interface ComponentOptions {
@@ -283,24 +283,24 @@ Declare watch callbacks to be invoked on data change.
   }
   ```
 
-  > Types are simplified for readability.
+  > I Tipi sono semplificati per leggibilità.
 
-- **Details**
+- **Dettagli**
 
-  The `watch` option expects an object where keys are the reactive component instance properties to watch (e.g. properties declared via `data` or `computed`) — and values are the corresponding callbacks. The callback receives the new value and the old value of the watched source.
+  L'opzione `watch` prevede un oggetto in cui le chiavi sono le proprietà dell'istanza del componente reattivo da controllare (ad esempio, le proprietà dichiarate tramite `data` o `computed`) — e i valori sono le callback corrispondenti. La callback riceve il nuovo valore e il vecchio valore dell'origine controllata.
 
-  In addition to a root-level property, the key can also be a simple dot-delimited path, e.g. `a.b.c`. Note that this usage does **not** support complex expressions - only dot-delimited paths are supported. If you need to watch complex data sources, use the imperative [`$watch()`](/api/component-instance#watch) API instead.
+  Oltre a una proprietà a livello di root, la chiave può anche essere un semplice percorso delimitato da punti, ad es. `a.b.c`. Tieni presente che questo utilizzo **non** supporta espressioni complesse: sono supportati solo percorsi delimitati da punti. Se devi monitorare origini dati complesse, utilizza invece l'API imperativa [`$watch()`](/api/component-instance#watch).
 
-  The value can also be a string of a method name (declared via `methods`), or an object that contains additional options. When using the object syntax, the callback should be declared under the `handler` field. Additional options include:
+  Il valore può anche essere una stringa del nome di un metodo (dichiarato tramite `methods`) o un oggetto che contiene opzioni aggiuntive. Quando si utilizza la sintassi dell'oggetto, la callback deve essere dichiarata nel campo `handler`. Ulteriori opzioni includono:
 
-  - **`immediate`**: trigger the callback immediately on watcher creation. Old value will be `undefined` on the first call.
-  - **`deep`**: force deep traversal of the source if it is an object or an array, so that the callback fires on deep mutations. See [Deep Watchers](/guide/essentials/watchers#deep-watchers).
-  - **`flush`**: adjust the callback's flush timing. See [Callback Flush Timing](/guide/essentials/watchers#callback-flush-timing) and [`watchEffect()`](/api/reactivity-core#watcheffect).
-  - **`onTrack / onTrigger`**: debug the watcher's dependencies. See [Watcher Debugging](/guide/extras/reactivity-in-depth#watcher-debugging).
+  - **`immediate`**: attivare immediatamente la richiamata alla creazione del watcher. Il vecchio valore sarà `undefined` alla prima chiamata.
+  - **`deep`**: forza l'attraversamento profondo dell'origine se si tratta di un oggetto o di un array, in modo che la callback si attivi su mutazioni avanzate. Guarda [Watcher Avanzati](/guide/essentials/watchers#deep-watchers).
+  - **`flush`**: regolare i tempi di flush della callback. Guarda [Tempi di esecuzione della Callback](/guide/essentials/watchers#callback-flush-timing) e [`watchEffect()`](/api/reactivity-core#watcheffect).
+  - **`onTrack / onTrigger`**: eseguire il debug delle dipendenze del watcher. Guarda [Debug degli Watcher](/guide/extras/reactivity-in-depth#watcher-debugging).
 
-  Avoid using arrow functions when declaring watch callbacks as they will not have access to the component instance via `this`.
+  Evita di utilizzare le funzioni freccia quando dichiari le callback di watch poiché non avranno accesso all'istanza del componente tramite `this`.
 
-- **Example**
+- **Esempio**
 
   ```js
   export default {
@@ -316,31 +316,31 @@ Declare watch callbacks to be invoked on data change.
       }
     },
     watch: {
-      // watching top-level property
+      // guardare proprietà di alto livello
       a(val, oldVal) {
         console.log(`new: ${val}, old: ${oldVal}`)
       },
-      // string method name
+      // nome del metodo stringa
       b: 'someMethod',
-      // the callback will be called whenever any of the watched object properties change regardless of their nested depth
+      // la callback verrà chiamata ogni volta che una qualsiasi delle proprietà dell'oggetto controllato cambia indipendentemente dalla sua profondità di nidificazione
       c: {
         handler(val, oldVal) {
           console.log('c changed')
         },
         deep: true
       },
-      // watching a single nested property:
+      // guardando una singola proprietà nidificata:
       'c.d': function (val, oldVal) {
-        // do something
+        // fa qualcosa
       },
-      // the callback will be called immediately after the start of the observation
+      // la callback verrà effettuata immediatamente dopo l'inizio dell'osservazione
       e: {
         handler(val, oldVal) {
           console.log('e changed')
         },
         immediate: true
       },
-      // you can pass array of callbacks, they will be called one-by-one
+      // puoi passare una serie di callback, verranno chiamate una per una
       f: [
         'handle1',
         function handle2(val, oldVal) {
@@ -363,12 +363,12 @@ Declare watch callbacks to be invoked on data change.
       }
     },
     created() {
-      this.a = 3 // => new: 3, old: 1
+      this.a = 3 // => nuovo: 3, vecchio: 1
     }
   }
   ```
 
-- **See also** [Watchers](/guide/essentials/watchers)
+- **Guarda anche** [Watchers](/guide/essentials/watchers)
 
 ## emits {#emits}
 
