@@ -372,9 +372,9 @@ Dichiara le callback di controllo da richiamare alla modifica dei dati.
 
 ## emits {#emits}
 
-Declare the custom events emitted by the component.
+Dichiarare gli eventi personalizzati emessi dal componente.
 
-- **Type**
+- **Tipo**
 
   ```ts
   interface ComponentOptions {
@@ -388,20 +388,20 @@ Declare the custom events emitted by the component.
   type EmitValidator = (...args: unknown[]) => boolean
   ```
 
-- **Details**
+- **Dettagli**
 
-  Emitted events can be declared in two forms:
+  Gli eventi emessi possono essere dichiarati in due forme:
 
-  - Simple form using an array of strings
-  - Full form using an object where each property key is the name of the event, and the value is either `null` or a validator function.
+  - Forma semplice che utilizza un array di stringhe
+  - Forma completa che utilizza un oggetto in cui ciascuna chiave di proprietà è il nome dell'evento e il valore è `null` o una funzione di convalida.
 
-  The validation function will receive the additional arguments passed to the component's `$emit` call. For example, if `this.$emit('foo', 1)` is called, the corresponding validator for `foo` will receive the argument `1`. The validator function should return a boolean to indicate whether the event arguments are valid.
+  La funzione di convalida riceverà gli argomenti aggiuntivi passati alla chiamata `$emit` del componente. Ad esempio, se viene chiamato `this.$emit('foo', 1)`, il validatore corrispondente per `foo` riceverà l'argomento `1`. La funzione di validazione dovrebbe restituire un valore booleano per indicare se gli argomenti dell'evento sono validi.
 
-  Note that the `emits` option affects which event listeners are considered component event listeners, rather than native DOM event listeners. The listeners for declared events will be removed from the component's `$attrs` object, so they will not be passed through to the component's root element. See [Fallthrough Attributes](/guide/components/attrs) for more details.
+  Tieni presente che l'opzione `emits` influisce sugli ascoltatori di eventi che sono considerati del componente, piuttosto che ascoltatori di eventi DOM nativi. Gli ascoltatori per gli eventi dichiarati verranno rimossi dall'oggetto `$attrs` del componente, quindi non verranno passati all'elemento root del componente. Guarda [Attributi trasferibili](/guide/components/attrs) per maggiori dettagli.
 
-- **Example**
+- **Esempio**
 
-  Array syntax:
+  Sintassi con array:
 
   ```js
   export default {
@@ -412,20 +412,20 @@ Declare the custom events emitted by the component.
   }
   ```
 
-  Object syntax:
+  Sintassi con oggetto:
 
   ```js
   export default {
     emits: {
-      // no validation
+      // senza validazione
       click: null,
 
-      // with validation
+      // con validazione
       submit: (payload) => {
         if (payload.email && payload.password) {
           return true
         } else {
-          console.warn(`Invalid submit event payload!`)
+          console.warn(`Payload dell'evento di invio non valido!`)
           return false
         }
       }
@@ -433,15 +433,15 @@ Declare the custom events emitted by the component.
   }
   ```
 
-- **See also**
-  - [Guide - Fallthrough Attributes](/guide/components/attrs)
-  - [Guide - Typing Component Emits](/guide/typescript/options-api#typing-component-emits) <sup class="vt-badge ts" />
+- **Guarda anche**
+  - [Guida - Attributi trasferibili](/guide/components/attrs)
+  - [Guida - Tipizzare gli emits dei componenti](/guide/typescript/options-api#typing-component-emits) <sup class="vt-badge ts" />
 
 ## expose {#expose}
 
-Declare exposed public properties when the component instance is accessed by a parent via template refs.
+Dichiara le proprietà pubbliche esposte quando un genitore accede all'istanza del componente tramite riferimenti al modello.
 
-- **Type**
+- **Tipo**
 
   ```ts
   interface ComponentOptions {
@@ -449,19 +449,19 @@ Declare exposed public properties when the component instance is accessed by a p
   }
   ```
 
-- **Details**
+- **Dettagli**
 
-  By default, a component instance exposes all instance properties to the parent when accessed via `$parent`, `$root`, or template refs. This can be undesirable, since a component most likely has internal state or methods that should be kept private to avoid tight coupling.
+  Per impostazione predefinita, un'istanza del componente espone tutte le proprietà dell'istanza al genitore quando si accede tramite `$parent`, `$root` o riferimenti al modello. Ciò può essere indesiderabile, poiché molto probabilmente un componente ha uno stato interno o metodi che dovrebbero essere mantenuti privati ​​per evitare un accoppiamento stretto.
 
-  The `expose` option expects a list of property name strings. When `expose` is used, only the properties explicitly listed will be exposed on the component's public instance.
+  L'opzione `expose` prevede un elenco di stringhe di nomi di proprietà. Quando viene utilizzato `expose`, solo le proprietà esplicitamente elencate verranno esposte nell'istanza pubblica del componente.
 
-  `expose` only affects user-defined properties - it does not filter out built-in component instance properties.
+  `expose` influisce solo sulle proprietà definite dall'utente e non filtra le proprietà dell'istanza del componente integrato.
 
-- **Example**
+- **Esempio**
 
   ```js
   export default {
-    // only `publicMethod` will be available on the public instance
+    // solo `publicMethod` sarà disponibile sull'istanza pubblica
     expose: ['publicMethod'],
     methods: {
       publicMethod() {
