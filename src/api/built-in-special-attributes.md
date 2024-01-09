@@ -78,7 +78,7 @@ Indica un [template ref](/guide/essentials/template-refs).
 
   Una nota importante in riferimento al momento della registrazione del ref: poiché i refs stessi vengono creati come risultato della funzione di rendering, è necessario attendere che il componente sia montato prima di accedervi.
 
-  Anche `this.$refs` è non reattivo, quindi non dovresti tentare di usarlo nei template per il data-binding.
+  `this.$refs` è anche non reattivo, quindi non dovresti tentare di usarlo nei template per il data-binding.
 
 - **Vedi anche**
   - [Guide - Template Refs](/guide/essentials/template-refs)
