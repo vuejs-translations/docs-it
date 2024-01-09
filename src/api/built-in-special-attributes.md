@@ -1,4 +1,4 @@
-# Built-in Special Attributes {#built-in-special-attributes}
+# Attributi speciali integrati {#built-in-special-attributes}
 
 ## key {#key}
 
