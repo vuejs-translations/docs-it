@@ -58,7 +58,6 @@ Perché Vue raccomanda i templates per impostazione predefinita? Ci sono diverse
 
 2. I template sono più facili da analizzare staticamente grazie alla loro sintassi. Questo consente al compilatore di template di Vue di applicare molte ottimizzazioni in fase di compilazione per migliorare le prestazioni del DOM virtuale (di cui parleremo più avanti).
 
-
 In pratica, i templates sono sufficienti per la maggior parte dei casi d'uso nelle applicazioni. Le render functions sono tipicamente utilizzate solo nei componenti riutilizzabili che devono gestire una logica di rendering altamente dinamica. L'uso delle render functions è discusso più dettagliatamente in [Render function e JSX](./render-function).
 
 ## Compiler-Informed Virtual DOM {#compiler-informed-virtual-dom}
