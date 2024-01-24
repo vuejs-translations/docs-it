@@ -257,7 +257,7 @@ Se sei nuovo in Vue, in linea di massima, ecco la nostra raccomandazione:
 
   - Scegli la Composition API + Componenti Single-File se prevedi di costruire applicazioni complete con Vue.
 
- The rest of the documentation will provide code samples in both styles where applicable, and you can toggle between them at any time using the **API Preference switches** at the top of the left sidebar. Non devi impegnarti a utilizzare un solo stile durante la fase di apprendimento. Il resto della documentazione fornirà esempi di codice in entrambi gli stili dove applicabile, e potrai passare da uno all'altro in qualsiasi momento utilizzando il **selettore di preferenza API**, presente nella parte superiore della barra laterale sinistra.
+ Il resto della documentazione fornirà esempi di codice in entrambi gli stili, ove applicabile, e potrai alternarli in qualsiasi momento utilizzando gli **interruttori delle preferenze API** nella parte superiore della barra laterale sinistra.. Non devi impegnarti a utilizzare un solo stile durante la fase di apprendimento. Il resto della documentazione fornirà esempi di codice in entrambi gli stili dove applicabile, e potrai passare da uno all'altro in qualsiasi momento utilizzando il **selettore di preferenza API**, presente nella parte superiore della barra laterale sinistra.
 
 ## Hai ancora domande? {#still-got-questions}
 
