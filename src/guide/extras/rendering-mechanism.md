@@ -21,7 +21,7 @@ const vnode = {
     id: 'hello'
   },
   children: [
-    /* more vnodes */
+    /* altri vnode */
   ]
 }
 ```
@@ -62,7 +62,7 @@ In pratica, i templates sono sufficienti per la maggior parte dei casi d'uso nel
 
 ## Compiler-Informed Virtual DOM {#compiler-informed-virtual-dom}
 
-L'implementazione del DOM virtuale in React e la maggior parte delle altre implementazioni del DOM virtuale sono puramente runtime: l'algoritmo di riconciliazione non può fare alcuna ipotesi sull'albero del DOM virtuale in arrivo, quindi deve attraversare completamente l'albero e diffondere gli oggetti di scena di ogni vnode per garantire la correttezza. Inoltre, anche se una parte dell'albero non cambia mai, a ogni re-render vengono sempre creati nuovi vnode, con conseguente inutile pressione sulla memoria. Questo è uno degli aspetti più criticati del DOM virtuale: il processo di riconciliazione, piuttosto brute-force, sacrifica l'efficienza in cambio di dichiaratività e correttezza.
+L'implementazione del DOM virtuale in React e la maggior parte delle altre implementazioni del DOM virtuale sono puramente runtime: l'algoritmo di riconciliazione non può fare alcuna ipotesi sull'albero del DOM virtuale in arrivo, quindi deve attraversare completamente l'albero e confrontare le proprietà di ogni vnode per garantire la correttezza. Inoltre, anche se una parte dell'albero non cambia mai, a ogni re-render vengono sempre creati nuovi vnode, con conseguente inutile pressione sulla memoria. Questo è uno degli aspetti più criticati del DOM virtuale: il processo di riconciliazione, piuttosto brute-force, sacrifica l'efficienza in cambio di dichiaratività e correttezza.
 
 Ma non deve essere necessariamente così. In Vue, il framework controlla sia il compilatore che il runtime. Questo ci permette di implementare molte ottimizzazioni in fase di compilazione che solo un renderer strettamente accoppiato può sfruttare. Il compilatore può analizzare staticamente il template e lasciare suggerimenti nel codice generato, in modo che il runtime possa prendere delle scorciatoie quando possibile. Allo stesso tempo, conserviamo la possibilità per l'utente di scendere al livello della funzione di rendering per un controllo più diretto nei casi limite. Chiamiamo questo approccio ibrido **Compiler-Informed Virtual DOM**.
 
@@ -70,7 +70,7 @@ Di seguito, discuteremo alcune importanti ottimizzazioni effettuate dal compilat
 
 ### Hoisting statico {#static-hoisting}
 
-Molto spesso ci sono parti di un modello che non contengono legami dinamici:
+Molto spesso ci sono parti di un template che non contengono binding dinamici:
 
 ```vue-html{2-3}
 <div>
@@ -82,22 +82,22 @@ Molto spesso ci sono parti di un modello che non contengono legami dinamici:
 
 [Ispeziona in Template Explorer](https://template-explorer.vuejs.org/#eyJzcmMiOiI8ZGl2PlxuICA8ZGl2PmZvbzwvZGl2PiA8IS0tIGhvaXN0ZWQgLS0+XG4gIDxkaXY+YmFyPC9kaXY+IDwhLS0gaG9pc3RlZCAtLT5cbiAgPGRpdj57eyBkeW5hbWljIH19PC9kaXY+XG48L2Rpdj5cbiIsIm9wdGlvbnMiOnsiaG9pc3RTdGF0aWMiOnRydWV9fQ==)
 
-I div `foo` e `bar` sono statici: ricreare i vnode e differenziarli a ogni rendering non è necessario. Il compilatore di Vue sposta automaticamente le chiamate alla creazione dei vnode dalla funzione di rendering e riutilizza gli stessi vnode a ogni rendering. Il renderer è anche in grado di saltare completamente la creazione di vnode quando si accorge che il vecchio vnode e il nuovo vnode sono gli stessi.
+I div `foo` e `bar` sono statici: ricreare i vnode e confrontarli a ogni rendering non è necessario. Il compilatore di Vue sposta automaticamente le chiamate alla creazione dei vnode dalla funzione di rendering e riutilizza gli stessi vnode a ogni rendering. Il renderer è anche in grado di evitare completamente la loro comparazione quando si accorge che il vecchio vnode e il nuovo vnode sono gli stessi.
 
 Inoltre, quando ci sono abbastanza elementi statici consecutivi, essi saranno condensati in un singolo "vnode statico" che contiene la stringa HTML semplice per tutti questi nodi ([Esempio](https://template-explorer.vuejs.org/#eyJzcmMiOiI8ZGl2PlxuICA8ZGl2IGNsYXNzPVwiZm9vXCI+Zm9vPC9kaXY+XG4gIDxkaXYgY2xhc3M9XCJmb29cIj5mb288L2Rpdj5cbiAgPGRpdiBjbGFzcz1cImZvb1wiPmZvbzwvZGl2PlxuICA8ZGl2IGNsYXNzPVwiZm9vXCI+Zm9vPC9kaXY+XG4gIDxkaXYgY2xhc3M9XCJmb29cIj5mb288L2Rpdj5cbiAgPGRpdj57eyBkeW5hbWljIH19PC9kaXY+XG48L2Rpdj4iLCJzc3IiOmZhbHNlLCJvcHRpb25zIjp7ImhvaXN0U3RhdGljIjp0cnVlfX0=)). Questi vnode statici vengono montati impostando direttamente `innerHTML`. Inoltre, al momento del montaggio iniziale, vengono memorizzati nella cache i nodi DOM corrispondenti: se lo stesso contenuto viene riutilizzato in altre parti dell'applicazione, i nuovi nodi DOM vengono creati usando il metodo nativo `cloneNode()`, che è estremamente efficiente.
 
 ### Patch Flags {#patch-flags}
 
-Per un singolo elemento con vincoli dinamici, possiamo dedurre molte informazioni in fase di compilazione:
+Per un singolo elemento con binding dinamici, possiamo dedurre molte informazioni in fase di compilazione:
 
 ```vue-html
-<!-- class binding only -->
+<!-- solo binding della classe -->
 <div :class="{ active }"></div>
 
-<!-- id and value bindings only -->
+<!-- solo binfing di id e value -->
 <input :id="id" :value="value">
 
-<!-- text children only -->
+<!-- solo testo figli -->
 <div>{{ dynamic }}</div>
 ```
 
@@ -115,18 +115,18 @@ L'ultimo argomento, `2`, è un [patch flag](https://github.com/vuejs/core/blob/m
 
 ```js
 if (vnode.patchFlag & PatchFlags.CLASS /* 2 */) {
-  // update the element's class
+  // aggiorna la classe dell'elemento
 }
 ```
 
-I controlli bitwise sono estremamente veloci. Con i patch flags, Vue è in grado di eseguire la minima quantità di lavoro necessaria quando si aggiornano elementi con legami dinamici.
+I controlli bitwise sono estremamente veloci. Con i patch flags, Vue è in grado di fare il lavoro minimo necessario quando si aggiornano elementi con legami dinamici.
 
-Vue codifica anche il tipo di figli che ha un vnode. Ad esempio, un modello che ha più root nodes viene rappresentato come un frammento. Nella maggior parte dei casi, sappiamo con certezza che l'ordine di questi root nodes non cambierà mai, quindi questa informazione può essere fornita al runtime come flag patch:
+Vue codifica anche il tipo di figli che ha un vnode. Ad esempio, un template che ha più root nodes viene rappresentato come un frammento. Nella maggior parte dei casi, sappiamo con certezza che l'ordine di questi root nodes non cambierà mai, quindi, questa informazione può essere fornita al runtime come flag patch:
 
 ```js{4}
 export function render() {
   return (_openBlock(), _createElementBlock(_Fragment, null, [
-    /* children */
+    /* figli */
   ], 64 /* STABLE_FRAGMENT */))
 }
 ```
@@ -140,7 +140,7 @@ Dando un'altra occhiata al codice generato dall'esempio precedente, si noterà c
 ```js{2}
 export function render() {
   return (_openBlock(), _createElementBlock(_Fragment, null, [
-    /* children */
+    /* figli */
   ], 64 /* STABLE_FRAGMENT */))
 }
 ```
@@ -150,11 +150,11 @@ Concettualmente, un "block" è una parte del template che ha una struttura inter
 Ogni blocco tiene traccia di tutti i nodi discendenti (non solo i figli diretti) che hanno la flag patch. Per esempio:
 
 ```vue-html{3,5}
-<div> <!-- root block -->
-  <div>...</div>         <!-- not tracked -->
-  <div :id="id"></div>   <!-- tracked -->
-  <div>                  <!-- not tracked -->
-    <div>{{ bar }}</div> <!-- tracked -->
+<div> <!-- blocco root -->
+  <div>...</div>         <!-- non tracciato -->
+  <div :id="id"></div>   <!-- tracciato -->
+  <div>                  <!-- non tracciato -->
+    <div>{{ bar }}</div> <!-- tracciato -->
   </div>
 </div>
 ```
@@ -162,19 +162,19 @@ Ogni blocco tiene traccia di tutti i nodi discendenti (non solo i figli diretti)
 Il risultato è un array appiattito che contiene solo i nodi discendenti dinamici:
 
 ```
-div (block root)
-- div with :id binding
-- div with {{ bar }} binding
+div (blocco root)
+- div con :id binding
+- div con {{ bar }} binding
 ```
 
-Quando questo componente deve eseguire un nuovo rendering, deve attraversare solo l'albero appiattito invece dell'albero completo. Questa operazione è chiamata **Tree flattering** e riduce notevolmente il numero di nodi che devono essere attraversati durante la riconciliazione del DOM virtuale. Tutte le parti statiche del modello vengono di fatto saltate.
+Quando questo componente deve eseguire un nuovo rendering, deve attraversare solo l'albero appiattito invece dell'albero completo. Questa operazione è chiamata **Tree flattering** e riduce notevolmente il numero di nodi che devono essere attraversati durante la riconciliazione del DOM virtuale. Tutte le parti statiche del template vengono di fatto saltate.
 
 Le direttive `v-if` e `v-for` creeranno un nuovo block node:
 
 ```vue-html
-<div> <!-- root block -->
+<div> <!-- blocco root -->
   <div>
-    <div v-if> <!-- if block -->
+    <div v-if> <!-- blocco if -->
       ...
     <div>
   </div>
@@ -187,6 +187,6 @@ Un blocco figlio viene tracciato all'interno dell'array di discendenti dinamici 
 
 Sia i patch flags che l'appiattimento dell'albero migliorano notevolmente le prestazioni di Vue [SSR Hydration](/guide/scaling-up/ssr#client-hydration):
 
-- L'idratazione di un singolo elemento può seguire percorsi veloci in base al patch flag del vnodo corrispondente.
+- L'idratazione di un singolo elemento può seguire percorsi veloci in base al patch flag del vnode corrispondente.
 
-- Solo block nodes e i loro discendenti dinamici devono essere attraversati durante l'idratazione, ottenendo di fatto un'idratazione parziale a livello di modello.
+- Solo i block node e i loro discendenti dinamici devono essere attraversati durante l'idratazione, ottenendo di fatto un'idratazione parziale a livello di template.
