@@ -34,13 +34,13 @@ Fornisce un'animazione di transizione ad un **solo** elemento o componente.
      */
     name?: string
     /**
-     * Se applicare le classi di transizione CSS.
+     * Definisce se applicare le classi di transizione CSS.
      * Predefinito: true
      */
     css?: boolean
     /**
      * Specifica il tipo di evento di transizione da attendere
-     * per determinare la tempistica della fine della transizione
+     * per determinare la tempistica della fine della transizione.
      * Il comportamento predefinito rileva automaticamente il tipo che ha
      * la durata maggiore.
      */
@@ -57,7 +57,7 @@ Fornisce un'animazione di transizione ad un **solo** elemento o componente.
      */
     mode?: 'in-out' | 'out-in' | 'default'
     /**
-     * Se applicare la transizione al rendering iniziale.
+     * Definisce se applicare la transizione al rendering iniziale.
      * Predefinito: false
      */
     appear?: boolean
@@ -89,10 +89,10 @@ Fornisce un'animazione di transizione ad un **solo** elemento o componente.
   - `@after-leave`
   - `@after-appear`
   - `@enter-cancelled`
-  - `@leave-cancelled` (`v-show` only)
+  - `@leave-cancelled` (solo `v-show`)
   - `@appear-cancelled`
 
-- **Esempo**
+- **Esempio**
 
   Elemento semplice:
 
@@ -160,7 +160,7 @@ Fornisce effetti di transizione per elementi **multipli** o componenti in un ele
 
   Nota che ogni figlio in `<transition-group>` deve avere una [**chiave univoca**](/guide/essentials/list#maintaining-state-with-key) per l'animazione per funzionare correttamente.
 
-  `<TransitionGroup>` supporta le tranzioni tramite trasformazione CSS. Quanto la posizione di un figlio nello schermo cambia dopo un aggiornamento, gli verrà applicata una classe CSS di movimento (generata automaticamente dall'attributo `name` o configurato con la prop `move-class`). Se la proprietà CSS `transform` è "transition-able" quando la classe di movimento è applicata, l'elemento verrà animato fluidamente alla sua destinazione usando la [tecnica FLIP](https://aerotwist.com/blog/flip-your-animations/).
+  `<TransitionGroup>` supporta le tranzioni tramite trasformazione CSS. Quando la posizione di un figlio nello schermo cambia dopo un aggiornamento, gli verrà applicata una classe CSS di movimento (generata automaticamente dall'attributo `name` o configurato con la prop `move-class`). Se la proprietà CSS `transform` è "transition-able" quando la classe di movimento è applicata, l'elemento verrà animato fluidamente alla sua destinazione usando la [tecnica FLIP](https://aerotwist.com/blog/flip-your-animations/).
 
 - **Esempio**
 
@@ -189,7 +189,7 @@ Memorizza nella cache i componenti attivati/disattivati ​​dinamicamente racc
     include?: MatchPattern
     /**
      * Qualsiasi componente con un nome corrispondente a `exclude`
-     * non verrà memorizzato nella cache
+     * non verrà memorizzato nella cache.
      */
     exclude?: MatchPattern
     /**
