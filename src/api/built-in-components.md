@@ -21,7 +21,7 @@ h(Transition, {
 
 ## `<Transition>` {#transition}
 
-Fornisce un'animazione di transizione ad un **solo** elemento o componente.
+Fornisce un'animazione di transizione a un **solo** elemento o componente.
 
 - **Props**
 
@@ -134,7 +134,7 @@ Fornisce effetti di transizione per elementi **multipli** o componenti in un ele
 
 - **Props**
 
-  `<TransitionGroup>` accetta le stesse prop di `<Transition>` tranne `mode`, più due prop aggiuntive:
+  `<TransitionGroup>` accetta le stesse props di `<Transition>` tranne `mode`, più due prop aggiuntive:
 
   ```ts
   interface TransitionGroupProps extends Omit<TransitionProps, 'mode'> {
@@ -160,7 +160,7 @@ Fornisce effetti di transizione per elementi **multipli** o componenti in un ele
 
   Nota che ogni figlio in `<transition-group>` deve avere una [**chiave univoca**](/guide/essentials/list#maintaining-state-with-key) per l'animazione per funzionare correttamente.
 
-  `<TransitionGroup>` supporta le tranzioni tramite trasformazione CSS. Quando la posizione di un figlio nello schermo cambia dopo un aggiornamento, gli verrà applicata una classe CSS di movimento (generata automaticamente dall'attributo `name` o configurato con la prop `move-class`). Se la proprietà CSS `transform` è "transition-able" quando la classe di movimento è applicata, l'elemento verrà animato fluidamente alla sua destinazione usando la [tecnica FLIP](https://aerotwist.com/blog/flip-your-animations/).
+  `<TransitionGroup>` supporta le transizioni tramite trasformazione CSS. Quando la posizione di un figlio nello schermo cambia dopo un aggiornamento, gli verrà applicata una classe CSS di movimento (generata automaticamente dall'attributo `name` o configurato con la prop `move-class`). Se la proprietà CSS `transform` è "transition-able" quando la classe di movimento è applicata, l'elemento verrà animato fluidamente alla sua destinazione usando la [tecnica FLIP](https://aerotwist.com/blog/flip-your-animations/).
 
 - **Esempio**
 
@@ -203,7 +203,7 @@ Memorizza nella cache i componenti attivati/disattivati ​​dinamicamente racc
 
 - **Dettagli**
 
-  Quando avvolto attorno a un componente dinamico, `<KeepAlive>` memorizza nella cache le istanze dei componenti inattivi senza distruggerle.
+  Quando racchiuso in un componente dinamico, `<KeepAlive>` memorizza nella cache le istanze dei componenti inattivi senza distruggerle.
 
   Ci può essere solo un'istanza di un componente come figlio diretto di `<KeepAlive>` in qualsiasi momento.
 
@@ -265,7 +265,7 @@ Memorizza nella cache i componenti attivati/disattivati ​​dinamicamente racc
 
 ## `<Teleport>` {#teleport}
 
-Renderizza il contenuto del suo slot in un' altra parte del DOM.
+Renderizza il contenuto dello slot in un' altra parte del DOM.
 
 - **Props**
 
@@ -277,9 +277,9 @@ Renderizza il contenuto del suo slot in un' altra parte del DOM.
      */
     to: string | HTMLElement
     /**
-     * Quando `true`, il contenuto rimarrà nella sua posizione
-     * originale invece di essere spostata dentro il container di destinazione.
-     * Può essere cambiato dinamicamente
+     * Quando `true`, il contenuto resterà nella posizione
+     * originale invece di essere spostato nel container di destinazione.
+     * Può essere cambiato dinamicamente.
      */
     disabled?: boolean
   }
@@ -326,6 +326,6 @@ Usato per orchestrare dipendenze asincrone annidate in un albero di componenti.
 
   `<Suspense>` accetta due slots: lo slot di `#default` e lo slot `#fallback`. Mostrerà il contenuto dello slot di fallback mentre renderizza lo slot default in memoria.
 
-  Se incontra una dipendenza asincrona ([Componente asincrono](/guide/components/async) e componenti con [`async setup()`](/guide/built-ins/suspense#async-setup)) mentre renderizza lo slot di default, aspetterà fino a quando tutti sono risolti prima di visualizzare lo slot di default.
+  Se incontra dipendenze asincrone ([Componente asincrono](/guide/components/async) e componenti con [`async setup()`](/guide/built-ins/suspense#async-setup)) mentre renderizza lo slot di default, aspetterà fino a quando tutti sono risolti prima di visualizzare lo slot di default.
 
 - **Vedi anche** [Guida - Suspense](/guide/built-ins/suspense)
