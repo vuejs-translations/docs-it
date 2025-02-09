@@ -1,22 +1,14 @@
 # Accessibilità {#accessibility}
 
-L'accessibilità web (conosciuta anche come a11y) si riferisce alla pratica di creare siti web che possano essere usati
-da chiunque - che si tratti di un utente con disabilità, di una connessione lenta, di hardware obsoleto o
-malfunzionante o semplicemente di qualcuno in un ambiente sfavorevole. Ad esempio, aggiungere i sottotitoli a un video
-aiuterebbe sia gli utenti sordi e con problemi di udito, sia chi si trova in un ambiente rumoroso e non riesce a sentire
-l'audio. Allo stesso modo, assicurarsi che il testo non abbia un contrasto troppo basso aiuterà sia gli utenti
-con difficoltà visive sia chi usa il telefono sotto la luce del sole.
+L'accessibilità web (conosciuta anche come a11y) si riferisce alla pratica di creare siti web che possano essere usati da chiunque - che si tratti di un utente con disabilità, di una connessione lenta, di hardware obsoleto o malfunzionante o semplicemente di qualcuno in un ambiente sfavorevole. Ad esempio, aggiungere i sottotitoli a un video aiuterebbe sia gli utenti sordi e con problemi di udito, sia chi si trova in un ambiente rumoroso e non riesce a sentire l'audio. Allo stesso modo, assicurarsi che il testo non abbia un contrasto troppo basso aiuterà sia gli utenti con difficoltà visive sia chi usa il telefono sotto la luce del sole.
 
 Pronto per iniziare ma non sai da dove?
 
-Controlla
-la [Guida alla pianificazione e gestione dell'accessibilità web](https://www.w3.org/WAI/planning-and-managing/) fornita
-dal [World Wide Web Consortium (W3C)](https://www.w3.org/)
+Controlla la [Guida alla pianificazione e gestione dell'accessibilità web](https://www.w3.org/WAI/planning-and-managing/) fornita dal [World Wide Web Consortium (W3C)](https://www.w3.org/)
 
 ## Salta collegamento {#skip-link}
 
-Dovresti aggiungere un collegamento all'inizio di ogni pagina che vada direttamente nell'area del contenuto principale
-in modo che le persone possano saltare il contenuto che è ripetuto su più pagine web
+Dovresti aggiungere un collegamento all'inizio di ogni pagina che vada direttamente nell'area del contenuto principale in modo che le persone possano saltare il contenuto che è ripetuto su più pagine web
 
 Tipicamente questo è fatto all'inizio di `App.vue` perchè sarà il primo elemento focalizzato in tutte le tue pagine:
 
@@ -49,8 +41,7 @@ Per nascondere il collegamento salvo essere focalizzato, puoi aggiungere il segu
 }
 ```
 
-Una volta che la persona cambia percorso, riporta il focus al collegamento per saltare. Può essere ottenuto
-richiamando la focalizzazione sul ref del template del collegamento per saltare (ipotizzando l'uso di `vue-router`)
+Una volta che la persona cambia percorso, riporta il focus al collegamento per saltare. Può essere ottenuto richiamando la focalizzazione sul ref del template del collegamento per saltare (ipotizzando l'uso di `vue-router`)
 
 <div class="options-api">
 
@@ -94,15 +85,11 @@ richiamando la focalizzazione sul ref del template del collegamento per saltare 
 
 ## Struttura del contenuto {#content-structure}
 
-Uno dei più importanti fattori dell'accessibilità è assicurarsi che il design possa supportare un'implementazione
-accessibile. Il design dovrebbe considerare non solo il contrasto dei colori, la scelta dei font, le dimensioni dei
-testi e la lingua, ma anche come il contenuto è strutturato nell'applicazione.
+Uno dei più importanti fattori dell'accessibilità è assicurarsi che il design possa supportare un'implementazione accessibile. Il design dovrebbe considerare non solo il contrasto dei colori, la scelta dei font, le dimensioni dei testi e la lingua, ma anche come il contenuto è strutturato nell'applicazione.
 
 ### Intestazioni {#headings}
 
-Gli utenti possono navigare un'applicazione attraverso le intestazioni. Avere intestazioni descrittive per ogni sezione
-della tua applicazione rende più facile per gli utenti prevedere il contenuto di ogni sezione. Quando si parla di
-intestazioni, ci sono un paio di pratiche consigliate per l'accessibilità
+Gli utenti possono navigare un'applicazione attraverso le intestazioni. Avere intestazioni descrittive per ogni sezione della tua applicazione rende più facile per gli utenti prevedere il contenuto di ogni sezione. Quando si parla di intestazioni, ci sono un paio di pratiche consigliate per l'accessibilità
 
 - Annida le intestazioni secondo il loro ordine gerarchico: `<h1>` - `<h6>`
 - Non saltare intestazioni all'interno di una sezione
@@ -130,11 +117,7 @@ intestazioni, ci sono un paio di pratiche consigliate per l'accessibilità
 
 ### Punti di riferimento {#landmarks}
 
-I [punti di riferimento](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/landmark_role) forniscono
-accesso programmabile alle sezioni all'interno di un'applicazione. Gli utenti che si affidano a tecnologie assistive
-possono navigare ad ogni sezione dell'applicazione e saltarne il contenuto. Puoi
-usare gli [ARIA roles](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles) per aiutarti a raggiungere
-questo risultato.
+I [punti di riferimento](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/landmark_role) forniscono accesso programmabile alle sezioni all'interno di un'applicazione. Gli utenti che si affidano a tecnologie assistive possono navigare ad ogni sezione dell'applicazione e saltarne il contenuto. Puoi usare gli [ARIA roles](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles) per aiutarti a raggiungere questo risultato.
 
 | HTML            | ARIA Role            | Scopo del punto di riferimento                                                                                               |
 |-----------------|----------------------|------------------------------------------------------------------------------------------------------------------------------|
@@ -148,9 +131,7 @@ questo risultato.
 | section         | role="region"        | Contenuto rilevante a cui gli utenti vorranno probabilmente accedere. È necessario fornire un'etichetta per questo elemento. |
 
 :::tip Tip:
-Si consiglia di usare elementi HTML per i punti di riferimento con un ridondante attributo role di punto di riferimento
-col fine di massimizzare la compatibilità
-con [browser legacy che non supportano gli elementi semantici di HTML5](https://caniuse.com/#feat=html5semantic).
+Si consiglia di usare elementi HTML per i punti di riferimento con un ridondante attributo role di punto di riferimento col fine di massimizzare la compatibilità con [browser legacy che non supportano gli elementi semantici di HTML5](https://caniuse.com/#feat=html5semantic).
 :::
 
 [Leggi di più sui punti di riferimento](https://www.w3.org/TR/wai-aria-1.2/#landmark_roles)
@@ -178,10 +159,7 @@ Le etichette sono solitamente posizionate sopra o a sinistra dei campi del modul
 
 <!-- <common-codepen-snippet title="Simple Form" slug="dyNzzWZ" :height="368" tab="js,result" theme="light" :preview="false" :editable="false" /> -->
 
-Nota come puoi includere `autocomplete='on'` sull'elemento form e si applicherà a tutti gli input del tuo modulo. Puoi
-anche impostare
-diversi [valori per l'attributo autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete)
-per ogni input
+Nota come puoi includere `autocomplete='on'` sull'elemento form e si applicherà a tutti gli input del tuo modulo. Puoi anche impostare diversi [valori per l'attributo autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete)per ogni input
 
 ### Etichette {#labels}
 
@@ -194,8 +172,7 @@ Fornisci etichette per descrivere lo scopo di tutti i campi del form, collegando
 
 <!-- <common-codepen-snippet title="Form Label" slug="XWpaaaj" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" /> -->
 
-Se ispezioni questo elemento con il tuo strumento per sviluppatori di chrome e apri il pannello Accessibilità dentro la tab
-Elementi, vedrai come l'input prende il suo nome dall'etichetta:
+Se ispezioni questo elemento con il tuo strumento per sviluppatori di chrome e apri il pannello Accessibilità dentro la tab Elementi, vedrai come l'input prende il suo nome dall'etichetta:
 
 ![Strumento per sviluppatori di Chrome mostra il nome accessibile dell'input dall'etichetta](./images/AccessibleLabelChromeDevTools.png)
 
@@ -214,8 +191,7 @@ Impostare esplicitamente l'etichetta con un id corrispondente è meglio supporta
 
 #### `aria-label` {#aria-label}
 
-Puoi anche dare all'input un nome accessibile con [
-`aria-label`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-label).
+Puoi anche dare all'input un nome accessibile con [`aria-label`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-label).
 
 ```vue-html
 <label for="name">Nome</label>
@@ -230,17 +206,13 @@ Puoi anche dare all'input un nome accessibile con [
 
 <!-- <common-codepen-snippet title="Form ARIA label" slug="NWdvvYQ" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" /> -->
 
-Sentiti libero di ispezionare questo elemento con lo strumento per sviluppatori di Chrome per vedere come il nome
-accessibile è cambiato:
+Sentiti libero di ispezionare questo elemento con lo strumento per sviluppatori di Chrome per vedere come il nome accessibile è cambiato:
 
 ![Strumento per sviluppatori di Chrome mostra il nome accessibile di un input dall'aria-label](./images/AccessibleARIAlabelDevTools.png)
 
 #### `aria-labelledby` {#aria-labelledby}
 
-L'utilizzo di [
-`aria-labelledby`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-labelledby) è
-simile a quello di `aria-label`, eccetto che è usato se il testo dell'etichetta è visibile a schermo. È abbinato ad
-altri elementi dal loro `id` e puoi collegare più `id:
+L'utilizzo di [`aria-labelledby`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-labelledby) è simile a quello di `aria-label`, eccetto che è usato se il testo dell'etichetta è visibile a schermo. È abbinato ad altri elementi dal loro `id` e puoi collegare più `id:
 
 ```vue-html
 <form
@@ -270,10 +242,7 @@ altri elementi dal loro `id` e puoi collegare più `id:
 
 #### `aria-describedby` {#aria-describedby}
 
-[aria-describedby](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-describedby) è usato
-allo stesso modo di `aria-labelledby`, eccetto che fornisce una descrizione con informazioni aggiuntive di cui l'utente
-potrebbe aver bisogno
-Questo può essere utilizzato per descrivere i criteri per qualsiasi input:
+[aria-describedby](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-describedby) è usato allo stesso modo di `aria-labelledby`, eccetto che fornisce una descrizione con informazioni aggiuntive di cui l'utente potrebbe aver bisogno. Questo può essere utilizzato per descrivere i criteri per qualsiasi input:
 
 ```vue-html
 <form
@@ -309,11 +278,7 @@ Puoi vedere la descrizione ispezionando lo strumento per sviluppatori di Chrome:
 
 Evita di utilizzare i segnaposto perchè potrebbero confondere molti utenti.
 
-Uno dei problemi con i segnaposto è il fatto che non raggiungono
-i [criteri di contrasto dei colori](https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html) di default;
-correggere il contrasto dei colori rende il segnaposto simile a un campo di input pre-popolato. Guardando l'esempio
-seguente, puoi vedere che il segnaposto del cognome che soddisfa i criteri di contrasto del colore assomiglia a un campo
-pre-popolato:
+Uno dei problemi con i segnaposto è il fatto che non raggiungono i [criteri di contrasto dei colori](https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html) di default; correggere il contrasto dei colori rende il segnaposto simile a un campo di input pre-popolato. Guardando l'esempio seguente, puoi vedere che il segnaposto del cognome che soddisfa i criteri di contrasto del colore assomiglia a un campo pre-popolato:
 
 ![Segnaposto accessibile](./images/AccessiblePlaceholder.png)
 
@@ -363,9 +328,7 @@ pre-popolato:
 ### Istruzioni {#instructions}
 
 Quando aggiungi istruzioni per i tuoi campi di input, assicurati che si colleghino correttamente all'input.
-Puoi offrire informazioni aggiuntive e legare molteplici id dentro un [
-`aria-labelledby`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-labelledby). Questo
-permette un design maggiormente flessibile
+Puoi offrire informazioni aggiuntive e legare molteplici id dentro un [`aria-labelledby`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-labelledby). Questo permette un design maggiormente flessibile
 
 ```vue-html
 <fieldset>
@@ -381,8 +344,7 @@ permette un design maggiormente flessibile
 </fieldset>
 ```
 
-In alternativa, puoi allegare le istruzioni all'input con [
-`aria-describedby`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-describedby):
+In alternativa, puoi allegare le istruzioni all'input con [`aria-describedby`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-describedby):
 
 ```vue-html
 <fieldset>
@@ -397,9 +359,7 @@ In alternativa, puoi allegare le istruzioni all'input con [
 
 ### Nascondere contenuti {#hiding-content}
 
-Di solito non è consigliato nascondere visivamente le etichette, anche se l'input ha un nome accessibile. Tuttavia, se
-la funzionalità dell'input può essere compresa con il contenuto circostante, allora possiamo nascondere visivamente
-l'etichetta.
+Di solito non è consigliato nascondere visivamente le etichette, anche se l'input ha un nome accessibile. Tuttavia, se la funzionalità dell'input può essere compresa con il contenuto circostante, allora possiamo nascondere visivamente l'etichetta.
 
 Diamo uno sguardo a questo campo di ricerca:
 
@@ -411,8 +371,7 @@ Diamo uno sguardo a questo campo di ricerca:
 </form>
 ```
 
-Possiamo fare questo perchè il bottone di ricerca aiuta visivamente l'utente a identificare lo scopo del campo di
-input.
+Possiamo fare questo perchè il bottone di ricerca aiuta visivamente l'utente a identificare lo scopo del campo di input.
 
 Possiamo usare CSS per nascondere visivamente l'elemento ma mantenerlo disponibile per le tecnologie assistive:
 
@@ -434,9 +393,7 @@ Possiamo usare CSS per nascondere visivamente l'elemento ma mantenerlo disponibi
 
 #### `aria-hidden="true"` {#aria-hidden-true}
 
-Aggiungere `aria-hidden="true"` nasconderà l'elemento alle tecnologie assistive ma lo lascerà visivamente accessibile
-per gli altri utenti. Non utilizzarlo su elementi focalizzabili, puramente decorativi, duplicati o contenuti fuori dallo
-schermo.
+Aggiungere `aria-hidden="true"` nasconderà l'elemento alle tecnologie assistive ma lo lascerà visivamente accessibile per gli altri utenti. Non utilizzarlo su elementi focalizzabili, puramente decorativi, duplicati o contenuti fuori dallo schermo.
 
 ```vue-html
 <p>Questo non è nascosto agli screen reader.</p>
@@ -500,8 +457,7 @@ Puoi usare questa tecnica per creare immagini funzionali.
 
 ## Standard {#standards}
 
-Il World Wide Web Consortium (W3C) Web Accessibility Initiative (WAI) sviluppa gli standard di accessibilità del web per
-i diversi componenti:
+Il World Wide Web Consortium (W3C) Web Accessibility Initiative (WAI) sviluppa gli standard di accessibilità del web per i diversi componenti:
 
 - [User Agent Accessibility Guidelines (UAAG)](https://www.w3.org/WAI/standards-guidelines/uaag/)
   - Browser web e lettori multimediali, inclusi alcuni aspetti delle tecnologie assistive
@@ -512,9 +468,7 @@ i diversi componenti:
 
 ### Web Content Accessibility Guidelines (WCAG) {#web-content-accessibility-guidelines-wcag}
 
-[WCAG 2.1](https://www.w3.org/TR/WCAG21/) si estende su [WCAG 2.0](https://www.w3.org/TR/WCAG20/) e permette
-l'implementazione di nuove tecnologie affrontando i cambiamenti del web. Il W3C incoraggia l'uso dell'ultima versione di
-WCAG quando si sviluppa o aggiorna le policy di accessibilità web.
+[WCAG 2.1](https://www.w3.org/TR/WCAG21/) si estende su [WCAG 2.0](https://www.w3.org/TR/WCAG20/) e permette l'implementazione di nuove tecnologie affrontando i cambiamenti del web. Il W3C incoraggia l'uso dell'ultima versione di WCAG quando si sviluppa o aggiorna le policy di accessibilità web.
 
 #### WCAG 2.1 Quattro Principi Guida (abbreviati come POUR): {#wcag-2-1-four-main-guiding-principles-abbreviated-as-pour}
 
@@ -574,22 +528,14 @@ Il W3C WAI-ARIA fornisce guide su come costruire contenuti dinamici e controlli 
 
 ### Utenti {#users}
 
-L'Organizzazione Mondiale della Sanità (WHO) stima che il 15% della popolazione mondiale ha qualche forma di disabilità,
-il 2.4% di loro gravemente. Questo equivale a circa 1 miliardo di persone nel mondo, rendendo le persone con disabilità
-la più grande minoranza nel mondo.
+L'Organizzazione Mondiale della Sanità (WHO) stima che il 15% della popolazione mondiale ha qualche forma di disabilità, il 2.4% di loro gravemente. Questo equivale a circa 1 miliardo di persone nel mondo, rendendo le persone con disabilità la più grande minoranza nel mondo.
 
 Esiste una vasta gamma di disabilità, che può essere suddivisa approssimativamente in quattro categorie:
 
-- _[Visiva](https://webaim.org/articles/visual/)_ - Questi utenti possono trarre vantaggio dai lettori di schermo,
-  ingrandimento dello schermo, controllo del contrasto dello schermo o display in braille.
-- _[Sonora](https://webaim.org/articles/auditory/)_ - Questi utenti possono trarre vantaggio dai sottotitoli,
-  trascrizioni o video in linguaggio dei segni
-- _[Motoria](https://webaim.org/articles/motor/)_ - Questi utenti possono trarre vantaggio da una serie
-  di [tecnologie assistive per disabilità motorie](https://webaim.org/articles/motor/assistive): software per il
-  riconoscimento vocale, tracciamento degli occhi, accesso a un solo pulsante, bacchetta per la testa, interrutori a
-  soffio e aspirazione, mouse trackball ingranditi, tastiere adattive o altre tecnologie assistive.
-- _[Cognitiva](https://webaim.org/articles/cognitive/)_ - Questi utenti possono trarre vantaggio da informazioni
-  supplementari, organizzazione strutturata dei contenuti, scrittura semplice e chiara.
+- _[Visiva](https://webaim.org/articles/visual/)_ - Questi utenti possono trarre vantaggio dai lettori di schermo, ingrandimento dello schermo, controllo del contrasto dello schermo o display in braille.
+- _[Sonora](https://webaim.org/articles/auditory/)_ - Questi utenti possono trarre vantaggio dai sottotitoli, trascrizioni o video in linguaggio dei segni
+- _[Motoria](https://webaim.org/articles/motor/)_ - Questi utenti possono trarre vantaggio da una serie di [tecnologie assistive per disabilità motorie](https://webaim.org/articles/motor/assistive): software per il riconoscimento vocale, tracciamento degli occhi, accesso a un solo pulsante, bacchetta per la testa, interrutori a soffio e aspirazione, mouse trackball ingranditi, tastiere adattive o altre tecnologie assistive.
+- _[Cognitiva](https://webaim.org/articles/cognitive/)_ - Questi utenti possono trarre vantaggio da informazioni supplementari, organizzazione strutturata dei contenuti, scrittura semplice e chiara.
 
 Dai un'occhiata ai link seguenti di WebAim per comprendere l'esperienza degli utenti:
 
